@@ -20,6 +20,11 @@
 #include "em_common.h"
 #include "em_int.h"
 
+// [LNP]
+#ifndef EMDRV_RTCDRV_NUM_TIMERS
+#define EMDRV_RTCDRV_NUM_TIMERS     (4)
+#endif
+
 #if defined( RTCC_PRESENT ) && ( RTCC_COUNT == 1 )
 #define RTCDRV_USE_RTCC
 #else

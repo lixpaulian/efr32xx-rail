@@ -17,7 +17,9 @@
 
 #include <stdint.h>
 #include "ecode.h"
-#include "ustimer_config.h"
+
+// [LNP] This header file must reside in the application
+// #include "ustimer_config.h"
 
 #ifdef __cplusplus
 extern "C" {

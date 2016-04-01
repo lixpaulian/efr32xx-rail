@@ -20,7 +20,9 @@
 #include <stdbool.h>
 
 #include "ecode.h"
-#include "rtcdrv_config.h"
+
+// [LNP] This header file must reside in the application
+// #include "rtcdrv_config.h"
 
 #ifdef __cplusplus
 extern "C" {
