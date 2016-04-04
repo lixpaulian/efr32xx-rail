@@ -2542,12 +2542,14 @@ void CMU_ClockSelectSet(CMU_Clock_TypeDef clock, CMU_Select_TypeDef ref)
       /* HFCLKCLE can not be used as LFACLK */
       EFM_ASSERT(ref != cmuSelect_HFCLKLE);
 #endif
+      /* no break [LNP] */
     case CMU_LFECLKSEL_REG:
       selReg = (selReg == NULL) ? &CMU->LFECLKSEL : selReg;
 #if !defined( _CMU_LFECLKSEL_LFE_HFCLKLE )
       /* HFCLKCLE can not be used as LFECLK */
       EFM_ASSERT(ref != cmuSelect_HFCLKLE);
 #endif
+      /* no break [LNP] */
     case CMU_LFBCLKSEL_REG:
       selReg = (selReg == NULL) ? &CMU->LFBCLKSEL : selReg;
       switch (ref)
