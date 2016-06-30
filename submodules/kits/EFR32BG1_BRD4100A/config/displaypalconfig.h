@@ -1,7 +1,7 @@
 /***************************************************************************//**
  * @file displaypalconfig.h
  * @brief Configuration file for PAL (Platform Abstraction Layer)
- * @version 3.20.5
+ * @version 4.4.0
  *******************************************************************************
  * @section License
  * <b>Copyright 2015 Silicon Labs, Inc. http://www.silabs.com</b>

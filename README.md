@@ -6,7 +6,7 @@ required to start writing applications for the EFR32FG Flex Gecko family.
 
 ## Version
 
-* v1.1.0.0
+* v1.2.0.0
 
 ## Documentation
 
@@ -18,7 +18,7 @@ http://www.silabs.com/products/wireless/proprietary/Pages/getting-started-with-f
 
 The original files are available in the `originals` branch.
 
-These files were extracted from `SiliconLabs-RAIL-1.1.0.0-GA.exe`.
+These files were extracted from `SiliconLabs-RAIL-1.2.0.0-GA.exe`.
 
 To save space, the following folders/files were removed:
 

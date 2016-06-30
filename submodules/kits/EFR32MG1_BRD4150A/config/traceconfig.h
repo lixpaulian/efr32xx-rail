@@ -1,7 +1,7 @@
 /***************************************************************************//**
  * @file
  * @brief Provide SWO/ETM TRACE configuration parameters.
- * @version 4.2.2
+ * @version 4.4.0
  *******************************************************************************
  * @section License
  * <b>Copyright 2016 Silicon Laboratories, Inc. http://www.silabs.com</b>
