@@ -70,8 +70,6 @@ void RAILCb_RfReady(void);
  * Get the current radio state
  *
  * @return An enumeration for current radio state
- * @warning State reporting from this API might not be accurate
- *          at all times
  *
  * Returns the state of the radio as either TX, RX, or IDLE. There are
  * intermediate states that the radio can transistion through which are not
@@ -80,6 +78,55 @@ void RAILCb_RfReady(void);
  * this function will return TX, as if the shutdown process hadn't started yet)
  */
 RAIL_RadioState_t RAIL_RfStateGet(void);
+
+/**
+ * Configure RAIL automatic state transitions after RX
+ *
+ * @param[in] success The next radio state to enter after a successful packet
+ * reception.
+ * @param[in] error The next radio state to enter after an error during packet
+ * reception.
+ * @param[in] ignoreErrors Define errors during packet handling to be ignored
+ * @return Returns zero on success and an error code on error.
+ *
+ * This function fails if unsupported transitions are passed in, or if the
+ * radio is currently in the RX state. Success can transition to TX, RX, or
+ * IDLE, while error can transition to RX or IDLE.
+ */
+RAIL_Status_t RAIL_SetRxTransitions(RAIL_RadioState_t success,
+                                    RAIL_RadioState_t error,
+                                    uint8_t ignoreErrors);
+
+/**
+ * Configure RAIL automatic state transitions after TX
+ *
+ * @param[in] success The next radio state to enter after a successful packet
+ * transmission.
+ * @param[in] error The next radio state to enter after an error during packet
+ * transmission.
+ * @return Returns zero on success and an error code on error.
+ *
+ * This function fails if unsupported transitions are passed in, or if the
+ * radio is currently the TX state. Success and error can each transition to RX
+ * or IDLE.
+ */
+RAIL_Status_t RAIL_SetTxTransitions(RAIL_RadioState_t success,
+                                    RAIL_RadioState_t error);
+
+/**
+ * Configure RAIL automatic state transition timing
+ *
+ * @param[in] timings The timings used to configure the RAIL state machine. This
+ * structure will be overwritten with the actual times that were set, in the
+ * case of an input timing that is invalid.
+ * @return Returns zero on success and an error code on error.
+ *
+ * The timings given will be close to the actual transition time, but there is
+ * some software overhead that is not yet characterized. Also, timings are not
+ * always adhered to when using an automatic transition after an error, due to
+ * the cleanup required to recover from the error.
+ */
+RAIL_Status_t RAIL_SetStateTiming(RAIL_StateTiming_t *timings);
 
 /**
  * Place the radio into an idle state
@@ -583,7 +630,7 @@ uint8_t RAIL_TxDataLoad(RAIL_TxData_t *txData);
  * (success) or RAILCb_TxRadioStatus() (failure).
  *
  * Begins transmission of the payload previously loaded via RAIL_TxDataLoad().
- * Return error if currently transmitting.
+ * Return error if currently transmitting or receiving.
  */
 uint8_t RAIL_TxStart(uint8_t channel,
                      RAIL_PreTxOp_t preTxOp,
@@ -612,7 +659,6 @@ void RAILCb_TxPacketSent(RAIL_TxPacketInfo_t *txPacketInfo);
  * Radio Statuses:
  * RAIL_TX_CONFIG_BUFFER_UNDERFLOW
  * RAIL_TX_CONFIG_CHANNEL_BUSY
- *
  */
 void RAILCb_TxRadioStatus(uint8_t status);
 
@@ -709,7 +755,7 @@ uint8_t RAIL_CcaLbt(void *params);
  *
  * Setup which receive interrupts will generate a RAILCb_RxRadioStatus()
  * callback. The full list of options is any define that starts with
- * RAIL_RX_CONFIG_.
+ * RAIL_RX_CONFIG_. This function cannot be called while receiving.
  */
 uint8_t RAIL_RxConfig(uint8_t cbToEnable, bool appendedInfoEnable);
 
@@ -720,7 +766,8 @@ uint8_t RAIL_RxConfig(uint8_t cbToEnable, bool appendedInfoEnable);
  * @return Return 0 for success or an error code
  *
  * This is a non-blocking function. RAILCb_RxPacketReceived will be called when
- * a packet has been received.
+ * a packet has been received. Returns an error is currently transmitting or
+ * receiving.
  */
 uint8_t RAIL_RxStart(uint8_t channel);
 
@@ -767,7 +814,7 @@ void RAILCb_RxPacketReceived(void *rxPacketHandle);
  *  RAIL_RX_CONFIG_PREAMBLE_DETECT
  *  RAIL_RX_CONFIG_SYNC1_DETECT
  *  RAIL_RX_CONFIG_SYNC2_DETECT
- *  RAIL_RX_CONFIG_INVALID_CRC
+ *  RAIL_RX_CONFIG_FRAME_ERROR
  *  RAIL_RX_CONFIG_BUFFER_OVERFLOW
  *  RAIL_RX_CONFIG_ADDRESS_FILTERED
  *
@@ -938,6 +985,25 @@ bool RAIL_AddressFilterEnableAddress(uint8_t field, uint8_t index);
 bool RAIL_AddressFilterDisableAddress(uint8_t field, uint8_t index);
 
 /**
+ * Configure address filtering based on frame type
+ *
+ * @param validFrames The frames on which to enable address filtering. Each bit
+ * corresponds to a frame, where a 1 means to enable address filtering during
+ * that frame, and a 0 means to ignore addresses during that frame.. The least
+ * significant bit corresponds to frame 0, and the most significant bit to
+ * frame 7.
+ * @return True if configuration was set properly, false otherwise
+ *
+ * This function only takes effect if frame type length decoding and address
+ * filtering are both being used. In that case, this function gives the ability
+ * to only enable address filtering on certain types of frames.
+ *
+ * @note This function must be called after RAIL_AddressFilterConfig for it to
+ * take effect.
+ */
+bool RAIL_AddressFilterByFrameType(uint8_t validFrames);
+
+/**
  * end of group Address_Filtering
  * @}
  */
@@ -1012,7 +1078,6 @@ RAIL_CalMask_t RAIL_CalPendingGet(void);
  * This callback function is called whenever the RAIL library detects that a
  * calibration is needed. It is up to the application to determine a valid
  * window to call RAIL_CalStart().
- *
  */
 void RAILCb_CalNeeded(void);
 

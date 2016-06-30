@@ -1,10 +1,10 @@
 /***************************************************************************//**
  * @file system_efr32mg1p.c
  * @brief CMSIS Cortex-M3/M4 System Layer for EFR32 devices.
- * @version 4.2.0
+ * @version 4.3.0
  ******************************************************************************
  * @section License
- * <b>Copyright 2015 Silicon Laboratories, Inc. http://www.silabs.com</b>
+ * <b>Copyright 2016 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -104,7 +104,7 @@ uint32_t SystemCoreClock;
  * @brief
  *   System HFRCO frequency
  *
- * @note 
+ * @note
  *   This is an EFR32 proprietary variable, not part of the CMSIS definition.
  *
  * @details
@@ -173,7 +173,7 @@ uint32_t SystemMaxCoreClockGet(void)
  *   Get the current HFCLK frequency.
  *
  * @note
- *   This is an EFR proprietary function, not part of the CMSIS definition.
+ *   This is an EFR32 proprietary function, not part of the CMSIS definition.
  *
  * @return
  *   The current HFCLK frequency in Hz.
@@ -213,7 +213,8 @@ uint32_t SystemHFClockGet(void)
       break;
   }
 
-  return ret;
+  return ret / (1U + ((CMU->HFPRESC & _CMU_HFPRESC_PRESC_MASK)
+                      >> _CMU_HFPRESC_PRESC_SHIFT));
 }
 
 
@@ -222,7 +223,7 @@ uint32_t SystemHFClockGet(void)
  *   Get high frequency crystal oscillator clock frequency for target system.
  *
  * @note
- *   This is an EFR proprietary function, not part of the CMSIS definition.
+ *   This is an EFR32 proprietary function, not part of the CMSIS definition.
  *
  * @return
  *   HFXO frequency in Hz.
@@ -248,7 +249,7 @@ uint32_t SystemHFXOClockGet(void)
  *   should probably only be used once during system startup.
  *
  * @note
- *   This is an EFR proprietary function, not part of the CMSIS definition.
+ *   This is an EFR32 proprietary function, not part of the CMSIS definition.
  *
  * @param[in] freq
  *   HFXO frequency in Hz used for target.
@@ -285,10 +286,10 @@ void SystemHFXOClockSet(uint32_t freq)
  *****************************************************************************/
 void SystemInit(void)
 {
-#if (__FPU_PRESENT == 1)
+#if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
   /* Set floating point coprosessor access mode. */
-  SCB->CPACR |= ((3UL << 10 * 2) |      /* set CP10 Full Access */
-                 (3UL << 11 * 2));      /* set CP11 Full Access */
+  SCB->CPACR |= ((3UL << 10*2) |                    /* set CP10 Full Access */
+                 (3UL << 11*2)  );                  /* set CP11 Full Access */
 #endif
 }
 
@@ -298,7 +299,7 @@ void SystemInit(void)
  *   Get low frequency RC oscillator clock frequency for target system.
  *
  * @note
- *   This is an EFR proprietary function, not part of the CMSIS definition.
+ *   This is an EFR32 proprietary function, not part of the CMSIS definition.
  *
  * @return
  *   LFRCO frequency in Hz.
@@ -317,7 +318,7 @@ uint32_t SystemLFRCOClockGet(void)
  *   Get ultra low frequency RC oscillator clock frequency for target system.
  *
  * @note
- *   This is an EFM32 proprietary function, not part of the CMSIS definition.
+ *   This is an EFR32 proprietary function, not part of the CMSIS definition.
  *
  * @return
  *   ULFRCO frequency in Hz.
@@ -334,7 +335,7 @@ uint32_t SystemULFRCOClockGet(void)
  *   Get low frequency crystal oscillator clock frequency for target system.
  *
  * @note
- *   This is an EFR proprietary function, not part of the CMSIS definition.
+ *   This is an EFR32 proprietary function, not part of the CMSIS definition.
  *
  * @return
  *   LFXO frequency in Hz.
@@ -360,7 +361,7 @@ uint32_t SystemLFXOClockGet(void)
  *   should probably only be used once during system startup.
  *
  * @note
- *   This is an EFR proprietary function, not part of the CMSIS definition.
+ *   This is an EFR32 proprietary function, not part of the CMSIS definition.
  *
  * @param[in] freq
  *   LFXO frequency in Hz used for target.
@@ -368,7 +369,7 @@ uint32_t SystemLFXOClockGet(void)
 void SystemLFXOClockSet(uint32_t freq)
 {
   /* External crystal oscillator present? */
-#if (EFR_LFXO_FREQ > 0)
+#if (EFR32_LFXO_FREQ > 0)
   SystemLFXOClock = freq;
 
   /* Update core clock frequency if LFXO is used to clock core */

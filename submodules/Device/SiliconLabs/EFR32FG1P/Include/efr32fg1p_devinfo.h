@@ -1,10 +1,10 @@
 /**************************************************************************//**
  * @file efr32fg1p_devinfo.h
  * @brief EFR32FG1P_DEVINFO register and bit field definitions
- * @version 4.2.0
+ * @version 4.3.0
  ******************************************************************************
  * @section License
- * <b>Copyright 2015 Silicon Laboratories, Inc. http://www.silabs.com</b>
+ * <b>Copyright 2016 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -41,55 +41,57 @@
 typedef struct
 {
   __I uint32_t CAL;              /**< CRC of DI-page and calibration temperature  */
-  uint32_t     RESERVED0[9];     /**< Reserved for future use **/
+  uint32_t     RESERVED0[7];     /**< Reserved for future use **/
+  __I uint32_t EXTINFO;          /**< External Component description  */
+  uint32_t     RESERVED1[1];     /**< Reserved for future use **/
   __I uint32_t EUI48L;           /**< EUI48 OUI and Unique identifier  */
   __I uint32_t EUI48H;           /**< OUI  */
   __I uint32_t CUSTOMINFO;       /**< Custom information  */
   __I uint32_t MEMINFO;          /**< Flash page size and misc. chip information  */
-  uint32_t     RESERVED1[2];     /**< Reserved for future use **/
+  uint32_t     RESERVED2[2];     /**< Reserved for future use **/
   __I uint32_t UNIQUEL;          /**< Low 32 bits of device unique number  */
   __I uint32_t UNIQUEH;          /**< High 32 bits of device unique number  */
   __I uint32_t MSIZE;            /**< Flash and SRAM Memory size in kB  */
   __I uint32_t PART;             /**< Part description  */
   __I uint32_t DEVINFOREV;       /**< Device information page revision  */
   __I uint32_t EMUTEMP;          /**< EMU Temperature Calibration Information  */
-  uint32_t     RESERVED2[2];     /**< Reserved for future use **/
+  uint32_t     RESERVED3[2];     /**< Reserved for future use **/
   __I uint32_t ADC0CAL0;         /**< ADC0 calibration register 0  */
   __I uint32_t ADC0CAL1;         /**< ADC0 calibration register 1  */
   __I uint32_t ADC0CAL2;         /**< ADC0 calibration register 2  */
   __I uint32_t ADC0CAL3;         /**< ADC0 calibration register 3  */
-  uint32_t     RESERVED3[4];     /**< Reserved for future use **/
+  uint32_t     RESERVED4[4];     /**< Reserved for future use **/
   __I uint32_t HFRCOCAL0;        /**< HFRCO Calibration Register (4 MHz)  */
-  uint32_t     RESERVED4[2];     /**< Reserved for future use **/
-  __I uint32_t HFRCOCAL3;        /**< HFRCO Calibration Register (7 MHz)  */
   uint32_t     RESERVED5[2];     /**< Reserved for future use **/
+  __I uint32_t HFRCOCAL3;        /**< HFRCO Calibration Register (7 MHz)  */
+  uint32_t     RESERVED6[2];     /**< Reserved for future use **/
   __I uint32_t HFRCOCAL6;        /**< HFRCO Calibration Register (13 MHz)  */
   __I uint32_t HFRCOCAL7;        /**< HFRCO Calibration Register (16 MHz)  */
   __I uint32_t HFRCOCAL8;        /**< HFRCO Calibration Register (19 MHz)  */
-  uint32_t     RESERVED6[1];     /**< Reserved for future use **/
+  uint32_t     RESERVED7[1];     /**< Reserved for future use **/
   __I uint32_t HFRCOCAL10;       /**< HFRCO Calibration Register (26 MHz)  */
   __I uint32_t HFRCOCAL11;       /**< HFRCO Calibration Register (32 MHz)  */
   __I uint32_t HFRCOCAL12;       /**< HFRCO Calibration Register (38 MHz)  */
-  uint32_t     RESERVED7[11];    /**< Reserved for future use **/
+  uint32_t     RESERVED8[11];    /**< Reserved for future use **/
   __I uint32_t AUXHFRCOCAL0;     /**< AUXHFRCO Calibration Register (4 MHz)  */
-  uint32_t     RESERVED8[2];     /**< Reserved for future use **/
-  __I uint32_t AUXHFRCOCAL3;     /**< AUXHFRCO Calibration Register (7 MHz)  */
   uint32_t     RESERVED9[2];     /**< Reserved for future use **/
+  __I uint32_t AUXHFRCOCAL3;     /**< AUXHFRCO Calibration Register (7 MHz)  */
+  uint32_t     RESERVED10[2];    /**< Reserved for future use **/
   __I uint32_t AUXHFRCOCAL6;     /**< AUXHFRCO Calibration Register (13 MHz)  */
   __I uint32_t AUXHFRCOCAL7;     /**< AUXHFRCO Calibration Register (16 MHz)  */
   __I uint32_t AUXHFRCOCAL8;     /**< AUXHFRCO Calibration Register (19 MHz)  */
-  uint32_t     RESERVED10[1];    /**< Reserved for future use **/
+  uint32_t     RESERVED11[1];    /**< Reserved for future use **/
   __I uint32_t AUXHFRCOCAL10;    /**< AUXHFRCO Calibration Register (26 MHz)  */
   __I uint32_t AUXHFRCOCAL11;    /**< AUXHFRCO Calibration Register (32 MHz)  */
   __I uint32_t AUXHFRCOCAL12;    /**< AUXHFRCO Calibration Register (38 MHz)  */
-  uint32_t     RESERVED11[11];   /**< Reserved for future use **/
+  uint32_t     RESERVED12[11];   /**< Reserved for future use **/
   __I uint32_t VMONCAL0;         /**< VMON Calibration Register 0  */
   __I uint32_t VMONCAL1;         /**< VMON Calibration Register 1  */
   __I uint32_t VMONCAL2;         /**< VMON Calibration Register 2  */
-  uint32_t     RESERVED12[3];    /**< Reserved for future use **/
+  uint32_t     RESERVED13[3];    /**< Reserved for future use **/
   __I uint32_t IDAC0CAL0;        /**< IDAC0 Calibration Register 0  */
   __I uint32_t IDAC0CAL1;        /**< IDAC0 Calibration Register 1  */
-  uint32_t     RESERVED13[2];    /**< Reserved for future use **/
+  uint32_t     RESERVED14[2];    /**< Reserved for future use **/
   __I uint32_t DCDCLNVCTRL0;     /**< DCDC Low-noise VREF Trim Register 0  */
   __I uint32_t DCDCLPVCTRL0;     /**< DCDC Low-power VREF Trim Register 0  */
   __I uint32_t DCDCLPVCTRL1;     /**< DCDC Low-power VREF Trim Register 1  */
@@ -110,6 +112,29 @@ typedef struct
 #define _DEVINFO_CAL_CRC_MASK                                    0xFFFFUL     /**< Bit mask for CRC */
 #define _DEVINFO_CAL_TEMP_SHIFT                                  16           /**< Shift value for TEMP */
 #define _DEVINFO_CAL_TEMP_MASK                                   0xFF0000UL   /**< Bit mask for TEMP */
+
+/* Bit fields for DEVINFO EXTINFO */
+#define _DEVINFO_EXTINFO_MASK                                    0xFFFFFFFFUL                            /**< Mask for DEVINFO_EXTINFO */
+#define _DEVINFO_EXTINFO_TYPE_SHIFT                              0                                       /**< Shift value for TYPE */
+#define _DEVINFO_EXTINFO_TYPE_MASK                               0xFFUL                                  /**< Bit mask for TYPE */
+#define _DEVINFO_EXTINFO_TYPE_IS25LQ040B                         0x00000001UL                            /**< Mode IS25LQ040B for DEVINFO_EXTINFO */
+#define _DEVINFO_EXTINFO_TYPE_NONE                               0x000000FFUL                            /**< Mode NONE for DEVINFO_EXTINFO */
+#define DEVINFO_EXTINFO_TYPE_IS25LQ040B                          (_DEVINFO_EXTINFO_TYPE_IS25LQ040B << 0) /**< Shifted mode IS25LQ040B for DEVINFO_EXTINFO */
+#define DEVINFO_EXTINFO_TYPE_NONE                                (_DEVINFO_EXTINFO_TYPE_NONE << 0)       /**< Shifted mode NONE for DEVINFO_EXTINFO */
+#define _DEVINFO_EXTINFO_CONNECTION_SHIFT                        8                                       /**< Shift value for CONNECTION */
+#define _DEVINFO_EXTINFO_CONNECTION_MASK                         0xFF00UL                                /**< Bit mask for CONNECTION */
+#define _DEVINFO_EXTINFO_CONNECTION_SPI                          0x00000001UL                            /**< Mode SPI for DEVINFO_EXTINFO */
+#define _DEVINFO_EXTINFO_CONNECTION_NONE                         0x000000FFUL                            /**< Mode NONE for DEVINFO_EXTINFO */
+#define DEVINFO_EXTINFO_CONNECTION_SPI                           (_DEVINFO_EXTINFO_CONNECTION_SPI << 8)  /**< Shifted mode SPI for DEVINFO_EXTINFO */
+#define DEVINFO_EXTINFO_CONNECTION_NONE                          (_DEVINFO_EXTINFO_CONNECTION_NONE << 8) /**< Shifted mode NONE for DEVINFO_EXTINFO */
+#define _DEVINFO_EXTINFO_REV_SHIFT                               16                                      /**< Shift value for REV */
+#define _DEVINFO_EXTINFO_REV_MASK                                0xFF0000UL                              /**< Bit mask for REV */
+#define _DEVINFO_EXTINFO_REV_REV1                                0x00000001UL                            /**< Mode REV1 for DEVINFO_EXTINFO */
+#define _DEVINFO_EXTINFO_REV_NONE                                0x000000FFUL                            /**< Mode NONE for DEVINFO_EXTINFO */
+#define DEVINFO_EXTINFO_REV_REV1                                 (_DEVINFO_EXTINFO_REV_REV1 << 16)       /**< Shifted mode REV1 for DEVINFO_EXTINFO */
+#define DEVINFO_EXTINFO_REV_NONE                                 (_DEVINFO_EXTINFO_REV_NONE << 16)       /**< Shifted mode NONE for DEVINFO_EXTINFO */
+#define _DEVINFO_EXTINFO_SPARE_SHIFT                             24                                      /**< Shift value for SPARE */
+#define _DEVINFO_EXTINFO_SPARE_MASK                              0xFF000000UL                            /**< Bit mask for SPARE */
 
 /* Bit fields for DEVINFO EUI48L */
 #define _DEVINFO_EUI48L_MASK                                     0xFFFFFFFFUL /**< Mask for DEVINFO_EUI48L */

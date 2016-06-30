@@ -45,14 +45,13 @@
 /*
  * Select how LCD polarity inversion should be handled:
  *
- * If POLARITY_INVERSION_EXTCOMIN is defined, the EXTMODE pin is set to HIGH,
- * and the polarity inversion is armed for every rising edge of the EXTCOMIN
- * pin. The actual polarity inversion is triggered at the next transision of
- * SCS. This mode is recommended because it causes less CPU and SPI load than
- * the alternative mode, see below.
- * If POLARITY_INVERSION_EXTCOMIN is undefined, the EXTMODE pin is set to LOW,
- * and the polarity inversion is toggled by sending an SPI command. This mode
- * causes more CPU and SPI load than using the EXTCOMIN pin mode.
+ * If POLARITY_INVERSION_EXTCOMIN is defined, the polarity inversion is armed
+ * for every rising edge of the EXTCOMIN pin. The actual polarity inversion is
+ * triggered at the next transision of SCS. This mode is recommended because it
+ * causes less CPU and SPI load than the alternative mode, see below.
+ * If POLARITY_INVERSION_EXTCOMIN is undefined, the polarity inversion is
+ * toggled by sending an SPI command. This mode causes more CPU and SPI load
+ * than using the EXTCOMIN pin mode.
  */
 #define POLARITY_INVERSION_EXTCOMIN
 

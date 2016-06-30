@@ -5,7 +5,7 @@
  * @version 3.20.5
  ******************************************************************************
  * @section License
- * <b>(C) Copyright 2015 Silicon Labs, http://www.silabs.com</b>
+ * <b>Copyright 2015 Silicon Labs, Inc. http://www.silabs.com</b>
  *******************************************************************************
  *
  * This file is licensed under the Silabs License Agreement. See the file
@@ -24,21 +24,19 @@
 #define SHARP_MEMLCD_DEVICE_NAME   "Sharp LS013B7DH03 #1"
 
 
-/* LCD and SPI GPIO pin connections on the SLWSTK6100A_EFR32MG. */
-#define LCD_PORT_SCLK             (2)  /* = gpioPortC on EFR32MG */
+/* LCD and SPI GPIO pin connections on the SLWSTK6101A_EFR32BG. */
+#define LCD_PORT_SCLK             (2)  /* = gpioPortC */
 #define LCD_PIN_SCLK              (8)
-#define LCD_PORT_SI               (2)  /* = gpioPortC on EZM32LG */
+#define LCD_PORT_SI               (2)  /* = gpioPortC */
 #define LCD_PIN_SI                (6)
-#define LCD_PORT_SCS              (3)  /* = gpioPortD on EZM32LG */
+#define LCD_PORT_SCS              (3)  /* = gpioPortD */
 #define LCD_PIN_SCS              (14)
-#define LCD_PORT_EXTCOMIN         (3)  /* = gpioPortD on EZM32LG */
+#define LCD_PORT_EXTCOMIN         (3)  /* = gpioPortD */
 #define LCD_PIN_EXTCOMIN         (13)
-#define LCD_PORT_DISP_SEL         (0)  /* = gpioPortF on EZM32LG */
+#define LCD_PORT_DISP_SEL         (0)  /* = gpioPortF */
 #define LCD_PIN_DISP_SEL          (0)
-#define LCD_PORT_DISP_PWR         (3)  /* = gpioPortD on EZM32LG */
+#define LCD_PORT_DISP_PWR         (3)  /* = gpioPortD */
 #define LCD_PIN_DISP_PWR         (15)
-#define LCD_PORT_EXTMODE          (0)  /* = gpioPortA on EZM32LG */
-#define LCD_PIN_EXTMODE           (0)
 
 /* PRS settings for polarity inversion extcomin auto toggle.  */
 #define LCD_AUTO_TOGGLE_PRS_CH    (4)  /* PRS channel 4.      */
@@ -49,13 +47,13 @@
 /*
  * Select how LCD polarity inversion should be handled:
  *
- * If POLARITY_INVERSION_EXTCOMIN is defined, the EXTMODE pin is set to HIGH,
- * and the polarity inversion is armed for every rising edge of the EXTCOMIN
+ * If POLARITY_INVERSION_EXTCOMIN is defined,
+ * the polarity inversion is armed for every rising edge of the EXTCOMIN
  * pin. The actual polarity inversion is triggered at the next transision of
  * SCS. This mode is recommended because it causes less CPU and SPI load than
  * the alternative mode, see below.
- * If POLARITY_INVERSION_EXTCOMIN is undefined, the EXTMODE pin is set to LOW,
- * and the polarity inversion is toggled by sending an SPI command. This mode
+ * If POLARITY_INVERSION_EXTCOMIN is undefined,
+ * the polarity inversion is toggled by sending an SPI command. This mode
  * causes more CPU and SPI load than using the EXTCOMIN pin mode.
  */
 #define POLARITY_INVERSION_EXTCOMIN
