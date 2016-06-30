@@ -158,6 +158,10 @@ void RAIL_RfIdle(void);
  *
  * @note After RF energy has been sensed, RF Sense is automatically disabled,
  * and RAIL_RfSense() must be called again to reactivate it.
+ *
+ * @warning RF Sense functionality is only guaranteed from 0 to
+ *          85 degrees Celsius. RF Sense should be disabled
+ *          outside this Temperature range.
  */
 uint32_t RAIL_RfSense(RAIL_RfSenseBand_t band, uint32_t senseTime, bool enableCb);
 
@@ -399,15 +403,28 @@ void RAILCb_EndWriteMemory(void *handle, uint32_t offset, uint32_t size);
 uint32_t RAIL_GetTime(void);
 
 /**
+ * Set the current RAIL time
+ *
+ * @param[in] time Set the RAIL timebase to this value in microseconds.
+ * @return Returns RAIL_STATUS_NO_ERROR on success and
+ * RAIL_STATUS_INVALID_STATE if the time could not be set.
+ * 
+ * Set the current time in the RAIL timebase in microseconds.
+ */
+RAIL_Status_t RAIL_SetTime(uint32_t time);
+
+/**
  * Set a timer via the RAIL timebase
  *
  * @param[in] time The time to delay for in the RAIL timebase.
  * @param[in] mode The timer mode can be relative to now or an absolute time.
+ * @return Returns RAIL_STATUS_NO_ERROR on success and
+ * RAIL_STATUS_INVALID_PARAMETER if the timer could not be scheduled.
  *
  * Configure a timer to fire after some period in the RAIL timebase. This timer
  * can be used to implement low level protocol features.
  */
-void RAIL_TimerSet(uint32_t time, RAIL_TimeMode_t mode);
+RAIL_Status_t RAIL_TimerSet(uint32_t time, RAIL_TimeMode_t mode);
 
 /**
  * Return the absolute time that the RAIL timer is configured to fire at.
@@ -774,7 +791,7 @@ uint8_t RAIL_RxStart(uint8_t channel);
 /**
  * Return the current raw RSSI
  *
- * @return Return -128, RAIL_RSSI_INVALID, if the receiver is disabled and we are unable to get an
+ * @return Return RAIL_RSSI_INVALID if the receiver is disabled and we are unable to get an
  *   RSSI value, otherwise, return the RSSI in quarter dBm, dbm*4.
  *
  * Get the current RSSI value. This value represents the current energy of the
@@ -883,6 +900,11 @@ void RAILCb_RxRadioStatus(uint8_t status);
  * force in the same address entry in each field you can use second define: \ref
  * ADDRCONFIG_MATCH_TABLE_DOUBLE_FIELD. For more complex systems you'll have to
  * create a valid table on your own.
+ *
+ * @note When using a 38.4 MHz crystal, address filtering will not function with
+ * any data rate greater than 1Mbps. If frame type decoding and address
+ * filtering are used together, then the maximum data rate is lowered to 500Kbps
+ * when using a 38.4 MHz crystal.
  *
  * @{
  */
@@ -1031,6 +1053,18 @@ bool RAIL_AddressFilterByFrameType(uint8_t validFrames);
  */
 
 /**
+ * Initialize RAIL Calibration
+ *
+ * @param[in] railCalInit The initialization structure to be used for setting 
+ *   up calibration procedures. 
+ * @return Returns zero on success and an error code on error.
+ *
+ * Calibration initialization provides the calibration settings that 
+ * correspond to the current radio configuration.
+ */
+uint8_t RAIL_CalInit(const RAIL_CalInit_t *railCalInit);
+
+/**
  * Start the calibration process
  *
  * @param[in] calValues Calibration Values to apply. To force the calibration
@@ -1170,6 +1204,47 @@ uint8_t RAIL_TxStreamStart(uint8_t channel, RAIL_StreamMode_t mode);
  * Halt the transmission started by RAIL_TxStreamStart.
  */
 uint8_t RAIL_TxStreamStop(void);
+
+/**
+ * Configure BER test
+ *
+ * @param[in] berConfig BER test parameters to apply.
+ *
+ * Configure settings specific to bit error rate (BER) testing. 
+ * During BER test mode, this device will expect to receive a standard PN9 
+ * signal (x^9 + x^5 + 1). In order to use this BER test, the selection 
+ * for BER mode should be enabled from the radio configurator.
+ */
+void RAIL_BerConfigSet(RAIL_BerConfig_t *berConfig);
+
+/**
+ * Start BER test
+ *
+ * @return void
+ *
+ * Enter BER receive with the settings specified by RAIL_BerConfig. This
+ * also resets the BER status.
+ */
+void RAIL_BerRxStart(void);
+
+/**
+ * Stop BER test
+ *
+ * @return void
+ *
+ * Halt a test early, or exit infinite BER receive mode.
+ */
+void RAIL_BerRxStop(void);
+
+/**
+ * Get BER test status
+ *
+ * @param[out] status Statistics pertaining to the latest BER test.
+ * @return void
+ *
+ * Get status of latest BER test.
+ */
+void RAIL_BerStatusGet(RAIL_BerStatus_t *status);
 
 /**
  * @}

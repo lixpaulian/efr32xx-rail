@@ -38,6 +38,15 @@
 typedef uint32_t RAIL_CalMask_t;
 
 /**
+ * @struct RAIL_CalInit_t
+ * @brief Initialization structure for RAIL calibrations.
+ */
+typedef struct RAIL_CalInit {
+  RAIL_CalMask_t calEnable; /**< Mask that defines calibrations to perform in RAIL. */
+  const uint8_t *irCalSettings; /**< Pointer to image rejection calibration settings. */
+} RAIL_CalInit_t;
+
+/**
  * @}
  */
 
@@ -523,9 +532,8 @@ typedef struct RAIL_TxPacketInfo {
 /** Ignore all possible errors. Receive all possible packets */
 #define RAIL_IGNORE_ALL_ERRORS    (0xFF)
 
-// fixed point number: sign extension (bits 31:10)
-//  + -128 as integer (bits 9:2) + 0 as fractional (bits 1:0)
-#define RAIL_RSSI_INVALID    (0xFFFFFE00L)
+// -128 * 4 for invalid in quarter dBm
+#define RAIL_RSSI_INVALID         ((int16_t)(-128 * 4))
 
 /**
  * @struct RAIL_AppendedInfo_t
@@ -599,6 +607,27 @@ typedef enum RAIL_StreamMode {
   PSUEDO_RANDOM_STREAM, /**< Psuedo random stream of bytes */
   PN9_STREAM            /**< PN9 byte sequence */
 } RAIL_StreamMode_t;
+
+/**
+ * @struct RAIL_BerStatus_t
+ * @brief BER test parameters.
+ */
+typedef struct RAIL_BerConfig
+{
+  uint32_t bytesToTest;
+} RAIL_BerConfig_t;
+
+/**
+ * @struct RAIL_BerStatus_t
+ * @brief The status of the latest bit error rate (BER) test.
+ */
+typedef struct RAIL_BerStatus
+{
+  uint32_t bitsTotal;
+  uint32_t bitsTested;
+  uint32_t bitErrors;
+  int8_t   rssi;
+} RAIL_BerStatus_t;
 
 /**
  * @}

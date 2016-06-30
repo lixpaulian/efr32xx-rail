@@ -1,7 +1,7 @@
 /***************************************************************************//**
  * @file i2cspmconfig.h
  * @brief I2CSPM driver configuration file
- * @version 3.20.9
+ * @version 4.4.0
  *******************************************************************************
  * @section License
  * <b>Copyright 2015 Silicon Labs, Inc. http://www.silabs.com</b>

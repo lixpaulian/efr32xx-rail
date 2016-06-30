@@ -5,7 +5,7 @@ IFS=$'\n\t'
 # Archives are to be downloaded from:
 # http://www.silabs.com/Support%20Documents/RegisteredDocs/SiliconLabs-RAIL-1.0.0.0-GA.exe
 
-RELEASE_VERSION="1.1.0.0"
+RELEASE_VERSION="1.2.0.0"
 
 FAMILY="EFM32FG FlexGecko"
 GITHUB_PROJECT="lixpaulian/efr32fg-rail"
