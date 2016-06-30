@@ -5,12 +5,13 @@ IFS=$'\n\t'
 # Archives are to be downloaded from:
 # http://www.silabs.com/Support%20Documents/RegisteredDocs/SiliconLabs-RAIL-1.0.0.0-GA.exe
 
-RELEASE_VERSION="1.0.0.0"
+RELEASE_VERSION="1.1.0.0"
 
 FAMILY="EFM32FG FlexGecko"
 GITHUB_PROJECT="lixpaulian/efr32fg-rail"
 ARCHIVE_NAME="SiliconLabs-RAIL-${RELEASE_VERSION}-GA.exe"
-ARCHIVE_URL="http://www.silabs.com/Support%20Documents/RegisteredDocs/${ARCHIVE_NAME}"
+# ARCHIVE_URL="http://www.silabs.com/Support%20Documents/RegisteredDocs/${ARCHIVE_NAME}"
+ARCHIVE_LOCATION="/Volumes/C/SiliconLabs/SiliconLabsRAIL/${RELEASE_VERSION}-GA"
 
 # we have only an .exe file that we must unpack using windows :-( hopefully Silicon Labs
 # will provide also a zip or tar file sometimes...
@@ -36,17 +37,18 @@ done
 # echo "Manually unpack '${ARCHIVE_NAME}'..."
 # unzip -q "${LOCAL_ARCHIVE_FILE}"
 
-cp -R "$HOME/SimplicityStudio/SiliconLabsRAIL/1.0.0.0-GA/"* .
+cp -R "${ARCHIVE_LOCATION}/"* .
 
 echo "Saving the precompiled library..."
 mkdir lib
-cp apps/rail_lib/armgcc/librail_efr32/Release/exe/librail_efr32.a lib/
+cp autogen/librail_release/librail_efr32_gcc_release.a lib/librail_efr32.a
 
 echo "Removing unnecessary files..."
 
 rm -rf \
 apps \
 apps-bin \
+autogen \
 docs \
 hal \
 meta-inf \

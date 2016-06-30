@@ -20,6 +20,9 @@
  * @{
  */
 
+// -----------------------------------------------------------------------------
+// Calibration Structures
+// -----------------------------------------------------------------------------
 /**
  * @addtogroup Calibration
  * @{
@@ -37,16 +40,6 @@ typedef uint32_t RAIL_CalMask_t;
 /**
  * @}
  */
-
-/**
- * @enum RAIL_TimeMode_t
- * @brief Enumeration for specifying timing offsets in RAIL for any APIs that
- * use them.
- */
-typedef enum RAIL_TimeMode {
-  RAIL_TIME_ABSOLUTE,  /**< The time specified is an exact time in the RAIL timebase */
-  RAIL_TIME_DELAY      /**< The time specified is relative to now */
-} RAIL_TimeMode_t;
 
 // -----------------------------------------------------------------------------
 // Radio Configuration Structures
@@ -97,6 +90,7 @@ typedef enum RAIL_RadioState {
 typedef enum RAIL_Status {
   RAIL_STATUS_NO_ERROR,
   RAIL_STATUS_INVALID_PARAMETER,
+  RAIL_STATUS_INVALID_STATE,
 } RAIL_Status_t;
 
 /**
@@ -123,6 +117,21 @@ typedef enum {
  * @addtogroup Radio_Configuration
  * @{
  */
+
+/**
+ * @struct RAIL_StateTiming_t
+ * @brief Timing configuration structure for the RAIL State Machine
+ *
+ * This is used to configure the timings of the radio state transitions for
+ * common situations. All of the listed timings are in us. Timing values cannot
+ * exceed 13ms. Transitions to IDLE always happen as fast as possible.
+ */
+typedef struct RAIL_StateTiming {
+  uint16_t idleToRx; /**<Transition time from IDLE to RX */
+  uint16_t txToRx; /**<Transition time from TX to RX */
+  uint16_t idleToTx; /**<Transition time from IDLE to RX */
+  uint16_t rxToTx; /**<Transition time from RX to TX */
+} RAIL_StateTiming_t;
 
 /**
  * @struct RAIL_FrameType_t
@@ -248,6 +257,28 @@ typedef struct RAIL_AddrConfig {
  */
 
 // -----------------------------------------------------------------------------
+// System Timing Structures
+// -----------------------------------------------------------------------------
+/**
+ * @addtogroup System_Timing
+ * @{
+ */
+
+/**
+ * @enum RAIL_TimeMode_t
+ * @brief Enumeration for specifying timing offsets in RAIL for any APIs that
+ * use them.
+ */
+typedef enum RAIL_TimeMode {
+  RAIL_TIME_ABSOLUTE,  /**< The time specified is an exact time in the RAIL timebase */
+  RAIL_TIME_DELAY      /**< The time specified is relative to now */
+} RAIL_TimeMode_t;
+
+/**
+ * @}
+ */
+
+// -----------------------------------------------------------------------------
 // Pre-Tx Configuration Structures
 // -----------------------------------------------------------------------------
 /**
@@ -304,9 +335,10 @@ typedef struct RAIL_CsmaConfig {
   /**
    * The backoff unit period, in RAIL's microsecond time base.  This is
    * mulitiplied by the random backoff multiplier controlled by @ref
-   * csmaMinBoExp and @ref csmaMaxBoExp to determine the overall backoff period.
-   * For random backoffs, this value must be in the range 100 to 511
-   * microseconds; for fixed backoffs it can go up to 65535 microseconds.
+   * csmaMinBoExp and @ref csmaMaxBoExp to determine the overall backoff
+   * period.  For random backoffs, this value must be in the range from
+   * idleToRx time (set by RAIL_SetStateTimings) to 511 microseconds; for fixed
+   * backoffs it can go up to 65535 microseconds.
    */
   uint16_t ccaBackoff;
   uint16_t ccaDuration;    /**< CCA check duration, in microseconds */
@@ -376,9 +408,10 @@ typedef struct RAIL_LbtConfig {
   /**
    * The backoff unit period, in RAIL's microsecond time base.  This is
    * mulitiplied by the random backoff multiplier controlled by @ref
-   * lbtMinBoRand and @ref lbtMaxBoRand to determine the overall backoff period.
-   * For random backoffs, this value must be in the range 100 to 511
-   * microseconds; for fixed backoffs it can go up to 65535 microseconds.
+   * csmaMinBoExp and @ref csmaMaxBoExp to determine the overall backoff
+   * period.  For random backoffs, this value must be in the range from
+   * idleToRx time (set by RAIL_SetStateTimings) to 511 microseconds; for fixed
+   * backoffs it can go up to 65535 microseconds.
    */
   uint16_t lbtBackoff;
   uint16_t lbtDuration;    /**< LBT check duration, in microseconds */
@@ -468,14 +501,27 @@ typedef struct RAIL_TxPacketInfo {
 #define RAIL_RX_CONFIG_SYNC1_DETECT      (0x01 << 2)
 /** Callback for detection of the second sync word */
 #define RAIL_RX_CONFIG_SYNC2_DETECT      (0x01 << 3)
-/** Callback for packets that have an invalid CRC */
-#define RAIL_RX_CONFIG_INVALID_CRC       (0x01 << 4)
+/** Callback for detection of frame errors */
+#define RAIL_RX_CONFIG_FRAME_ERROR       (0x01 << 4)
 /** Callback for when we run out of Rx buffer space */
 #define RAIL_RX_CONFIG_BUFFER_OVERFLOW   (0x01 << 5)
 /** Callback for when a packet is address filtered */
 #define RAIL_RX_CONFIG_ADDRESS_FILTERED  (0x01 << 6)
 /** Callback for RF Sensed */
 #define RAIL_RX_CONFIG_RF_SENSED         (0x01 << 7)
+
+/** To maintain backwards compatibility with RAIL 1.1,
+ * RAIL_RX_CONFIG_INVALID_CRC is the same as RAIL_RX_CONFIG_FRAME_ERROR
+ */
+#define RAIL_RX_CONFIG_INVALID_CRC RAIL_RX_CONFIG_FRAME_ERROR
+
+// Rx Config Ignore Error Defines
+/** Ignore no errors. Drop all packets with errors */
+#define RAIL_IGNORE_NO_ERRORS     (0x00)
+/** Ignore CRC errors. Receive packets with CRC errors */
+#define RAIL_IGNORE_CRC_ERRORS    (0x01 << 0)
+/** Ignore all possible errors. Receive all possible packets */
+#define RAIL_IGNORE_ALL_ERRORS    (0xFF)
 
 // fixed point number: sign extension (bits 31:10)
 //  + -128 as integer (bits 9:2) + 0 as fractional (bits 1:0)
@@ -498,12 +544,17 @@ typedef struct RAIL_AppendedInfo {
    * Indicates whether the CRC passed or failed for the receive packet. This
    * will be set to 0 for fail and 1 for pass.
    */
-  uint8_t crcStatus;
+  bool crcStatus:1;
+  /**
+   * Indicates whether frame coding found any errors in the receive packet.
+   * This will be set to 0 for fail and 1 for pass.
+   */
+  bool frameCodingStatus:1;
   /**
    * RSSI of the received packet in integer dBm. This is latched when the sync
    * word is detected for this packet.
    */
-  uint8_t rssiLatch;
+  int8_t rssiLatch;
   /**
    * Link quality indicator of the received packet. This is not currently
    * implemented.

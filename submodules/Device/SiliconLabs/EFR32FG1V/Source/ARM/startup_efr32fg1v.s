@@ -2,7 +2,7 @@
 ; * @file startup_efr32fg1v.s
 ; * @brief    CMSIS Core Device Startup File for
 ; *           Silicon Labs EFR32FG1V Device Series
-; * @version 4.2.0
+; * @version 4.3.0
 ; * @date     03. February 2012
 ; *
 ; * @note

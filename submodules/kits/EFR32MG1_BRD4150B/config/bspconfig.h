@@ -67,14 +67,12 @@
   false,        /* Disable auto-start and select on RAC wakeup */               \
   _CMU_HFXOSTARTUPCTRL_CTUNE_DEFAULT,                                           \
   0x142,        /* Steady-state CTUNE for WSTK boards without load caps */      \
-  _CMU_HFXOSTARTUPCTRL_REGISHWARM_DEFAULT,                                      \
   _CMU_HFXOSTEADYSTATECTRL_REGISH_DEFAULT,                                      \
   _CMU_HFXOSTARTUPCTRL_IBTRIMXOCORE_DEFAULT,                                    \
   0x7,          /* Recommended steady-state XO core bias current */             \
   0x6,          /* Recommended peak detection threshold */                      \
   _CMU_HFXOTIMEOUTCTRL_SHUNTOPTTIMEOUT_DEFAULT,                                 \
   0xA,          /* Recommended peak detection timeout  */                       \
-  _CMU_HFXOTIMEOUTCTRL_WARMSTEADYTIMEOUT_DEFAULT,                               \
   _CMU_HFXOTIMEOUTCTRL_STEADYTIMEOUT_DEFAULT,                                   \
   _CMU_HFXOTIMEOUTCTRL_STARTUPTIMEOUT_DEFAULT,                                  \
 }

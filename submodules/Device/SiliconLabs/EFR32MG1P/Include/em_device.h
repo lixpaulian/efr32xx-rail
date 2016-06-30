@@ -12,10 +12,10 @@
  *
  *
  * @endverbatim
- * @version 4.2.0
+ * @version 4.3.0
  ******************************************************************************
  * @section License
- * <b>Copyright 2015 Silicon Laboratories, Inc. http://www.silabs.com</b>
+ * <b>Copyright 2016 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -67,6 +67,18 @@
 
 #elif defined(EFR32MG1P233F256GM48)
 #include "efr32mg1p233f256gm48.h"
+
+#elif defined(EFR32MG1P632F256GM32)
+#include "efr32mg1p632f256gm32.h"
+
+#elif defined(EFR32MG1P632F256IM32)
+#include "efr32mg1p632f256im32.h"
+
+#elif defined(EFR32MG1P732F256GM32)
+#include "efr32mg1p732f256gm32.h"
+
+#elif defined(EFR32MG1P732F256IM32)
+#include "efr32mg1p732f256im32.h"
 
 #else
 #error "em_device.h: PART NUMBER undefined"
