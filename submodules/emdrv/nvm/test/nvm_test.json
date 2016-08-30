@@ -1,0 +1,23 @@
+{
+  "name": "NVM",
+  "defines": [],
+  "emlib": [
+    "em_system.c",
+    "em_emu.c",
+    "em_cmu.c",
+    "em_msc.c",
+    "em_int.c",
+    "em_assert.c"
+  ],
+  "emdrv": [
+    "config/nvm_config.c",
+    "nvm/src/nvm.c",
+    "nvm/src/nvm_hal.c",
+    "nvm/test/main.c"
+  ],
+  "includes": [
+    "emdrv/common/inc",
+    "emdrv/config",
+    "emdrv/nvm/inc"
+  ]
+}

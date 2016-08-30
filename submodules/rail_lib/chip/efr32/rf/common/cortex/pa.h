@@ -102,6 +102,7 @@ int32_t  PA_OutputPowerSet(int32_t power);
 int32_t  PA_MaxOutputPowerSet(void);
 uint32_t PA_RampTimeGet(void);
 uint32_t PA_RampTimeSet(uint32_t ramptime);
+void     PA_CTuneSet(uint8_t txPaCtuneValue, uint8_t rxPaCtuneValue);
 
 /** @} (end addtogroup PA) */
 /** @} (end addtogroup RF_Library) */

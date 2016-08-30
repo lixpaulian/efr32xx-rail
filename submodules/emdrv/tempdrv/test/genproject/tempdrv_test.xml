@@ -1,0 +1,65 @@
+<workspace name="tempdrv_test">
+  <project name="tempdrv_test_slwstk6001a_efr32mg" device="EFR32MG1P233F256GM48">
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\SLWSTK6001A_EFR32MG\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <tempdrv>$PROJ_DIR$\..\..\..\tempdrv</tempdrv>
+      <gpiointerrupt>$PROJ_DIR$\..\..\..\gpiointerrupt</gpiointerrupt>
+      <rtcdrv>$PROJ_DIR$\..\..\..\rtcdrv</rtcdrv>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>DEBUG_EFM</define>
+      <define>ITM_DEBUG_OUTPUT</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFR32MG1P\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-tempdrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFR32MG1P\Source\$IDE$\startup_efr32mg1p.s</source>
+      <source>##em-path-device##\EFR32MG1P\Source\system_efr32mg1p.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="bsp">
+      <source>##em-path-bsp##\bsp_bcc.c</source>
+      <source>##em-path-bsp##\bsp_stk.c</source>
+      <source>##em-path-bsp##\bsp_stk_leds.c</source>
+    </group>
+    <group name="EMDRV">
+      <source>##em-path-tempdrv##\src\tempdrv.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+</workspace>

@@ -1,0 +1,27 @@
+{
+  "name": "DMADRV_NATIVE",
+  "defines": ["EMDRV_DMADRV_USE_NATIVE_API"],
+  "emlib": [
+    "em_system.c",
+    "em_emu.c",
+    "em_cmu.c",
+    "em_usart.c",
+    "em_dma.c",
+    "em_gpio.c",
+    "em_ldma.c",
+    "em_int.c",
+    "em_leuart.c",
+    "em_assert.c"
+  ],
+  "emdrv": [
+    "dmadrv/src/dmadrv.c",
+    "dmadrv/test/main.c",
+    "dmadrv/test/dmactrl.c"
+  ],
+  "includes": [
+    "emdrv/config",
+    "emdrv/common/inc",
+    "emdrv/dmadrv/inc",
+    "emdrv/dmadrv/test"
+  ]
+}

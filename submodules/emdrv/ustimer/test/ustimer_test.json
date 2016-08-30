@@ -1,0 +1,22 @@
+{
+  "name": "USTIMER",
+  "defines": [],
+  "emlib": [
+    "em_system.c",
+    "em_assert.c",
+    "em_int.c",
+    "em_emu.c",
+    "em_cmu.c",
+    "em_timer.c"
+  ],
+  "emdrv": [
+    "ustimer/src/ustimer.c",
+    "ustimer/test/main.c",
+    "ustimer/test/ustimestamp32.c"
+  ],
+  "includes": [
+    "emdrv/config",
+    "emdrv/common/inc",
+    "emdrv/ustimer/inc"
+  ]
+}
