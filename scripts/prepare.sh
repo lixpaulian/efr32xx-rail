@@ -2,10 +2,14 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# Archives are to be downloaded from:
+# Usage: go to the xpacks/efr32-rail.git directory and call the script:
+#       bash scripts/prepare.sh
+# Don't forget first to switch to the "Originals" branch!
+
+# Archives are to be downloaded from (example, you must change the version string in the file name):
 # http://www.silabs.com/Support%20Documents/RegisteredDocs/SiliconLabs-RAIL-1.0.0.0-GA.exe
 
-RELEASE_VERSION="1.2.0.0"
+RELEASE_VERSION="1.2.1.0"
 
 FAMILY="EFM32FG FlexGecko"
 GITHUB_PROJECT="lixpaulian/efr32fg-rail"
