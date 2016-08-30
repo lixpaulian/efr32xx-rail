@@ -1,0 +1,1028 @@
+<workspace name="dmadrv_test">
+   <project name="dmadrv_test_efm32pg1b" device="EFM32PG1B200F256GM48">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\SLSTK3401A_EFM32PG\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>EMDRV_REGRESSION_TEST</define>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_DMADRV_USE_NATIVE_API</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFM32PG1B\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-drivers##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFM32PG1B\Source\$IDE$\startup_efm32pg1b.s</source>
+      <source>##em-path-device##\EFM32PG1B\Source\system_efm32pg1b.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ldma.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="bsp">
+      <source>##em-path-bsp##\bsp_bcc.c</source>
+      <source>##em-path-bsp##\bsp_stk.c</source>
+      <source>##em-path-bsp##\bsp_stk_leds.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+   <project name="dmadrv_test_efr32mg1p" device="EFR32MG1P233F256GM48">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\SLWSTK6001A_EFR32MG\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>ITM_DEBUG_OUTPUT</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_DMADRV_USE_NATIVE_API</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFR32MG1P\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-drivers##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFR32MG1P\Source\$IDE$\startup_efr32mg1p.s</source>
+      <source>##em-path-device##\EFR32MG1P\Source\system_efr32mg1p.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ldma.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="bsp">
+      <source>##em-path-bsp##\bsp_bcc.c</source>
+      <source>##em-path-bsp##\bsp_stk.c</source>
+      <source>##em-path-bsp##\bsp_stk_leds.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="dmadrv_test_ezr32lg" device="EZR32LG330F256R60">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\SLWSTK6200A_EZR32LG\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+      <define>RETARGET_USART1</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EZR32LG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EZR32LG\Source\$IDE$\startup_ezr32lg.s</source>
+      <source>##em-path-device##\EZR32LG\Source\system_ezr32lg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_dma.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\dmactrl.c</source>
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="dmadrv_test_ezr32wg" device="EZR32WG330F256R60">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\SLWSTK6220A_EZR32WG\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+      <define>RETARGET_USART1</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EZR32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EZR32WG\Source\$IDE$\startup_ezr32wg.s</source>
+      <source>##em-path-device##\EZR32WG\Source\system_ezr32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_dma.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\dmactrl.c</source>
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="dmadrv_test_efm32gg" device="EFM32GG990F1024">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32GG_DK3750\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFM32GG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFM32GG\Source\$IDE$\startup_efm32gg.s</source>
+      <source>##em-path-device##\EFM32GG\Source\system_efm32gg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_dma.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="bsp">
+      <source>##em-path-bsp##\bsp_dk_3201.c</source>
+      <source>##em-path-bsp##\bsp_dk_leds.c</source>
+      <source>##em-path-bsp##\bsp_trace.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\dmactrl.c</source>
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="dmadrv_test_efm32g" device="EFM32G890F128">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32_Gxxx_STK\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFM32G\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFM32G\Source\$IDE$\startup_efm32g.s</source>
+      <source>##em-path-device##\EFM32G\Source\system_efm32g.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_dma.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\dmactrl.c</source>
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="dmadrv_test_efm32gdk" device="EFM32G890F128">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32_Gxxx_STK\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFM32G\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFM32G\Source\$IDE$\startup_efm32g.s</source>
+      <source>##em-path-device##\EFM32G\Source\system_efm32g.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_dma.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\dmactrl.c</source>
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="dmadrv_test_efm32wg" device="EFM32WG990F256">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32WG_STK3800\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFM32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFM32WG\Source\$IDE$\startup_efm32wg.s</source>
+      <source>##em-path-device##\EFM32WG\Source\system_efm32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_dma.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\dmactrl.c</source>
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="dmadrv_test_efm32wgdk" device="EFM32WG990F256">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32WG_STK3800\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFM32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFM32WG\Source\$IDE$\startup_efm32wg.s</source>
+      <source>##em-path-device##\EFM32WG\Source\system_efm32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_dma.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\dmactrl.c</source>
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="dmadrv_test_efm32lg" device="EFM32LG990F256">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32LG_STK3600\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFM32LG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFM32LG\Source\$IDE$\startup_efm32lg.s</source>
+      <source>##em-path-device##\EFM32LG\Source\system_efm32lg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_dma.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\dmactrl.c</source>
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="dmadrv_test_efm32lgdk" device="EFM32LG990F256">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32LG_STK3600\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFM32LG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFM32LG\Source\$IDE$\startup_efm32lg.s</source>
+      <source>##em-path-device##\EFM32LG\Source\system_efm32lg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_dma.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\dmactrl.c</source>
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="dmadrv_test_efm32_tiny" device="EFM32TG840F32">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32WG_STK3800\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFM32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFM32WG\Source\$IDE$\startup_efm32wg.s</source>
+      <source>##em-path-device##\EFM32WG\Source\system_efm32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_dma.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\dmactrl.c</source>
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="dmadrv_test_efm32hg" device="EFM32HG322F64">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\SLSTK3400A_EFM32HG\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+      <define>UNITY_TEST_REPORT_SERIAL</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFM32HG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFM32HG\Source\$IDE$\startup_efm32hg.s</source>
+      <source>##em-path-device##\EFM32HG\Source\system_efm32hg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_dma.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-cmsis##\unity\src\unity.c</source>
+      <source>##em-path-cmsis##\unity\src\unity_conf.c</source>
+      <source>##em-path-cmsis##\unity\src\unity_usart.c</source>
+      <source>##em-path-cmsis##\emlib\src\em_usart.c</source>
+      <source>##em-path-cmsis##\emlib\src\em_gpio.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\dmactrl.c</source>
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="dmadrv_test_efm32zg" device="EFM32ZG222F32">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32ZG_STK3200\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>DEBUG_EFM</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+      <define>UNITY_TEST_REPORT_SERIAL</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFM32ZG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFM32ZG\Source\$IDE$\startup_efm32zg.s</source>
+      <source>##em-path-device##\EFM32ZG\Source\system_efm32zg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_dma.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-cmsis##\unity\src\unity.c</source>
+      <source>##em-path-cmsis##\unity\src\unity_conf.c</source>
+      <source>##em-path-cmsis##\unity\src\unity_usart.c</source>
+      <source>##em-path-cmsis##\emlib\src\em_usart.c</source>
+      <source>##em-path-cmsis##\emlib\src\em_gpio.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\dmactrl.c</source>
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="dmadrv_test_fpga" device="EFR32CGFULL">
+    <targets>
+      <name>iar</name>
+      <name>armgcc</name>
+    </targets>
+    <directories>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <device>$PROJ_DIR$\..\..\..\..\Device\SiliconLabs</device>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <unity>$PROJ_DIR$\..\..\..\..\unity\src</unity>
+      <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+      <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+      <efrdrivers>$PROJ_DIR$\..\..\..\..\kits\EMDK1001_EFR\drivers</efrdrivers>
+      <efrbsp>$PROJ_DIR$\..\..\..\..\kits\EMDK1001_EFR\bsp</efrbsp>
+      <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EMDK1001_EFR\config</kitconfig>
+      <emdrvconfig>$PROJ_DIR$\..\..\..\config</emdrvconfig>
+      <ecode>$PROJ_DIR$\..\..\..\common\inc</ecode>
+      <dmadrv>$PROJ_DIR$\..\..\..\dmadrv</dmadrv>
+    </directories>
+    <cflags>
+      <optimize>none</optimize>
+      <define>ITM_DEBUG_OUTPUT</define>
+      <define>EMDRV_REGRESSION_TEST</define>
+      <define>DEBUG_EFM</define>
+      <define>EFR32CG_FPGA</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsis##\CMSIS\Include</path>
+      <path>##em-path-cmsis##\Device\SiliconLabs\EFR32CG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-efrdrivers##</path>
+      <path>##em-path-unity##</path>
+      <path>##em-path-emdrvconfig##</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-dmadrv##\inc</path>
+      <path>##em-path-drivers##</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-device##\EFR32CG\Source\$IDE$\startup_efr32cg.s</source>
+      <source>##em-path-device##\EFR32CG\Source\system_efr32cg.c</source>
+    </group>
+    <group name="efrbsp">
+      <source>##em-path-efrbsp##\bsp_dk1001_efr.c</source>
+    </group>
+    <group name="efrdrivers">
+      <source>##em-path-efrdrivers##\bsp_dk1001_efr_misc.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ldma.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-unity##\unity.c</source>
+      <source>##em-path-unity##\unity_conf.c</source>
+      <source>##em-path-unity##\unity_swo.c</source>
+    </group>
+    <group name="bsp">
+      <source>##em-path-bsp##\bsp_dk_leds.c</source>
+    </group>
+    <group name="DMADRV">
+      <source>##em-path-dmadrv##\src\dmadrv.c</source>
+    </group>
+    <group name="Drivers">
+      <source>##em-path-drivers##\retargetserial.c</source>
+      <source>##em-path-drivers##\retargetio.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+</workspace>

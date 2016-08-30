@@ -1,0 +1,411 @@
+<workspace name="nvm">
+  <project name="nvm_gecko" device="EFM32G890F128">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32_Gxxx_DK\config</kitconfig>
+        <nvm>$PROJ_DIR$\..\..\..\..\emdrv\nvm</nvm>
+        <ecode>$PROJ_DIR$\..\..\..\..\emdrv\common\inc</ecode>
+        <emdrv-ecode>$PROJ_DIR$\..\..\..\..\emdrv\ecode</emdrv-ecode>
+        <emdrv-config>$PROJ_DIR$\..\..\..\..\emdrv\config</emdrv-config>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>       
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32G\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-nvm##\inc</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-emdrv-ecode##</path>
+			<path>##em-path-emdrv-config##</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32G\Source\$IDE$\startup_efm32g.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32G\Source\system_efm32g.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>      
+      <source>##em-path-emlib##\src\em_emu.c</source>      
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_msc.c</source>      
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>  
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="NVM">
+      <source>##em-path-nvm##\src\nvm.c</source>
+      <source>##em-path-nvm##\src\nvm_hal.c</source>
+			<source>##em-path-emdrv-config##\nvm_config.c</source>
+    </group>
+    <group name="Source">      
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+    <patches>
+      <patch only_ide="arm" match="ScatterFile&gt;&lt;">ScatterFile&gt;ram_code.sct&lt;</patch>
+      <patch only_ide="arm" match="umfTarg&gt;1&lt;">umfTarg&gt;0&lt;</patch>
+    </patches>
+  </project>
+  <project name="nvm_giant" device="EFM32GG990F1024">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32GG_DK3750\config</kitconfig>
+        <nvm>$PROJ_DIR$\..\..\..\..\emdrv\nvm</nvm>
+        <ecode>$PROJ_DIR$\..\..\..\..\emdrv\common\inc</ecode>
+        <emdrv-ecode>$PROJ_DIR$\..\..\..\..\emdrv\ecode</emdrv-ecode>
+        <emdrv-config>$PROJ_DIR$\..\..\..\..\emdrv\config</emdrv-config>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>       
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32GG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-nvm##\inc</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-emdrv-ecode##</path>
+      <path>##em-path-emdrv-config##</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32GG\Source\$IDE$\startup_efm32gg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32GG\Source\system_efm32gg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>      
+      <source>##em-path-emlib##\src\em_emu.c</source>      
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_msc.c</source>      
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>  
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="NVM">
+      <source>##em-path-nvm##\src\nvm.c</source>
+      <source>##em-path-nvm##\src\nvm_hal.c</source>
+      <source>##em-path-emdrv-config##\nvm_config.c</source>
+    </group>
+    <group name="Source">      
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+    <patches>
+      <patch only_ide="arm" match="ScatterFile&gt;&lt;">ScatterFile&gt;ram_code.sct&lt;</patch>
+      <patch only_ide="arm" match="umfTarg&gt;1&lt;">umfTarg&gt;0&lt;</patch>
+    </patches>
+  </project>
+  <project name="nvm_tiny" device="EFM32TG840F32">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32TG_STK3300\config</kitconfig>
+        <nvm>$PROJ_DIR$\..\..\..\..\emdrv\nvm</nvm>
+        <emdrv-ecode>$PROJ_DIR$\..\..\..\..\emdrv\common\inc</emdrv-ecode>
+        <ecode>$PROJ_DIR$\..\..\..\..\emdrv\ecode</ecode>
+        <emdrv-config>$PROJ_DIR$\..\..\..\..\emdrv\config</emdrv-config>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>       
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32TG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-nvm##\inc</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-emdrv-ecode##</path>
+      <path>##em-path-emdrv-config##</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32TG\Source\$IDE$\startup_efm32tg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32TG\Source\system_efm32tg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>      
+      <source>##em-path-emlib##\src\em_emu.c</source>      
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_msc.c</source>      
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>  
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="NVM">
+      <source>##em-path-nvm##\src\nvm.c</source>
+      <source>##em-path-nvm##\src\nvm_hal.c</source>
+      <source>##em-path-emdrv-config##\nvm_config.c</source>
+    </group>
+    <group name="Source">      
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+    <patches>
+      <patch only_ide="arm" match="ScatterFile&gt;&lt;">ScatterFile&gt;ram_code.sct&lt;</patch>
+      <patch only_ide="arm" match="umfTarg&gt;1&lt;">umfTarg&gt;0&lt;</patch>
+    </patches>
+  </project>  
+  <project name="nvm_zero" device="EFM32ZG210F32">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32ZG_STK3200\config</kitconfig>
+        <nvm>$PROJ_DIR$\..\..\..\..\emdrv\nvm</nvm>
+        <emdrv-ecode>$PROJ_DIR$\..\..\..\..\emdrv\common\inc</emdrv-ecode>
+        <ecode>$PROJ_DIR$\..\..\..\..\emdrv\ecode</ecode>
+        <emdrv-config>$PROJ_DIR$\..\..\..\..\emdrv\config</emdrv-config>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>       
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>UNITY_TEST_REPORT_SERIAL</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32ZG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-nvm##\inc</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-emdrv-ecode##</path>
+      <path>##em-path-emdrv-config##</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32ZG\Source\$IDE$\startup_efm32zg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32ZG\Source\system_efm32zg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>      
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_msc.c</source>      
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>  
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_usart.c</source>
+    </group>
+    <group name="NVM">
+      <source>##em-path-nvm##\src\nvm.c</source>
+      <source>##em-path-nvm##\src\nvm_hal.c</source>
+      <source>##em-path-emdrv-config##\nvm_config.c</source>
+    </group>
+    <group name="Source">      
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+    <patches>
+      <patch only_ide="arm" match="ScatterFile&gt;&lt;">ScatterFile&gt;ram_code.sct&lt;</patch>
+      <patch only_ide="arm" match="umfTarg&gt;1&lt;">umfTarg&gt;0&lt;</patch>
+    </patches>
+  </project>  
+    <project name="nvm_giant" device="EFM32GG990F1024">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32GG_DK3750\config</kitconfig>
+        <nvm>$PROJ_DIR$\..\..\..\..\emdrv\nvm</nvm>
+        <ecode>$PROJ_DIR$\..\..\..\..\emdrv\common\inc</ecode>
+        <emdrv-ecode>$PROJ_DIR$\..\..\..\..\emdrv\ecode</emdrv-ecode>
+        <emdrv-config>$PROJ_DIR$\..\..\..\..\emdrv\config</emdrv-config>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>       
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32GG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-nvm##\inc</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-emdrv-ecode##</path>
+      <path>##em-path-emdrv-config##</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32GG\Source\$IDE$\startup_efm32gg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32GG\Source\system_efm32gg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>      
+      <source>##em-path-emlib##\src\em_emu.c</source>      
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_msc.c</source>      
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>  
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="NVM">
+      <source>##em-path-nvm##\src\nvm.c</source>
+      <source>##em-path-nvm##\src\nvm_hal.c</source>
+      <source>##em-path-emdrv-config##\nvm_config.c</source>
+    </group>
+    <group name="Source">      
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+    <patches>
+      <patch only_ide="arm" match="ScatterFile&gt;&lt;">ScatterFile&gt;ram_code.sct&lt;</patch>
+      <patch only_ide="arm" match="umfTarg&gt;1&lt;">umfTarg&gt;0&lt;</patch>
+    </patches>
+  </project>
+  <project name="nvm_pearl" device="EFM32PG1B200F256GM32">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\SLSTK3401A_EFM32PG\config</kitconfig>
+        <nvm>$PROJ_DIR$\..\..\..\..\emdrv\nvm</nvm>
+        <emdrv-ecode>$PROJ_DIR$\..\..\..\..\emdrv\common\inc</emdrv-ecode>
+        <ecode>$PROJ_DIR$\..\..\..\..\emdrv\ecode</ecode>
+        <emdrv-config>$PROJ_DIR$\..\..\..\..\emdrv\config</emdrv-config>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>       
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32PG1B\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-nvm##\inc</path>
+      <path>##em-path-ecode##</path>
+      <path>##em-path-emdrv-ecode##</path>
+      <path>##em-path-emdrv-config##</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32PG1B\Source\$IDE$\startup_efm32pg1b.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32PG1B\Source\system_efm32pg1b.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>      
+      <source>##em-path-emlib##\src\em_emu.c</source>      
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_msc.c</source>      
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>  
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="NVM">
+      <source>##em-path-nvm##\src\nvm.c</source>
+      <source>##em-path-nvm##\src\nvm_hal.c</source>
+      <source>##em-path-emdrv-config##\nvm_config.c</source>
+    </group>
+    <group name="Source">      
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+    <patches>
+      <patch only_ide="arm" match="ScatterFile&gt;&lt;">ScatterFile&gt;ram_code.sct&lt;</patch>
+      <patch only_ide="arm" match="umfTarg&gt;1&lt;">umfTarg&gt;0&lt;</patch>
+    </patches>
+  </project>   
+</workspace>

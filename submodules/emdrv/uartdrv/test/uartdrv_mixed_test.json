@@ -1,0 +1,35 @@
+{
+  "name": "UARTDRV_MIXED",
+  "defines": ["UARTDRV_TEST_MIXED"],
+  "emlib": [
+    "em_system.c",
+    "em_assert.c",
+    "em_int.c",
+    "em_emu.c",
+    "em_cmu.c",
+    "em_dma.c",
+    "em_ldma.c",
+    "em_usart.c",
+    "em_leuart.c",
+    "em_gpio.c",
+    "em_rtc.c",
+    "em_rtcc.c"
+  ],
+  "emdrv": [
+    "uartdrv/src/uartdrv.c",
+    "uartdrv/test/main.c",
+    "uartdrv/test/dmactrl.c",
+    "rtcdrv/src/rtcdriver.c",
+    "gpiointerrupt/src/gpiointerrupt.c",
+    "dmadrv/src/dmadrv.c"
+  ],
+  "includes": [
+    "emdrv/config",
+    "emdrv/common/inc",
+    "emdrv/rtcdrv/inc",
+    "emdrv/dmadrv/inc",
+    "emdrv/gpiointerrupt/inc",
+    "emdrv/uartdrv/inc",
+    "emdrv/uartdrv/test"
+  ]
+}

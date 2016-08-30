@@ -1,0 +1,30 @@
+{
+  "name": "RTCDRV",
+  "defines": [],
+  "emlib": [
+    "em_system.c",
+    "em_emu.c",
+    "em_cmu.c",
+    "em_rmu.c",
+    "em_rtc.c",
+    "em_rtcc.c",
+    "em_timer.c",
+    "em_gpio.c",
+    "em_letimer.c",
+    "em_int.c",
+    "em_assert.c"
+  ],
+  "emdrv": [
+    "rtcdrv/src/rtcdriver.c",
+    "rtcdrv/test/main.c",
+    "rtcdrv/test/timer_rtcdrv.c",
+    "rtcdrv/test/ustimestamp32.c",
+    "sleep/src/sleep.c"
+  ],
+  "includes": [
+    "emdrv/common/inc",
+    "emdrv/rtcdrv/inc",
+    "emdrv/rtcdrv/test",
+    "emdrv/sleep/inc"
+  ]
+}

@@ -1,0 +1,745 @@
+<workspace name="sleep">
+
+  <project name="sleep_test_slwstk6200a_ezr32lg_868" device="EZR32LG330F256R60">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\SLWSTK6200A_EZR32LG\config</kitconfig>
+        <sleep>$PROJ_DIR$\..\..\..\..\emdrv\sleep</sleep>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>
+       <flag only_ide="cs3">-Wall -Wextra</flag>
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EZR32LG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-sleep##\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EZR32LG\Source\$IDE$\startup_ezr32lg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EZR32LG\Source\system_ezr32lg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_burtc.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="emdrv">
+      <source>##em-path-sleep##\src\sleep.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="sleep_test_slwstk6220a_ezr32wg_868" device="EZR32WG330F256R60">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\SLWSTK6220A_EZR32WG\config</kitconfig>
+        <sleep>$PROJ_DIR$\..\..\..\..\emdrv\sleep</sleep>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>
+       <flag only_ide="cs3">-Wall -Wextra</flag>
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EZR32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-sleep##\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EZR32WG\Source\$IDE$\startup_ezr32wg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EZR32WG\Source\system_ezr32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_burtc.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="emdrv">
+      <source>##em-path-sleep##\src\sleep.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="sleep_efm32g" device="EFM32G890F128">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32_Gxxx_STK\config</kitconfig>
+        <sleep>$PROJ_DIR$\..\..\..\..\emdrv\sleep</sleep>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>
+       <flag only_ide="cs3">-Wall -Wextra</flag>
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32G\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-sleep##\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32G\Source\$IDE$\startup_efm32g.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32G\Source\system_efm32g.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="emdrv">
+      <source>##em-path-sleep##\src\sleep.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="sleep_efm32gdk" device="EFM32G890F128">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32_Gxxx_STK\config</kitconfig>
+        <sleep>$PROJ_DIR$\..\..\..\..\emdrv\sleep</sleep>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>
+       <flag only_ide="cs3">-Wall -Wextra</flag>
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32G\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-sleep##\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32G\Source\$IDE$\startup_efm32g.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32G\Source\system_efm32g.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="emdrv">
+      <source>##em-path-sleep##\src\sleep.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="sleep_efm32gg" device="EFM32GG990F1024">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32GG_STK3700\config</kitconfig>
+        <sleep>$PROJ_DIR$\..\..\..\..\emdrv\sleep</sleep>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>
+       <flag only_ide="cs3">-Wall -Wextra</flag>
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32GG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-sleep##\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32GG\Source\$IDE$\startup_efm32gg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32GG\Source\system_efm32gg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_burtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="emdrv">
+      <source>##em-path-sleep##\src\sleep.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="sleep_efm32hg" device="EFM32HG322F64">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\SLSTK3400A_EFM32HG\config</kitconfig>
+        <sleep>$PROJ_DIR$\..\..\..\..\emdrv\sleep</sleep>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>
+       <define>DEBUG_EFM</define>
+       <define>UNITY_TEST_REPORT_SERIAL</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32HG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-sleep##\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32HG\Source\$IDE$\startup_efm32hg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32HG\Source\system_efm32hg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_usart.c</source>
+    </group>
+    <group name="emdrv">
+      <source>##em-path-sleep##\src\sleep.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="sleep_efm32tg" device="EFM32TG840F32">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32TG_STK3300\config</kitconfig>
+        <sleep>$PROJ_DIR$\..\..\..\..\emdrv\sleep</sleep>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>
+       <flag only_ide="cs3">-Wall -Wextra</flag>
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32TG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-sleep##\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32TG\Source\$IDE$\startup_efm32tg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32TG\Source\system_efm32tg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="emdrv">
+      <source>##em-path-sleep##\src\sleep.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="sleep_efm32wg" device="EFM32WG990F256">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32WG_STK3800\config</kitconfig>
+        <sleep>$PROJ_DIR$\..\..\..\..\emdrv\sleep</sleep>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>
+       <flag only_ide="cs3">-Wall -Wextra</flag>
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-sleep##\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32WG\Source\$IDE$\startup_efm32wg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32WG\Source\system_efm32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_burtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="emdrv">
+      <source>##em-path-sleep##\src\sleep.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="sleep_efm32wgdk" device="EFM32WG990F256">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32WG_STK3800\config</kitconfig>
+        <sleep>$PROJ_DIR$\..\..\..\..\emdrv\sleep</sleep>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>
+       <flag only_ide="cs3">-Wall -Wextra</flag>
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-sleep##\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32WG\Source\$IDE$\startup_efm32wg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32WG\Source\system_efm32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_burtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="emdrv">
+      <source>##em-path-sleep##\src\sleep.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="sleep_efm32lg" device="EFM32LG990F256">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32LG_STK3600\config</kitconfig>
+        <sleep>$PROJ_DIR$\..\..\..\..\emdrv\sleep</sleep>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>
+       <flag only_ide="cs3">-Wall -Wextra</flag>
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32LG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-sleep##\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32LG\Source\$IDE$\startup_efm32lg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32LG\Source\system_efm32lg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_burtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="emdrv">
+      <source>##em-path-sleep##\src\sleep.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="sleep_efm32lgdk" device="EFM32LG990F256">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32LG_STK3600\config</kitconfig>
+        <sleep>$PROJ_DIR$\..\..\..\..\emdrv\sleep</sleep>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>
+       <flag only_ide="cs3">-Wall -Wextra</flag>
+       <flag only_ide="rowley">-Wall;-Wextra</flag>
+       <define>DEBUG_EFM</define>
+       <define>ITM_DEBUG_OUTPUT</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32LG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-sleep##\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32LG\Source\$IDE$\startup_efm32lg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32LG\Source\system_efm32lg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_burtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="emdrv">
+      <source>##em-path-sleep##\src\sleep.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+  <project name="sleep_efm32zg" device="EFM32ZG222F32">
+     <directories>
+        <root>$PROJ_DIR$\..\..\..\..</root>
+        <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+        <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+        <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+        <bsp>$PROJ_DIR$\..\..\..\..\kits\common\bsp</bsp>
+        <drivers>$PROJ_DIR$\..\..\..\..\kits\common\drivers</drivers>
+        <kitconfig>$PROJ_DIR$\..\..\..\..\kits\EFM32ZG_STK3200\config</kitconfig>
+        <sleep>$PROJ_DIR$\..\..\..\..\emdrv\sleep</sleep>
+     </directories>
+     <cflags>
+       <optimize>speed</optimize>
+       <define>DEBUG_EFM</define>
+       <define>UNITY_TEST_REPORT_SERIAL</define>
+     </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32ZG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-sleep##\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>##em-path-bsp##</path>
+      <path>##em-path-kitconfig##</path>
+      <path>##em-path-drivers##</path>
+      <path>$PROJ_DIR$\..</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32ZG\Source\$IDE$\startup_efm32zg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32ZG\Source\system_efm32zg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="BSP">
+      <source>##em-path-bsp##\bsp_trace.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_usart.c</source>
+    </group>
+    <group name="emdrv">
+      <source>##em-path-sleep##\src\sleep.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+    </group>
+  </project>
+
+</workspace>

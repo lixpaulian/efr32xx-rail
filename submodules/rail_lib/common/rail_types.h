@@ -604,7 +604,7 @@ typedef struct RAIL_RxPacketInfo {
  * @brief Possible stream output modes.
  */
 typedef enum RAIL_StreamMode {
-  PSUEDO_RANDOM_STREAM, /**< Psuedo random stream of bytes */
+  PSEUDO_RANDOM_STREAM, /**< Pseudo random stream of bytes */
   PN9_STREAM            /**< PN9 byte sequence */
 } RAIL_StreamMode_t;
 

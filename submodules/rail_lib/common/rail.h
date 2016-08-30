@@ -56,13 +56,17 @@ void RAIL_VersionGet(RAIL_Version_t * version, bool verbose);
 uint8_t RAIL_RfInit(const RAIL_Init_t *railInit);
 
 /**
- * Callback for when the radio is ready
+ * Callback for when the radio is finished initializing from \ref RAIL_RfInit
+ * and is ready to be configured
  *
  * @return void
  *
- * Callback that lets the app know when the radio has finished init and is
- * ready. After this callback fires, the transmit and receive functions
- * can be called.
+ * Callback that notifies the application when the radio is finished
+ * initializing and is ready for further configuration. This is callback is
+ * useful for potential transceiver products that require a power up sequence
+ * before further configuration is available.  After this callback fires, the
+ * radio is ready for additional configuration before transmit and receive
+ * operations.
  */
 void RAILCb_RfReady(void);
 
@@ -91,7 +95,8 @@ RAIL_RadioState_t RAIL_RfStateGet(void);
  *
  * This function fails if unsupported transitions are passed in, or if the
  * radio is currently in the RX state. Success can transition to TX, RX, or
- * IDLE, while error can transition to RX or IDLE.
+ * IDLE, while error can transition to RX or IDLE. The full list of options for
+ * the ignoreErrors parameter is any define that starts with RAIL_IGNORE_.
  */
 RAIL_Status_t RAIL_SetRxTransitions(RAIL_RadioState_t success,
                                     RAIL_RadioState_t error,
@@ -583,6 +588,20 @@ uint32_t RAIL_SymbolRateGet(void);
  * information on this consult the modem calculator documentation.
  */
 uint32_t RAIL_BitRateGet(void);
+
+/**
+ * Set the PA capacitor tune value for transmit and receive
+ *  
+ * @param[in] txPaCtuneValue PA Ctune value for TX mode
+ * @param[in] rxPaCtuneValue PA Ctune value for RX mode
+ *  
+ * @return returns RAIL_STATUS_NO_ERROR if successful
+ *
+ * Provides the ability to tune the impedance of the transmit
+ * and receive modes by changing the amount of capacitance at
+ * the PA output.
+ */
+RAIL_Status_t RAIL_PaCtuneSet(uint8_t txPaCtuneValue, uint8_t rxPaCtuneValue);
 
 /**
  * @}

@@ -1,0 +1,1253 @@
+<workspace name="rtcdrv_test">
+
+  <project name="rtcdrv_test_efm32pg1b" device="EFM32PG1B200F256GM48">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>EMDRV_REGRESSION_TEST</define>
+      <define>DEBUG_EFM</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32PG1B\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32PG1B\Source\$IDE$\startup_efm32pg1b.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32PG1B\Source\system_efm32pg1b.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rtcc.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_efr32mg1p" device="EFR32MG1P233F256GM48">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>EMDRV_REGRESSION_TEST</define>
+      <define>STK_BOARD</define>
+      <define>DEBUG_EFM</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFR32MG1P\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFR32MG1P\Source\$IDE$\startup_efr32mg1p.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFR32MG1P\Source\system_efr32mg1p.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rtcc.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_slwstk6200a_ezr32lg_868" device="EZR32LG330F256R60">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EZR32LG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EZR32LG\Source\$IDE$\startup_ezr32lg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EZR32LG\Source\system_ezr32lg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_slwstk6201a_ezr32lg_434" device="EZR32LG330F256R55">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EZR32LG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EZR32LG\Source\$IDE$\startup_ezr32lg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EZR32LG\Source\system_ezr32lg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_slwstk6202a_ezr32lg_915" device="EZR32LG330F256R63">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EZR32LG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EZR32LG\Source\$IDE$\startup_ezr32lg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EZR32LG\Source\system_ezr32lg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_slwstk6220a_ezr32wg_868" device="EZR32WG330F256R60">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EZR32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EZR32WG\Source\$IDE$\startup_ezr32wg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EZR32WG\Source\system_ezr32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_slwstk6221a_ezr32wg_434" device="EZR32WG330F256R55">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EZR32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EZR32WG\Source\$IDE$\startup_ezr32wg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EZR32WG\Source\system_ezr32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_slwstk6222a_ezr32wg_915" device="EZR32WG330F256R63">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EZR32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EZR32WG\Source\$IDE$\startup_ezr32wg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EZR32WG\Source\system_ezr32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_slwstk6223a_ezr32wg_490" device="EZR32WG330F256R63">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EZR32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EZR32WG\Source\$IDE$\startup_ezr32wg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EZR32WG\Source\system_ezr32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_slwstk6224a_ezr32wg_169" device="EZR32WG330F256R63">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EZR32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EZR32WG\Source\$IDE$\startup_ezr32wg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EZR32WG\Source\system_ezr32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_efm32g" device="EFM32G890F128">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32G\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32G\Source\$IDE$\startup_efm32g.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32G\Source\system_efm32g.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_efm32gdk" device="EFM32G890F128">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32G\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32G\Source\$IDE$\startup_efm32g.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32G\Source\system_efm32g.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_efm32gg" device="EFM32GG990F1024">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>DK3750_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32GG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32GG\Source\$IDE$\startup_efm32gg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32GG\Source\system_efm32gg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_efm32hg" device="EFM32HG322F64">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+      <define>UNITY_TEST_REPORT_SERIAL</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32HG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-cmsis##\kits\common\bsp</path>
+      <path>##em-path-cmsis##\kits\SLSTK3400A_EFM32HG\config</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32HG\Source\$IDE$\startup_efm32hg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32HG\Source\system_efm32hg.c</source>
+    </group>
+       <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-cmsis##\unity\src\unity_usart.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\ustimestamp32.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_efm32lg" device="EFM32LG990F256">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32LG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32LG\Source\$IDE$\startup_efm32lg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32LG\Source\system_efm32lg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_efm32lgdk" device="EFM32LG990F256">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32LG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32LG\Source\$IDE$\startup_efm32lg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32LG\Source\system_efm32lg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_efm32tg" device="EFM32TG840F32">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <release-linkerfile only_ide="iar">$PROJ_DIR$\..\rtc_tiny.icf</release-linkerfile>
+      <debug-linkerfile only_ide="iar">$PROJ_DIR$\..\rtc_tiny.icf</debug-linkerfile>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32TG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32TG\Source\$IDE$\startup_efm32tg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32TG\Source\system_efm32tg.c</source>
+    </group>
+       <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_efm32wg" device="EFM32WG990F256">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32WG\Source\$IDE$\startup_efm32wg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32WG\Source\system_efm32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_efm32wgdk" device="EFM32WG990F256">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32WG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32WG\Source\$IDE$\startup_efm32wg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32WG\Source\system_efm32wg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_efm32lg" device="EFM32LG990F256">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32LG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32LG\Source\$IDE$\startup_efm32lg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32LG\Source\system_efm32lg.c</source>
+    </group>
+    <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-root##\unity\src\unity_swo.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+  <project name="rtcdrv_test_efm32zg" device="EFM32ZG222F32">
+    <targets>
+      <name>armgcc</name>
+      <name>iar</name>
+    </targets>
+    <directories>
+      <root>$PROJ_DIR$\..\..\..\..</root>
+      <cmsis>$PROJ_DIR$\..\..\..\..</cmsis>
+      <cmsisdir>$PROJ_DIR$\..\..\..\..\CMSIS</cmsisdir>
+      <emlib>$PROJ_DIR$\..\..\..\..\emlib</emlib>
+      <emdrv>$PROJ_DIR$\..\..\..\..\emdrv</emdrv>
+    </directories>
+    <cflags>
+      <optimize>speed</optimize>
+      <define>STK_BOARD</define>
+      <define>UNITY_TEST_REPORT_SERIAL</define>
+    </cflags>
+    <includepaths>
+      <path>##em-path-cmsisdir##\Include</path>
+      <path>##em-path-root##\Device\SiliconLabs\EFM32ZG\Include</path>
+      <path>##em-path-emlib##\inc</path>
+      <path>##em-path-emdrv##\common\inc</path>
+      <path>##em-path-emdrv##\rtcdrv\inc</path>
+      <path>##em-path-cmsis##\kits\common\bsp</path>
+      <path>##em-path-cmsis##\kits\EFM32ZG_STK3200\config</path>
+      <path>##em-path-root##\unity\src</path>
+      <path>$PROJ_DIR$\..</path>
+      <path>$PROJ_DIR$\..\..\..\sleep\inc</path>
+      <path>##em-path-emdrv##\config</path>
+    </includepaths>
+    <group name="CMSIS">
+      <source>##em-path-root##\Device\SiliconLabs\EFM32ZG\Source\$IDE$\startup_efm32zg.s</source>
+      <source>##em-path-root##\Device\SiliconLabs\EFM32ZG\Source\system_efm32zg.c</source>
+    </group>
+       <group name="emlib">
+      <source>##em-path-emlib##\src\em_assert.c</source>
+      <source>##em-path-emlib##\src\em_cmu.c</source>
+      <source>##em-path-emlib##\src\em_ebi.c</source>
+      <source>##em-path-emlib##\src\em_emu.c</source>
+      <source>##em-path-emlib##\src\em_gpio.c</source>
+      <source>##em-path-emlib##\src\em_int.c</source>
+      <source>##em-path-emlib##\src\em_letimer.c</source>
+      <source>##em-path-emlib##\src\em_rmu.c</source>
+      <source>##em-path-emlib##\src\em_rtc.c</source>
+      <source>##em-path-emlib##\src\em_system.c</source>
+      <source>##em-path-emlib##\src\em_timer.c</source>
+      <source>##em-path-emlib##\src\em_usart.c</source>
+    </group>
+    <group name="Unity">
+      <source>##em-path-root##\unity\src\unity.c</source>
+      <source>##em-path-root##\unity\src\unity_conf.c</source>
+      <source>##em-path-cmsis##\unity\src\unity_usart.c</source>
+    </group>
+    <group name="rtcdrv">
+      <source>##em-path-emdrv##\rtcdrv\src\rtcdriver.c</source>
+    </group>
+    <group name="Source">
+      <source>$PROJ_DIR$\..\main.c</source>
+      <source>$PROJ_DIR$\..\timer_rtcdrv.c</source>
+      <source>$PROJ_DIR$\..\ustimestamp32.c</source>
+      <source>$PROJ_DIR$\..\..\..\sleep\src\sleep.c</source>
+    </group>
+  </project>
+
+</workspace>
