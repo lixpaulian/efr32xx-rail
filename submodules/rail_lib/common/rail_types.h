@@ -64,12 +64,12 @@ typedef struct RAIL_CalInit {
  * @brief Contains RAIL Library Version Information
  */
 typedef struct RAIL_Version {
-    uint32_t hash;
+    uint32_t hash;    /**< Git hash */
     uint8_t  major;   /**< Major number    */
     uint8_t  minor;   /**< Minor number    */
     uint8_t  rev;     /**< Revision number */
-    uint8_t  build;
-    uint8_t  flags;
+    uint8_t  build;   /**< Build number */
+    uint8_t  flags;   /**< Build flags */
 } RAIL_Version_t;
 
 /**
@@ -83,13 +83,26 @@ typedef struct RAIL_Init {
 } RAIL_Init_t;
 
 /**
+ * @enum RAIL_PtiProtocol_t
+ * @brief The protocol that RAIL outputs via the Packet Trace Interface (PTI)
+ */
+typedef enum RAIL_PtiProtocol {
+  RAIL_PTI_PROTOCOL_CUSTOM = 0, /**< PTI output for a custom protocol */
+  RAIL_PTI_PROTOCOL_ZIGBEE = 1, /**< PTI output for the Zigbee protocol */
+  RAIL_PTI_PROTOCOL_THREAD = 2, /**< PTI output for the Thread protocol */
+  RAIL_PTI_PROTOCOL_BLE = 3, /**< PTI output for the Bluetooth Smart protocol */
+  RAIL_PTI_PROTOCOL_CONNECT = 4, /**< PTI output for the Connect protocol */
+  RAIL_PTI_PROTOCOL_MAX = 0xF /**< Maximum possible protocol value for PTI */
+} RAIL_PtiProtocol_t;
+
+/**
  * @enum RAIL_RadioState_t
  * @brief The current state of the radio
  */
 typedef enum RAIL_RadioState {
-  RAIL_RF_STATE_IDLE,
-  RAIL_RF_STATE_RX,
-  RAIL_RF_STATE_TX,
+  RAIL_RF_STATE_IDLE, /**< Radio is idle */
+  RAIL_RF_STATE_RX,   /**< Radio is in receive */
+  RAIL_RF_STATE_TX,   /**< Radio is in transmit */
 } RAIL_RadioState_t;
 
 /**
@@ -97,9 +110,10 @@ typedef enum RAIL_RadioState {
  * @brief The available status options
  */
 typedef enum RAIL_Status {
-  RAIL_STATUS_NO_ERROR,
-  RAIL_STATUS_INVALID_PARAMETER,
-  RAIL_STATUS_INVALID_STATE,
+  RAIL_STATUS_NO_ERROR, /**< RAIL function reports no error */
+  RAIL_STATUS_INVALID_PARAMETER, /**< Call to RAIL function errored because of an invalid parameter */
+  RAIL_STATUS_INVALID_STATE, /**< Call to RAIL function errored because called during an invalid radio state */
+  RAIL_STATUS_INVALID_CALL, /**< The function is called in an invalid order */
 } RAIL_Status_t;
 
 /**
@@ -107,12 +121,37 @@ typedef enum RAIL_Status {
  * @brief Enumeration for specifying Rf Sense frequency band.
  */
 typedef enum {
-  RAIL_RFSENSE_OFF,    // 0
-  RAIL_RFSENSE_2_4GHZ, // 1
-  RAIL_RFSENSE_SUBGHZ, // 2
-  RAIL_RFSENSE_ANY,    // 3
+  RAIL_RFSENSE_OFF,    /**< RFSense is disabled */
+  RAIL_RFSENSE_2_4GHZ, /**< RFSense is in 2.4G band */
+  RAIL_RFSENSE_SUBGHZ, /**< RFSense is in subgig band */
+  RAIL_RFSENSE_ANY,    /**< RfSense is in both bands */
   RAIL_RFSENSE_MAX     // Must be last
 } RAIL_RfSenseBand_t;
+
+/**
+ * @enum RAIL_RfIdleMode_t
+ * @brief Enumeration for the different types of idle modes we support. These
+ * vary how quickly and destructively we will put the radio into idle.
+ */
+typedef enum {
+  /**
+   * Idle the radio by turning off receive and canceling any future scheduled
+   * receive or transmit operations. This will not abort a receive or
+   * transmit that is in progress.
+   */
+  RAIL_IDLE,
+  /**
+   * Idle the radio by turning off receive and any scheduled events. This will
+   * also abort any receive, transmit, or scheduled events in progress.
+   */
+  RAIL_IDLE_ABORT,
+  /**
+   * Force the radio into a shutdown mode as quickly as possible. This will
+   * abort all current operations and cancel any pending scheduled operations.
+   * It may also corrupt receive or transmit buffers and end up clearing them.
+   */
+  RAIL_IDLE_FORCE_SHUTDOWN
+} RAIL_RfIdleMode_t;
 
 /**
  * @}
@@ -280,7 +319,8 @@ typedef struct RAIL_AddrConfig {
  */
 typedef enum RAIL_TimeMode {
   RAIL_TIME_ABSOLUTE,  /**< The time specified is an exact time in the RAIL timebase */
-  RAIL_TIME_DELAY      /**< The time specified is relative to now */
+  RAIL_TIME_DELAY,     /**< The time specified is relative to now */
+  RAIL_TIME_DISABLED   /**< The time specified is not intended to be used */
 } RAIL_TimeMode_t;
 
 /**
@@ -345,9 +385,10 @@ typedef struct RAIL_CsmaConfig {
    * The backoff unit period, in RAIL's microsecond time base.  This is
    * mulitiplied by the random backoff multiplier controlled by @ref
    * csmaMinBoExp and @ref csmaMaxBoExp to determine the overall backoff
-   * period.  For random backoffs, this value must be in the range from
-   * idleToRx time (set by RAIL_SetStateTimings) to 511 microseconds; for fixed
-   * backoffs it can go up to 65535 microseconds.
+   * period.  This value must be at least the idleToRx time (set by
+   * RAIL_SetStateTimings). For random backoffs, any value above 511
+   * microseconds will be truncated; for fixed backoffs it can go up to 65535
+   * microseconds.
    */
   uint16_t ccaBackoff;
   uint16_t ccaDuration;    /**< CCA check duration, in microseconds */
@@ -471,6 +512,10 @@ typedef struct RAIL_LbtConfig {
 #define RAIL_TX_CONFIG_BUFFER_UNDERFLOW  (0x01 << 1)
 /** Callback for CCA/CSMA/LBT failure */
 #define RAIL_TX_CONFIG_CHANNEL_BUSY      (0x01 << 2)
+/** Callback for when a Tx is aborted by the user */
+#define RAIL_TX_CONFIG_TX_ABORTED        (0x01 << 3)
+/** Callback for when a Tx is blocked by something like PTA or RHO */
+#define RAIL_TX_CONFIG_TX_BLOCKED        (0x01 << 4)
 
 /**
  * @struct RAIL_TxData_t
@@ -493,6 +538,19 @@ typedef struct RAIL_TxPacketInfo {
    */
   uint32_t timeUs;
  } RAIL_TxPacketInfo_t;
+
+/**
+ * @struct RAIL_TxOptions_t
+ * @brief Tx Option structure that modifies the transmit. Only applies to one
+ * transmit.
+ */
+typedef struct RAIL_TxOptions {
+  /**
+   * Configure if radio should wait for ack after transmit.  waitForAck is only
+   * honored if Auto Ack is enabled and if Auto Ack Tx is not paused
+   */
+  bool waitForAck;
+} RAIL_TxOptions_t;
 
 /**
  * @}
@@ -518,6 +576,10 @@ typedef struct RAIL_TxPacketInfo {
 #define RAIL_RX_CONFIG_ADDRESS_FILTERED  (0x01 << 6)
 /** Callback for RF Sensed */
 #define RAIL_RX_CONFIG_RF_SENSED         (0x01 << 7)
+/** Callback for when an Rx event times out */
+#define RAIL_RX_CONFIG_TIMEOUT           (0x01 << 8)
+/** Callback for when the scheduled Rx window ends */
+#define RAIL_RX_CONFIG_SCHEDULED_RX_END  (0x01 << 9)
 
 /** To maintain backwards compatibility with RAIL 1.1,
  * RAIL_RX_CONFIG_INVALID_CRC is the same as RAIL_RX_CONFIG_FRAME_ERROR
@@ -532,7 +594,7 @@ typedef struct RAIL_TxPacketInfo {
 /** Ignore all possible errors. Receive all possible packets */
 #define RAIL_IGNORE_ALL_ERRORS    (0xFF)
 
-// -128 * 4 for invalid in quarter dBm
+/** The value returned by RAIL for an invalid RSSI: (-128 * 4) quarter dBm */
 #define RAIL_RSSI_INVALID         ((int16_t)(-128 * 4))
 
 /**
@@ -558,6 +620,12 @@ typedef struct RAIL_AppendedInfo {
    * This will be set to 0 for fail and 1 for pass.
    */
   bool frameCodingStatus:1;
+  /**
+   * Indicates if the received packet is an ack. An 'ack' is defined as a
+   * packet received during the rx ack window when autoack is enabled.
+   * Set to 0 for not an ack, and 1 for is an ack.
+   */
+  bool isAck:1;
   /**
    * RSSI of the received packet in integer dBm. This is latched when the sync
    * word is detected for this packet.
@@ -588,9 +656,123 @@ typedef struct RAIL_RxPacketInfo {
 } RAIL_RxPacketInfo_t;
 
 /**
+ * @struct RAIL_ScheduleRxConfig_t
+ * @brief This structure is used to configure the Scheduled Rx algorithm. It
+ * allows you to define the start and end times of the window in either absolute
+ * or relative times. If start is set to \ref RAIL_TIME_DISABLED it will be
+ * assumed that we should start receive now. If end is set to \ref
+ * RAIL_TIME_DISABLED then the only way to end this scheduled receive is with an
+ * explicit call to RAIL_RfIdle(). If end is relative it is relative to the
+ * start time not the current time. All times are assumed to be specified in the
+ * RAIL timebase.
+ */
+typedef struct RAIL_ScheduleRxConfig {
+  /**
+   * The time to start receive. See startMode for more information about they
+   * types of start times that you can specify.
+   */
+  uint32_t start;
+
+  /**
+   * The type of time value specified in the start parameter. If this is
+   * \ref RAIL_TIME_ABSOLUTE then it's an exact time, if it's \ref
+   * RAIL_TIME_DELAY then it's an offset relative to the current time. If you
+   * specify \ref RAIL_TIME_DISABLED for this then the start event will be
+   * ignored.
+   */
+
+  RAIL_TimeMode_t startMode;
+  /**
+   * The time to end receive. See endMode for more information about the types
+   * of end times you can specify.
+   */
+  uint32_t end;
+  /**
+   * The type of time value specified in the end parameter. If this is
+   * \ref RAIL_TIME_ABSOLUTE then it's an exact time, if it's \ref RAIL_TIME_DELAY then
+   * it's an offset relative to the start time as long as the startMode isn't
+   * \ref RAIL_TIME_DISABLED and if it's \ref RAIL_TIME_DISABLED we will not configure the
+   * end event so that this can run indefinitely.
+   */
+  RAIL_TimeMode_t endMode;
+  /**
+   * While in scheduled Rx you are still able to control the radio state via
+   * state transitions. This option allows you to configure whether a transition
+   * to Rx goes back to scheduled Rx or to the normal Rx state. Once in the
+   * normal Rx state you will effectively end the scheduled Rx window and can
+   * continue to receive indefinitely depending on your state transitions. Set
+   * this to 1 to transition to normal Rx and 0 to stay in scheduled Rx.
+   */
+  uint8_t rxTransitionEndSchedule;
+  /**
+   * If set to 0 this will allow any packets being received when the window end
+   * event occurs to complete. If set to anything else we will force an abort of
+   * any packets being received when the window end occurs.
+   */
+  uint8_t hardWindowEnd;
+} RAIL_ScheduleRxConfig_t;
+
+/**
  * @}
  */
 
+/**
+ * @addtogroup Auto_Ack
+ * @{
+ */
+/**
+ * @struct RAIL_AutoAckConfig_t
+ * @brief This structure is used to configure the Auto Ack algorithm. The
+ * structure provides a defaultState for the radio to return to once an ack
+ * operation occurs (transmitting or attempting to receive an ack). Regardless
+ * if the ack operation was successful, the radio will return to the specified
+ * default state.
+ *
+ * The other parameters configure auto ack timing. The application can specify
+ * timing from when the radio is idle to TX/RX, the turnaround time from TX->RX
+ * and RX->TX, and finally the total amount of time to look for an ack. All of
+ * these timing parameters are in microseconds.
+ */
+typedef struct RAIL_AutoAckConfig {
+  /**
+   * Default state once auto ack sequence completes or errors. Can only be
+   * RAIL_RF_STATE_RX or RAIL_RF_STATE_IDLE.
+   */
+  RAIL_RadioState_t defaultState;
+  /**
+   * Define the time from idleToTx and idleToRx in us. Limited to a max of
+   * 13ms.
+   */
+  uint16_t idleTiming;
+  /**
+   * Define the ack turnaround time in us. Limited to a max of 13ms.
+   */
+  uint16_t turnaroundTime;
+  /**
+   * Define the rx ack timeout duration in us. Limited to a max of 65.535ms.
+   */
+  uint16_t ackTimeout;
+} RAIL_AutoAckConfig_t;
+
+/**
+ * @struct RAIL_AutoAckData_t
+ * @brief This structure is used to define the data to use during auto
+ * acknowledgement. The data is copied into an RAIL space buffer so after
+ * RAIL_AutoAckLoadBuffer returns, the pointer can be deallocated or reused.
+ *
+ * Size limited to \ref RAIL_AUTOACK_MAX_LENGTH.
+ */
+typedef struct RAIL_AutoAckData {
+  uint8_t *dataPtr; /**< Pointer to ack data to transmit */
+  uint8_t dataLength; /**< Number of ack bytes to transmit */
+} RAIL_AutoAckData_t;
+
+/// Acknowledgement packets cannot be longer than 64 bytes.
+#define RAIL_AUTOACK_MAX_LENGTH 64
+/**
+ * @}
+ * endofgroup AutoAck
+ */
 /******************************************************************************
  * Version
  *****************************************************************************/
@@ -609,12 +791,12 @@ typedef enum RAIL_StreamMode {
 } RAIL_StreamMode_t;
 
 /**
- * @struct RAIL_BerStatus_t
+ * @struct RAIL_BerConfig_t
  * @brief BER test parameters.
  */
 typedef struct RAIL_BerConfig
 {
-  uint32_t bytesToTest;
+  uint32_t bytesToTest; /**< Number of bytes to test */
 } RAIL_BerConfig_t;
 
 /**
@@ -623,10 +805,10 @@ typedef struct RAIL_BerConfig
  */
 typedef struct RAIL_BerStatus
 {
-  uint32_t bitsTotal;
-  uint32_t bitsTested;
-  uint32_t bitErrors;
-  int8_t   rssi;
+  uint32_t bitsTotal; /**< Number of bits to receive */
+  uint32_t bitsTested; /**< Number of bits currently tested */
+  uint32_t bitErrors; /**< Number of bits errors detected */
+  int8_t   rssi; /**< Latched RSSI value at pattern detect */
 } RAIL_BerStatus_t;
 
 /**
