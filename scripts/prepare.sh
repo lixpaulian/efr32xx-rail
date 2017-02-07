@@ -5,13 +5,13 @@ IFS=$'\n\t'
 # Archives are to be downloaded from:
 # http://www.silabs.com/Support%20Documents/RegisteredDocs/SiliconLabs-RAIL-1.0.0.0-GA.exe
 
-RELEASE_VERSION="1.2.1.0"
+RELEASE_VERSION="1.3.1.0"
 
 FAMILY="EFM32FG FlexGecko"
 GITHUB_PROJECT="lixpaulian/efr32fg-rail"
 ARCHIVE_NAME="SiliconLabs-RAIL-${RELEASE_VERSION}-GA.exe"
 # ARCHIVE_URL="http://www.silabs.com/Support%20Documents/RegisteredDocs/${ARCHIVE_NAME}"
-ARCHIVE_LOCATION="/Volumes/C/SiliconLabs/SiliconLabsRAIL/${RELEASE_VERSION}-GA"
+ARCHIVE_LOCATION="/Users/np/SimplicityStudio/SiliconLabsRAIL/${RELEASE_VERSION}-GA"
 
 # we have only an .exe file that we must unpack using windows :-( hopefully Silicon Labs
 # will provide also a zip or tar file sometimes...

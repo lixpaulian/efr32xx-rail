@@ -34,9 +34,9 @@
 /**
  * Get the version information for the compiled RAIL library.
  *
- * @param[in] version Pointer to RAIL_Version_t struct to populate with version
+ * @param[in] version Pointer to \ref RAIL_Version_t struct to populate with version
  *   information.
- * @param[in] verbose Populate RAIL_Version_t struct with verbose information
+ * @param[in] verbose Populate \ref RAIL_Version_t struct with verbose information
  *
  * Version information contains a major version number, a minor version number,
  * and a rev (revision) number.
@@ -54,6 +54,20 @@ void RAIL_VersionGet(RAIL_Version_t * version, bool verbose);
  * of the radio, and the calibrations to perform.
  */
 uint8_t RAIL_RfInit(const RAIL_Init_t *railInit);
+
+/**
+ * Set protocol that RAIL outputs on PTI
+ *
+ * @param protocol The enum representing which protocol the node is using
+ * @return Returns zero on success and an error code on error.
+ *
+ * The protocol is output via the Packet Trace Interface (PTI) for each packet.
+ * Before any protocol is set, the default value is \ref RAIL_PTI_PROTOCOL_CUSTOM.
+ * A custom value may be used if it does not conflict with one of the available
+ * \ref RAIL_PtiProtocol_t enum values, though values may only go up to \ref
+ * RAIL_PTI_PROTOCOL_MAX.
+ */
+RAIL_Status_t RAIL_SetPtiProtocol(RAIL_PtiProtocol_t protocol);
 
 /**
  * Callback for when the radio is finished initializing from \ref RAIL_RfInit
@@ -143,15 +157,28 @@ RAIL_Status_t RAIL_SetStateTiming(RAIL_StateTiming_t *timings);
 void RAIL_RfIdle(void);
 
 /**
+ * Extended radio idle API
+ *
+ * @param[in] mode The method to use for shutting down the radio.
+ * @param[in] wait Whether this function should wait for the radio to reach idle
+ * before returning.
+ *
+ * This is an extended version of the simple RAIL_RfIdle() API which lets the
+ * application specify how it reaches idle state and if the function should
+ * busy wait.
+ */
+void RAIL_RfIdleExt(RAIL_RfIdleMode_t mode, bool wait);
+
+/**
  * Start/Stop RF Sense functionality for use during low-energy sleep modes.
  *
  * @param[in] band The frequency band(s) on which to sense RF energy.
  * To stop Rf Sense, specify \ref RAIL_RFSENSE_OFF.
  * @param[in] senseTime The time (in microseconds) RF energy must be
  * continually detected to be considered "sensed".
- * @param[in] enableCb Set true to enable RAILCb_RxRadioStatus() callback
+ * @param[in] enableCb Set true to enable \ref RAILCb_RxRadioStatus() callback
  * with status \ref RAIL_RX_CONFIG_RF_SENSED when Rf is sensed.  Set false if
- * prefer to poll via RAIL_RfSensed().
+ * prefer to poll via \ref RAIL_RfSensed().
  *
  * @return The actual senseTime utilized, which may be different than
  * requested due to limitations of the hardware.  If 0, RF sense was
@@ -173,11 +200,12 @@ uint32_t RAIL_RfSense(RAIL_RfSenseBand_t band, uint32_t senseTime, bool enableCb
 /**
  * Check if RF was sensed.
  *
- * @return true if RF was sensed since last call to RAIL_RfSense(); false
+ * @return true if RF was sensed since last call to \ref RAIL_RfSense; false
  * otherwise.
  *
- * This function is useful if RAIL_RfSense has been called with enableCb set to
- * false. It is generally used after EM4 reboot, but can be used any time.
+ * This function is useful if \ref RAIL_RfSense has been called with enableCb
+ * set to false. It is generally used after EM4 reboot, but can be used any
+ * time.
  */
 bool RAIL_RfSensed(void);
 
@@ -216,20 +244,20 @@ uint16_t RAIL_GetRadioEntropy(uint8_t *buffer, uint16_t bytes);
  * callbacks. These callbacks will be called from interrupt context to interact
  * with whatever memory allocation system your application uses.
  *
- * Memory will be allocated for receiving a packet whenever we think we need it.
- * This depends on the chip you're using and possibly the size of your maximum
- * packet. We will never ask for more memory than `MAX_PACKET_SIZE +
- * sizeof(RAIL_RxPacketInfo)` where MAX_PACKET_SIZE is the maximum packet your
- * PHY is configured to receive over the air. Once you give us the handle to
- * this memory it must stay valid until we tell you we are done with it using
- * the RAILCb_FreeMemory() callback. Generally this will happen immediately
- * after we call the RAILCb_RxPacketReceived() function with that handle. RAIL
- * has no concept of an invalid handle so we will attempt to use whatever you
- * pass to us. This means that you will still receive all callbacks for invalid
- * handles even if we are forced to drop receive packet bytes because they don't
- * fit anywhere.
-
-  If the handle is invalid you must make sure your callbacks do not
+ * Memory will be allocated for receiving a packet whenever we think we need
+ * it.  This depends on the chip you're using and possibly the size of your
+ * maximum packet. We will never ask for more memory than `MAX_PACKET_SIZE +
+ * sizeof(\ref RAIL_RxPacketInfo_t)` where MAX_PACKET_SIZE is the maximum
+ * packet your PHY is configured to receive over the air. Once you give us the
+ * handle to this memory it must stay valid until we tell you we are done with
+ * it using the RAILCb_FreeMemory() callback. Generally this will happen
+ * immediately after we call the RAILCb_RxPacketReceived() function with that
+ * handle. RAIL has no concept of an invalid handle so we will attempt to use
+ * whatever you pass to us. This means that you will still receive all
+ * callbacks for invalid handles even if we are forced to drop receive packet
+ * bytes because they don't fit anywhere.
+ *
+ * If the handle is invalid you must make sure your callbacks do not
  * crash and that RAILCb_BeginWriteMemory() returns a NULL pointer or 0 bytes
  * available so that we do not try to write to this memory. In this case, the
  * packet data will be dropped.
@@ -253,7 +281,7 @@ uint16_t RAIL_GetRadioEntropy(uint8_t *buffer, uint16_t bytes);
  * that can handle receiving multiple packets simultaneously.
  *
  * @code{.c}
- * static uint8_t buffer[MAX_PACKET_SIZE + sizeof(RAIL_RxPacketInfo)];
+ * static uint8_t buffer[MAX_PACKET_SIZE + sizeof(RAIL_RxPacketInfo_t)];
  * static bool isAllocated = false;
  *
  * void *RAILCb_AllocateMemory(uint32_t size)
@@ -262,7 +290,7 @@ uint16_t RAIL_GetRadioEntropy(uint8_t *buffer, uint16_t bytes);
  *   void *ptr = NULL;
  *
  *   // We can't support sizes greater than the maximum buffer size
- *   if(size > (MAX_PACKET_SIZE + sizeof(RAIL_RxPacketInfo))) {
+ *   if(size > (MAX_PACKET_SIZE + sizeof(RAIL_RxPacketInfo_t))) {
  *     return NULL;
  *   }
  *
@@ -288,7 +316,7 @@ uint16_t RAIL_GetRadioEntropy(uint8_t *buffer, uint16_t bytes);
  *
  * void *RAILCb_BeginWriteMemory(void *handle,
  *                               uint32_t offset,
- *                               uint32_t *available);
+ *                               uint32_t *available)
  * {
  *   return ((uint8_t*)handle) + offset;
  * }
@@ -413,7 +441,7 @@ uint32_t RAIL_GetTime(void);
  * @param[in] time Set the RAIL timebase to this value in microseconds.
  * @return Returns RAIL_STATUS_NO_ERROR on success and
  * RAIL_STATUS_INVALID_STATE if the time could not be set.
- * 
+ *
  * Set the current time in the RAIL timebase in microseconds.
  */
 RAIL_Status_t RAIL_SetTime(uint32_t time);
@@ -436,9 +464,9 @@ RAIL_Status_t RAIL_TimerSet(uint32_t time, RAIL_TimeMode_t mode);
  *
  * @return The absolute time that this timer is set to go off at.
  *
- * This will give the absolute time regardless of the RAIL_Timemode_t that was
- * passed into RAIL_TimerSet. The return value is undefined if the timer was
- * never set.
+ * This will give the absolute time regardless of the \ref RAIL_TimeMode_t that
+ * was passed into \ref RAIL_TimerSet. The return value is undefined if the
+ * timer was never set.
  */
 uint32_t RAIL_TimerGet(void);
 
@@ -591,10 +619,10 @@ uint32_t RAIL_BitRateGet(void);
 
 /**
  * Set the PA capacitor tune value for transmit and receive
- *  
+ *
  * @param[in] txPaCtuneValue PA Ctune value for TX mode
  * @param[in] rxPaCtuneValue PA Ctune value for RX mode
- *  
+ *
  * @return returns RAIL_STATUS_NO_ERROR if successful
  *
  * Provides the ability to tune the impedance of the transmit
@@ -644,11 +672,14 @@ int32_t RAIL_TxPowerGet(void);
  * @param[in] txData Pointer to a RAIL_TxData_t structure which defines the
  *   payload bytes and length to transmit. If the fields are configured for
  *   fixed length.
- * @return Returns 0 on success and an error code on failure
+ * @return Returns 0 on success and an error code on fail.
  *
  * This function may overwrite current TX data held by RAIL, and should not be
  * called repetitively or during TX. The recommended way to use this is to call
- * RAIL_TxDataLoad and RAIL_TxStart almost immediately in succession.
+ * RAIL_TxDataLoad() and RAIL_TxStart() almost immediately in succession.
+ *
+ * Will return \ref RAIL_STATUS_INVALID_CALL if the Tx buffer is in use by the
+ * radio and cannot be updated.
  */
 uint8_t RAIL_TxDataLoad(RAIL_TxData_t *txData);
 
@@ -673,6 +704,32 @@ uint8_t RAIL_TxStart(uint8_t channel,
                      void *preTxOpParams);
 
 /**
+ * Non-blocking Transmit with options
+ *
+ * @param[in] channel Define the channel to transmit on.
+ * @param[in] options Defines options that apply for this transmit
+ * @param[in] preTxOp Function to use for any pre-transmit operation (e.g. for
+ * scheduled transmit, CSMA, LBT, etc.), or NULL for an immediate transmit.
+ * @param[in] preTxOpParams Pointer to the pre-transmit operation's
+ * configuration parameters, or NULL if none.
+ * @return Returns 0 on successfully initiating the transmit process, or an
+ * error code on failure.  If successfully initiated, transmit completion
+ * or failure will be reported by later callbacks RAILCb_TxPacketSent()
+ * (success) or RAILCb_TxRadioStatus() (failure).
+ *
+ * This is an extension of RAIL_TxStart where the transmit is modified by the
+ * options defined in RAIL_TxOptions_t. If using a pre-tx operation, the
+ * transmit options will only be configured if the preTxOp is successful.
+ *
+ * Begins transmission of the payload previously loaded via RAIL_TxDataLoad().
+ * Return error if currently transmitting or receiving.
+ */
+uint8_t RAIL_TxStartWithOptions(uint8_t channel,
+                                RAIL_TxOptions_t *options,
+                                RAIL_PreTxOp_t preTxOp,
+                                void *preTxOpParams);
+
+/**
  * Interrupt level callback to signify when the packet was sent
  *
  * @param txPacketInfo Information about the packet that was transmitted.
@@ -693,8 +750,10 @@ void RAILCb_TxPacketSent(RAIL_TxPacketInfo_t *txPacketInfo);
  * TX radio errors.
  *
  * Radio Statuses:
- * RAIL_TX_CONFIG_BUFFER_UNDERFLOW
- * RAIL_TX_CONFIG_CHANNEL_BUSY
+ * - \ref RAIL_TX_CONFIG_BUFFER_UNDERFLOW
+ * - \ref RAIL_TX_CONFIG_CHANNEL_BUSY
+ * - \ref RAIL_TX_CONFIG_TX_ABORTED
+ * - \ref RAIL_TX_CONFIG_TX_BLOCKED
  */
 void RAILCb_TxRadioStatus(uint8_t status);
 
@@ -793,7 +852,7 @@ uint8_t RAIL_CcaLbt(void *params);
  * callback. The full list of options is any define that starts with
  * RAIL_RX_CONFIG_. This function cannot be called while receiving.
  */
-uint8_t RAIL_RxConfig(uint8_t cbToEnable, bool appendedInfoEnable);
+uint8_t RAIL_RxConfig(uint32_t cbToEnable, bool appendedInfoEnable);
 
 /**
  * Listen on a channel for a packet
@@ -801,17 +860,35 @@ uint8_t RAIL_RxConfig(uint8_t cbToEnable, bool appendedInfoEnable);
  * @param[in] channel Channel to listen on
  * @return Return 0 for success or an error code
  *
- * This is a non-blocking function. RAILCb_RxPacketReceived will be called when
- * a packet has been received. Returns an error is currently transmitting or
- * receiving.
+ * This is a non-blocking function. RAILCb_RxPacketReceived() will be called
+ * when a packet has been received. Returns an error is currently transmitting
+ * or receiving.
  */
 uint8_t RAIL_RxStart(uint8_t channel);
 
 /**
+ * Schedule a receive window for some time in the future.
+ *
+ * @param[in] channel Channel to listen on
+ * @param[in] cfg The configuation struct to define the receive window.
+ * @return Return 0 on success or an error code
+ *
+ * This API will immediately change your channel and schedule receive to start
+ * at the specified time and end at the given end time. If you do not specify an
+ * end time then you may call this API later with an end time as long as you set
+ * the start time to disabled. You can also terminate the whole receive
+ * operation immediately using the RAIL_RfIdle() function. Note that relative
+ * end times are always relative to the start unless there is not start
+ * specified.
+ */
+uint8_t RAIL_ScheduleRx(uint8_t channel, RAIL_ScheduleRxConfig_t *cfg);
+
+/**
  * Return the current raw RSSI
  *
- * @return Return RAIL_RSSI_INVALID if the receiver is disabled and we are unable to get an
- *   RSSI value, otherwise, return the RSSI in quarter dBm, dbm*4.
+ * @return Return \ref RAIL_RSSI_INVALID if the receiver is disabled and we are
+ * unable to get an RSSI value, otherwise, return the RSSI in quarter dBm,
+ * dbm*4.
  *
  * Get the current RSSI value. This value represents the current energy of the
  * channel, so it can change rapidly, and will be low if there is no RF energy
@@ -843,19 +920,53 @@ void RAILCb_RxPacketReceived(void *rxPacketHandle);
  *
  * @param[in] status The event that triggered this callback
  *
- * The triggers that cause this function to be called can be enabled by
- * RAIL_RxConfig.
+ * The triggers that cause this function to be called can be enabled using the
+ * RAIL_RxConfig() function.
+ *
+ * @note This function will return only the first 8 of all possible triggers.
+ * For accessing all triggers see the new RAILCb_RxRadioStatusExt() API. If you
+ * implement RAILCb_RxRadioStatusExt() this callback will no longer be used by
+ * the RAIL library. In RAIL 2.0 this API will be merged with the
+ * RAILCb_RxRadioStatusExt() for one clean interface.
  *
  * Triggers:
- *  RAIL_RX_CONFIG_PREAMBLE_DETECT
- *  RAIL_RX_CONFIG_SYNC1_DETECT
- *  RAIL_RX_CONFIG_SYNC2_DETECT
- *  RAIL_RX_CONFIG_FRAME_ERROR
- *  RAIL_RX_CONFIG_BUFFER_OVERFLOW
- *  RAIL_RX_CONFIG_ADDRESS_FILTERED
- *
+ *  - \ref RAIL_RX_CONFIG_PREAMBLE_DETECT
+ *  - \ref RAIL_RX_CONFIG_SYNC1_DETECT
+ *  - \ref RAIL_RX_CONFIG_SYNC2_DETECT
+ *  - \ref RAIL_RX_CONFIG_FRAME_ERROR
+ *  - \ref RAIL_RX_CONFIG_BUFFER_OVERFLOW
+ *  - \ref RAIL_RX_CONFIG_ADDRESS_FILTERED
+ *  - \ref RAIL_RX_CONFIG_RF_SENSED
  */
 void RAILCb_RxRadioStatus(uint8_t status);
+
+/**
+ * Called whenever an enabled radio status event occurs
+ *
+ * @param[in] status The event or events that triggered this callback
+ *
+ * The triggers that cause this function to be called can be enabled using the
+ * RAIL_RxConfig() function. This function is the same as RAILCb_RxRadioStatus()
+ * with an extended set of triggers. For backwards compatibility this function
+ * is weakly defined in the RAIL library to call RAILCb_RxRadioStatus() with the
+ * subset of valid events. If you need more events you must implement this
+ * version which will stop the old one from being called.
+ *
+ * @note In RAIL 2.0 this API will be merged with the RAILCb_RxRadioStatus() for
+ * one clean interface.
+ *
+ * Triggers:
+ *  - \ref RAIL_RX_CONFIG_PREAMBLE_DETECT
+ *  - \ref RAIL_RX_CONFIG_SYNC1_DETECT
+ *  - \ref RAIL_RX_CONFIG_SYNC2_DETECT
+ *  - \ref RAIL_RX_CONFIG_FRAME_ERROR
+ *  - \ref RAIL_RX_CONFIG_BUFFER_OVERFLOW
+ *  - \ref RAIL_RX_CONFIG_ADDRESS_FILTERED
+ *  - \ref RAIL_RX_CONFIG_RF_SENSED
+ *  - \ref RAIL_RX_CONFIG_TIMEOUT
+ *  - \ref RAIL_RX_CONFIG_SCHEDULED_RX_END
+ */
+void RAILCb_RxRadioStatusExt(uint32_t status);
 
 /******************************************************************************
  * Address Filtering (Rx)
@@ -921,9 +1032,7 @@ void RAILCb_RxRadioStatus(uint8_t status);
  * create a valid table on your own.
  *
  * @note When using a 38.4 MHz crystal, address filtering will not function with
- * any data rate greater than 1Mbps. If frame type decoding and address
- * filtering are used together, then the maximum data rate is lowered to 500Kbps
- * when using a 38.4 MHz crystal.
+ * any data rate greater than 1Mbps.
  *
  * @{
  */
@@ -1055,6 +1164,253 @@ bool RAIL_AddressFilterByFrameType(uint8_t validFrames);
  */
 
 /******************************************************************************
+ * Auto Acking
+ *****************************************************************************/
+/**
+ * @addtogroup Auto_Ack
+ * @brief APIs for configuring Auto-Ack functionality
+ *
+ * These APIs are used to configure the radio for auto acknowledgement
+ * features.  Auto ack inherently changes how the underlying state machine
+ * behaves so users should not modify RAIL_SetRxTransitions() and
+ * RAIL_SetTxTransitions() while using auto ack features.
+ *
+ * @code{.c}
+ * // Go to RX after ack operation, 100 us idle->rx/tx,
+ * // 192 us rx->tx/tx->rx, 1000 us ack timeout
+ * RAIL_AutoAckConfig_t autoAckConfig = { RAIL_RF_STATE_RX, 100, 192, 1000};
+ *
+ * RAIL_Status_t status = RAIL_AutoAckConfig(&autoAckConfig);
+ *
+ * uint8_t ackPayload[] = {0x05, 0x02, 0x10, 0x00};
+ * RAIL_AutoAckData_t ackData = {ackPayload, sizeof(ackPayload)};
+ *
+ * RAIL_Status_t status = RAIL_AutoAckLoadBuffer(&ackData);
+ * @endcode
+ *
+ * The acknowledgement will transmit based on the frame format configured via
+ * the Radio Configurator. For example, if the frame format is using a variable
+ * length scheme, the ack will be sent according to that scheme. If a 10 byte
+ * packet is loaded into the ack, but the variable length field of the ack
+ * payload specifies a length of 5, only 5 bytes will transmit for the ack.
+ * The converse is also true, if the frame length is configured to be a fixed
+ * 10 byte packet but only 5 bytes are loaded into the ack buffer then a TX
+ * underflow will occur during the ack transmit.
+ *
+ * When auto ack is enabled, the default operation is to transmit the ack after
+ * a receive and wait for an ack after a transmit. After the ack operation
+ * completes, the radio will transition to the configured defaultState. If
+ * there is a desire to not auto acknowledge a series of packets after transmit
+ * or receive, call RAIL_AutoAckTxPause() and RAIL_AutoAckRxPause(). When
+ * auto acking is paused, after successfully receiving or transmitting a
+ * packet, the radio will transition to the defaultState. To get out of a
+ * paused state and resume auto acking, call RAIL_AutoAckTxResume() or
+ * RAIL_AutoAckRxResume().
+ *
+ * Applications can cancel the transmission of an ack with
+ * RAIL_AutoAckCancelAck(). Conversly, applications can control if a transmit
+ * operation should wait for an ack after transmitting by using
+ * RAIL_TxStartWithOptions() and populating the waitForAck field in
+ * \ref RAIL_TxOptions_t.
+ *
+ * @code{.c}
+ * void RAILCb_RxPacketReceived(void *rxPacketHandle)
+ * {
+ *   // If we have just received an ACK, don't respond with an ACK
+ *   if (rxPacketInfo->dataPtr[2] == 0xF1)
+ *   {
+ *     RAIL_AutoAckCancelAck();
+ *   }
+ * }
+ *
+ * void transmitAndWaitForAck (void)
+ * {
+ *   RAIL_TxOptions_t txOption;
+ *   txOption.waitForAck = true;
+ *   RAIL_Status_t status = RAIL_TxStartWithOptions(0, &txOption, NULL, NULL);
+ * }
+ * @endcode
+ *
+ * If the ack payload is dynamic, the application must call
+ * RAIL_AutoAckLoadBuffer() with the appropriate ack payload after the
+ * application processes the receive. RAIL can auto ack from the normal
+ * transmit buffer if RAIL_AutoAckUseTxBuffer() is called before the radio
+ * transmits the ack.  Make sure the transmit buffer contains data loaded by
+ * RAIL_TxDataLoad().
+ *
+ * Standards based protocols that contain auto ack functionality are normally
+ * configured in the protocol specific config function. For example,
+ * RAIL_IEEE802154_Init() provides auto ack configuration parameters in \ref
+ * RAIL_IEEE802154_Config_t and should only be configured through that
+ * function. It is unadvised to call both RAIL_IEEE802154_Init() and
+ * RAIL_AutoAckConfig(). However, ack modification functions are still valid to
+ * use with protocol specific acks. To cancel a IEEE 802.15.4 ack transmit, use
+ * RAIL_AutoAckCancelAck().
+ *
+ * @{
+ */
+
+/**
+ * Disable Automatic Acknowledgement
+ *
+ * @return if function successfully disabled auto acking
+ *
+ * Disable auto ack functionality. All state transitions are reverted to IDLE,
+ * IDLE.
+ */
+RAIL_Status_t RAIL_AutoAckDisable(void);
+
+/**
+ * Return the enable status of the auto ack feature
+ *
+ * @return true if Auto Ack is enabled, false if disabled
+ */
+bool RAIL_AutoAckIsEnabled(void);
+
+/**
+ * Configure and enable Auto Acknowledgement
+ *
+ * @param[in] config Auto ack config structure
+ * @return If autoack is successfully enabled
+ *
+ * Configures the RAIL state machine to for hardware accelerated auto
+ * acknowledgement. Ack timing parameters are defined in the configuration
+ * structure.
+ *
+ * While auto acking is enabled do not call the following RAIL functions:
+ *   - RAIL_SetRxTransitions()
+ *   - RAIL_SetTxTransitions()
+ *   - RAIL_SetStateTiming()
+ */
+RAIL_Status_t RAIL_AutoAckConfig(RAIL_AutoAckConfig_t *config);
+
+/**
+ * Load Auto Ack buffer with ack data
+ *
+ * @param[in] ackData Pointer to ack data to transmit
+ * @return \ref RAIL_STATUS_INVALID_CALL if called while ACK buffer is being
+ * used by the radio
+ *
+ * If the ack buffer is available to be updated, load the ack buffer with data.
+ */
+RAIL_Status_t RAIL_AutoAckLoadBuffer(RAIL_AutoAckData_t *ackData);
+
+/**
+ * Pause RX Auto Ack functionality.
+ *
+ * @return void
+ *
+ * When RX Auto Acking is paused, the radio will transition to the defaultState
+ * after receiving a packet and will not transmit an ack.
+ *
+ */
+void RAIL_AutoAckRxPause(void);
+
+/**
+ * Resume Rx Auto Ack functionality.
+ *
+ * @return void
+ *
+ * When Rx Auto Ack is resumed, the radio will resume automatically acking
+ * every successfully received packet.
+ */
+void RAIL_AutoAckRxResume(void);
+
+/**
+ * Return if Rx Auto Ack is paused
+ *
+ * @return true if Rx Auto Ack is paused, false if not paused
+ */
+bool RAIL_AutoAckRxIsPaused(void);
+
+/**
+ * Resume Tx Auto Ack functionality.
+ *
+ * @return void
+ *
+ * When Tx Auto Ack is resumed, the radio will resume automatically waiting for
+ * an ack after a successful transmit.
+ */
+void RAIL_AutoAckTxResume(void);
+
+/**
+ * Pause TX Auto Ack functionality.
+ *
+ * @return void
+ *
+ * When TX Auto Acking is paused, the radio will transition to the defaultState
+ * after transmitting a packet and will not wait for an ack.
+ *
+ */
+void RAIL_AutoAckTxPause(void);
+
+/**
+ * Return if Tx Auto Ack is paused
+ *
+ * @return true if Tx Auto Ack is paused, false if not paused
+ */
+bool RAIL_AutoAckTxIsPaused(void);
+
+/**
+ * Modify the upcoming ack to use the TX Buffer
+ *
+ * @return True if the ack is modified to send from TX buffer, false if it is
+ * too late to switch to tx buffer or if the function call is not valid
+ *
+ * This function allows the application to use the normal TX buffer as the data
+ * source for the upcoming ack. The ack modification to use the TX buffer only
+ * applies to one ack transmission.
+ *
+ * This function will only return true if the following conditions are met:
+ *   - Radio has not already decided to use the ack buffer AND
+ *   - Radio is either looking for sync, receiving the packet after sync or in
+ *     the Rx2Tx turnaround before the ack is sent.
+ */
+bool RAIL_AutoAckUseTxBuffer(void);
+
+/**
+ * Cancel the upcoming ack
+ *
+ * @return True if the ack is successfully cancelled, false if it is
+ * too late to cancel the ack or if the function call is not valid
+ *
+ * This function allows the application to use cancel the upcoming automatic
+ * acknowledgement.
+ *
+ * This function will only return true if the following conditions are met:
+ *   - Radio has not already decided to transmit the ack AND
+ *   - Radio is either looking for sync, receiving the packet after sync or in
+ *     the Rx2Tx turnaround before the ack is sent.
+ */
+bool RAIL_AutoAckCancelAck(void);
+
+/**
+ * Return if the radio is currently waiting for an ack
+ *
+ * @return True if radio is waiting for ack, False if radio is not waiting for
+ * an ack
+ *
+ * This function allows the application to query if the radio is currently
+ * waiting for an ack after a transmit operation.
+ */
+bool RAIL_AutoAckWaitingForAck(void);
+
+/**
+ * Callback that notifies the application when searching for an ACK has timed
+ * out.
+ *
+ * @return void
+ *
+ * This callback function is called whenever the timeout for searching for an
+ * ack is exceeded.
+ */
+void RAILCb_RxAckTimeout(void);
+
+/**
+ * @} endof Auto_Acking
+ */
+
+/******************************************************************************
  * Calibration
  *****************************************************************************/
 /**
@@ -1074,11 +1430,11 @@ bool RAIL_AddressFilterByFrameType(uint8_t validFrames);
 /**
  * Initialize RAIL Calibration
  *
- * @param[in] railCalInit The initialization structure to be used for setting 
- *   up calibration procedures. 
+ * @param[in] railCalInit The initialization structure to be used for setting
+ *   up calibration procedures.
  * @return Returns zero on success and an error code on error.
  *
- * Calibration initialization provides the calibration settings that 
+ * Calibration initialization provides the calibration settings that
  * correspond to the current radio configuration.
  */
 uint8_t RAIL_CalInit(const RAIL_CalInit_t *railCalInit);
@@ -1118,7 +1474,7 @@ void RAIL_CalStart(RAIL_CalValues_t *calValues, RAIL_CalMask_t calForce, bool ca
  * perform.
  *
  * This function will return a full set of pending calibrations. The only way
- * to clear pending calibrations is to perform them using the RAIL_CalStart()
+ * to clear pending calibrations is to perform them using the \ref RAIL_CalStart()
  * API with the appropriate list of calibrations.
  */
 RAIL_CalMask_t RAIL_CalPendingGet(void);
@@ -1130,7 +1486,7 @@ RAIL_CalMask_t RAIL_CalPendingGet(void);
  *
  * This callback function is called whenever the RAIL library detects that a
  * calibration is needed. It is up to the application to determine a valid
- * window to call RAIL_CalStart().
+ * window to call \ref RAIL_CalStart().
  */
 void RAILCb_CalNeeded(void);
 
@@ -1190,7 +1546,7 @@ uint32_t RAIL_GetTune(void);
  * @return Returns 0 on success and 1 on error
  *
  * Transmits a continuous wave, or tone, at the given channel, as defined by
- * the channel configuration passed to RAIL_ChannelConfig.
+ * the channel configuration passed to RAIL_ChannelConfig().
  */
 uint8_t RAIL_TxToneStart(uint8_t channel);
 
@@ -1199,7 +1555,7 @@ uint8_t RAIL_TxToneStart(uint8_t channel);
  *
  * @return Returns 0 on success and 1 on error
  *
- * Halt the transmission started by RAIL_TxToneStart.
+ * Halt the transmission started by RAIL_TxToneStart().
  */
 uint8_t RAIL_TxToneStop(void);
 
@@ -1220,7 +1576,7 @@ uint8_t RAIL_TxStreamStart(uint8_t channel, RAIL_StreamMode_t mode);
  *
  * @return Returns 0 on success and 1 on error
  *
- * Halt the transmission started by RAIL_TxStreamStart.
+ * Halt the transmission started by RAIL_TxStreamStart().
  */
 uint8_t RAIL_TxStreamStop(void);
 
@@ -1229,9 +1585,9 @@ uint8_t RAIL_TxStreamStop(void);
  *
  * @param[in] berConfig BER test parameters to apply.
  *
- * Configure settings specific to bit error rate (BER) testing. 
- * During BER test mode, this device will expect to receive a standard PN9 
- * signal (x^9 + x^5 + 1). In order to use this BER test, the selection 
+ * Configure settings specific to bit error rate (BER) testing.
+ * During BER test mode, this device will expect to receive a standard PN9
+ * signal (x^9 + x^5 + 1). In order to use this BER test, the selection
  * for BER mode should be enabled from the radio configurator.
  */
 void RAIL_BerConfigSet(RAIL_BerConfig_t *berConfig);
@@ -1241,8 +1597,8 @@ void RAIL_BerConfigSet(RAIL_BerConfig_t *berConfig);
  *
  * @return void
  *
- * Enter BER receive with the settings specified by RAIL_BerConfig. This
- * also resets the BER status.
+ * Enter BER receive with the settings specified by RAIL_BerConfigSet().
+ * This also resets the BER status.
  */
 void RAIL_BerRxStart(void);
 
