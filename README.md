@@ -1,4 +1,3 @@
-# EFM32FG FlexGecko CMSIS
 
 This project, available from [GitHub](https://github.com/lixpaulian/efr32fg-rail),
 includes the RAIL precompiled library and all the header and source files
@@ -6,7 +5,7 @@ required to start writing applications for the EFR32FG Flex Gecko family.
 
 ## Version
 
-* v1.3.1.0
+* Flex Lib v1.0.1.0
 
 ## Documentation
 
@@ -18,16 +17,12 @@ http://www.silabs.com/products/wireless/proprietary/Pages/getting-started-with-f
 
 The original files are available in the `originals` branch.
 
-These files were extracted from `SiliconLabs-RAIL-1.3.1.0-GA.exe`.
+These files were extracted from the `SiliconLabs Simplicity Studio Installation`.
 
 To save space, the following folders/files were removed:
 
-* apps
-* apps-bin
-* docs
-* hal
-* meta-inf
-* stack.*
+* hardware
+* meta
 * *.dat
 * *.exe
 * *.html

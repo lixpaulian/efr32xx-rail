@@ -2,20 +2,16 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# Archives are to be downloaded from:
-# http://www.silabs.com/Support%20Documents/RegisteredDocs/SiliconLabs-RAIL-1.0.0.0-GA.exe
+# Archives are to be copied from the Simplicity Studio installation directory:
+# /Applications/Simplicity Studio/Contents/Eclipse/developer/stacks/flex
 
-RELEASE_VERSION="1.3.1.0"
+RELEASE_VERSION="1.0.1.0"
 
-FAMILY="EFM32FG FlexGecko"
+FAMILY="EFR32FG FlexGecko"
 GITHUB_PROJECT="lixpaulian/efr32fg-rail"
-ARCHIVE_NAME="SiliconLabs-RAIL-${RELEASE_VERSION}-GA.exe"
-# ARCHIVE_URL="http://www.silabs.com/Support%20Documents/RegisteredDocs/${ARCHIVE_NAME}"
-ARCHIVE_LOCATION="/Users/np/SimplicityStudio/SiliconLabsRAIL/${RELEASE_VERSION}-GA"
+ARCHIVE_NAME="SiliconLabs Simplicity Studio Installation"
+ARCHIVE_LOCATION="/Applications/Simplicity Studio.app/Contents/Eclipse/developer/stacks/flex/v${RELEASE_VERSION}"
 
-# we have only an .exe file that we must unpack using windows :-( hopefully Silicon Labs
-# will provide also a zip or tar file sometimes...
-# LOCAL_ARCHIVE_FILE="/tmp/xpacks/${ARCHIVE_NAME}"
 
 echo "Cleaning previous files..."
 for f in *
@@ -28,39 +24,26 @@ do
   fi
 done
 
-# if [ ! -f "${LOCAL_ARCHIVE_FILE}" ]
-# then
-#  mkdir -p $(dirname ${LOCAL_ARCHIVE_FILE})
-#  curl -o "${LOCAL_ARCHIVE_FILE}" -L "${ARCHIVE_URL}"
-# fi
-
-# echo "Manually unpack '${ARCHIVE_NAME}'..."
-# unzip -q "${LOCAL_ARCHIVE_FILE}"
+# Copy files from the Simplicity Studio installation
 
 cp -R "${ARCHIVE_LOCATION}/"* .
 
 echo "Saving the precompiled library..."
 mkdir lib
-cp autogen/librail_release/librail_efr32_gcc_release.a lib/librail_efr32.a
+cp protocol/flex_1.0/connect/plugins/libraries/libphy-rail-efr32xg1-rtos-library-gcc.a lib/librail_efr32.a
 
 echo "Removing unnecessary files..."
 
 rm -rf \
-apps \
-apps-bin \
-autogen \
-docs \
-hal \
-meta-inf \
-stack.* \
+hardware \
+meta \
+protocol \
 *.dat \
 *.exe \
-*.html \
-utils
+util
 
 echo "Creating README.md..."
 cat <<EOF >README.md
-# ${FAMILY} CMSIS
 
 This project, available from [GitHub](https://github.com/${GITHUB_PROJECT}),
 includes the RAIL precompiled library and all the header and source files
@@ -68,7 +51,7 @@ required to start writing applications for the EFR32FG Flex Gecko family.
 
 ## Version
 
-* v${RELEASE_VERSION}
+* Flex Lib v${RELEASE_VERSION}
 
 ## Documentation
 
@@ -80,16 +63,12 @@ http://www.silabs.com/products/wireless/proprietary/Pages/getting-started-with-f
 
 The original files are available in the \`originals\` branch.
 
-These files were extracted from \`${ARCHIVE_NAME}\`.
+These files were extracted from the \`${ARCHIVE_NAME}\`.
 
 To save space, the following folders/files were removed:
 
-* apps
-* apps-bin
-* docs
-* hal
-* meta-inf
-* stack.*
+* hardware
+* meta
 * *.dat
 * *.exe
 * *.html
