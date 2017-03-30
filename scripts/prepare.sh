@@ -6,12 +6,13 @@ IFS=$'\n\t'
 # /Applications/Simplicity Studio/Contents/Eclipse/developer/stacks/flex
 
 RELEASE_VERSION="1.0.1.0"
+VECTORS_VERSION="5.0.0.0"
 
 FAMILY="EFR32FG FlexGecko"
 GITHUB_PROJECT="lixpaulian/efr32fg-rail"
 ARCHIVE_NAME="SiliconLabs Simplicity Studio Installation"
 ARCHIVE_LOCATION="/Applications/Simplicity Studio.app/Contents/Eclipse/developer/stacks/flex/v${RELEASE_VERSION}"
-
+DEVICE_VECTORS_LOCATION="/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v${VECTORS_VERSION}/platform/Device"
 
 echo "Cleaning previous files..."
 for f in *
@@ -27,6 +28,8 @@ done
 # Copy files from the Simplicity Studio installation
 
 cp -R "${ARCHIVE_LOCATION}/"* .
+mkdir Device
+cp -R "${DEVICE_VECTORS_LOCATION}/"* Device
 
 echo "Saving the precompiled library..."
 mkdir lib
