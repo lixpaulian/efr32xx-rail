@@ -19,6 +19,74 @@ Default_Handler(void);
 // defines a handler (with the same name), this will automatically take
 // precedence over these weak definitions
 
+void __attribute__ ((weak, alias ("Default_Handler")))
+EMU_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+FRC_PRI_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+WDOG0_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+FRC_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+MODEM_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+RAC_SEQ_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+RAC_RSM_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+BUFC_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+LDMA_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+GPIO_EVEN_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+TIMER0_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+USART0_RX_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+USART0_TX_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+ACMP0_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+ADC0_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+IDAC0_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+I2C0_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+GPIO_ODD_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+TIMER1_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+USART1_RX_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+USART1_TX_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+LEUART0_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+PCNT0_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+CMU_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+MSC_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+CRYPTO_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+LETIMER0_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+AGC_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+PROTIMER_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+RTCC_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+SYNTH_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+CRYOTIMER_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+RFSENSE_IRQHandler(void);
+void __attribute__ ((weak, alias ("Default_Handler")))
+FPUEH_IRQHandler(void);
 
 // ----------------------------------------------------------------------------
 
@@ -67,6 +135,41 @@ pHandler __isr_vectors[] =
     SysTick_Handler,                   // The SysTick handler
 
     // ----------------------------------------------------------------------
+    // External Interrupts
+    EMU_IRQHandler,        // 0: EMU Interrupt
+    FRC_PRI_IRQHandler,        // 1: FRC_PRI Interrupt
+    WDOG0_IRQHandler,        // 2: WDOG0 Interrupt
+    FRC_IRQHandler,        // 3: FRC Interrupt
+    MODEM_IRQHandler,        // 4: MODEM Interrupt
+    RAC_SEQ_IRQHandler,        // 5: RAC_SEQ Interrupt
+    RAC_RSM_IRQHandler,        // 6: RAC_RSM Interrupt
+    BUFC_IRQHandler,        // 7: BUFC Interrupt
+    LDMA_IRQHandler,        // 8: LDMA Interrupt
+    GPIO_EVEN_IRQHandler,        // 9: GPIO_EVEN Interrupt
+    TIMER0_IRQHandler,        // 10: TIMER0 Interrupt
+    USART0_RX_IRQHandler,        // 11: USART0_RX Interrupt
+    USART0_TX_IRQHandler,        // 12: USART0_TX Interrupt
+    ACMP0_IRQHandler,        // 13: ACMP0 Interrupt
+    ADC0_IRQHandler,        // 14: ADC0 Interrupt
+    IDAC0_IRQHandler,        // 15: IDAC0 Interrupt
+    I2C0_IRQHandler,        // 16: I2C0 Interrupt
+    GPIO_ODD_IRQHandler,        // 17: GPIO_ODD Interrupt
+    TIMER1_IRQHandler,        // 18: TIMER1 Interrupt
+    USART1_RX_IRQHandler,        // 19: USART1_RX Interrupt
+    USART1_TX_IRQHandler,        // 20: USART1_TX Interrupt
+    LEUART0_IRQHandler,        // 21: LEUART0 Interrupt
+    PCNT0_IRQHandler,        // 22: PCNT0 Interrupt
+    CMU_IRQHandler,        // 23: CMU Interrupt
+    MSC_IRQHandler,        // 24: MSC Interrupt
+    CRYPTO_IRQHandler,        // 25: CRYPTO Interrupt
+    LETIMER0_IRQHandler,        // 26: LETIMER0 Interrupt
+    AGC_IRQHandler,        // 27: AGC Interrupt
+    PROTIMER_IRQHandler,        // 28: PROTIMER Interrupt
+    RTCC_IRQHandler,        // 29: RTCC Interrupt
+    SYNTH_IRQHandler,        // 30: SYNTH Interrupt
+    CRYOTIMER_IRQHandler,        // 31: CRYOTIMER Interrupt
+    RFSENSE_IRQHandler,        // 32: RFSENSE Interrupt
+    FPUEH_IRQHandler,        // 33: FPUEH Interrupt
 };
 
 // ----------------------------------------------------------------------------

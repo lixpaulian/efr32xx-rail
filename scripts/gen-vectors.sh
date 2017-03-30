@@ -2,9 +2,9 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-# Convert assembly vectors table to C.
+# Convert assembly vector tables to C.
 
-SRC_PATH="Device/SiliconLabs"
+SRC_PATH="platform/Device/SiliconLabs"
 
 for f in "$SRC_PATH/"EF*
 do
