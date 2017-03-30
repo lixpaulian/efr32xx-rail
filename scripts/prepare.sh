@@ -28,8 +28,8 @@ done
 # Copy files from the Simplicity Studio installation
 
 cp -R "${ARCHIVE_LOCATION}/"* .
-mkdir Device
-cp -R "${DEVICE_VECTORS_LOCATION}/"* Device
+rm -rf platform/Device/*
+cp -R "${DEVICE_VECTORS_LOCATION}/"* platform/Device
 
 echo "Saving the precompiled library..."
 mkdir lib
@@ -43,7 +43,8 @@ meta \
 protocol \
 *.dat \
 *.exe \
-util
+util \
+platform/CMSIS
 
 echo "Creating README.md..."
 cat <<EOF >README.md
