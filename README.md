@@ -1,7 +1,7 @@
 
 This project, available from [GitHub](https://github.com/lixpaulian/efr32fg-rail),
 includes the RAIL precompiled library and all the header and source files
-required to start writing applications for the EFR32xG Gecko family of SoCs.
+required to start writing applications for the EFR32xG Wireless Gecko family of SoCs.
 
 ## Version
 
