@@ -5,7 +5,7 @@
  *
  * THIS IS A GENERATED FILE.  DO NOT EDIT.
  *
- * <!-- Copyright 2016 Silicon Laboratories, Inc.                        *80*-->
+ * <!-- Copyright 2017 Silicon Laboratories, Inc.                        *80*-->
  */
 
 #ifndef __MICRO_DEFINES_H__
@@ -79,15 +79,15 @@
 // FAMILY 19 is the EFR32BG1P
 // FAMILY 20 is the EFR32BG1B
 // FAMILY 21 is the EFR32BG1V
-// FAMILY 22 is the EFR32ZG1P
-// FAMILY 23 is the EFR32ZG1B
-// FAMILY 24 is the EFR32ZG1V
 // FAMILY 25 is the EFR32FG1P
 // FAMILY 27 is the EFR32FG1V
 // FAMILY 28 is the EFR32MG12P
 // FAMILY 28 is the EFR32MG2P
-// FAMILY 29 is the EFR32BG12P
-// FAMILY 30 is the EFR32FG12P
+// FAMILY 31 is the EFR32BG12P
+// FAMILY 39 is the EFR32FG12P
+// FAMILY 40 is the EFR32MG13P
+// FAMILY 43 is the EFR32BG13P
+// FAMILY 49 is the EFR32FG13P
 // -----------------------------------------------------------------------------
 
 // Create an enum for the platforms
@@ -101,6 +101,7 @@ enum {
   EMBER_PLATFORM_FFD        = 6,
   EMBER_PLATFORM_MAX_VALUE
 };
+
 typedef uint16_t EmberPlatformEnum;
 
 #define EMBER_PLATFORM_STRINGS \
@@ -118,6 +119,7 @@ enum {
   EMBER_MICRO_AVR_ATMEGA_UNKNOWN   = 0,
   EMBER_MICRO_AVR_ATMEGA_MAX_VALUE
 };
+
 typedef uint16_t EmberMicroAvrAtmegaEnum;
 
 #define EMBER_MICRO_AVR_ATMEGA_STRINGS \
@@ -131,6 +133,7 @@ enum {
   EMBER_MICRO_XAP2B_EM260     = 2,
   EMBER_MICRO_XAP2B_MAX_VALUE
 };
+
 typedef uint16_t EmberMicroXap2bEnum;
 
 #define EMBER_MICRO_XAP2B_STRINGS \
@@ -144,6 +147,7 @@ enum {
   EMBER_MICRO_OBSOLETE_3_UNKNOWN   = 0,
   EMBER_MICRO_OBSOLETE_3_MAX_VALUE
 };
+
 typedef uint16_t EmberMicroObsolete3Enum;
 
 #define EMBER_MICRO_OBSOLETE_3_STRINGS \
@@ -189,6 +193,7 @@ enum {
   EMBER_MICRO_CORTEXM3_EZR32WG              = 34,
   EMBER_MICRO_CORTEXM3_MAX_VALUE
 };
+
 typedef uint16_t EmberMicroCortexM3Enum;
 
 #define EMBER_MICRO_CORTEXM3_STRINGS \
@@ -239,6 +244,7 @@ enum {
   EMBER_MICRO_C8051_SIF393    = 5,
   EMBER_MICRO_C8051_MAX_VALUE
 };
+
 typedef uint16_t EmberMicroC8051Enum;
 
 #define EMBER_MICRO_C8051_STRINGS \
@@ -256,6 +262,7 @@ enum {
   EMBER_MICRO_FFD_SI4010    = 1,
   EMBER_MICRO_FFD_MAX_VALUE
 };
+
 typedef uint16_t EmberMicroFfdEnum;
 
 #define EMBER_MICRO_FFD_STRINGS \
@@ -272,17 +279,18 @@ enum {
   EMBER_FAMILY_EFR32BG1P  = 19,
   EMBER_FAMILY_EFR32BG1B  = 20,
   EMBER_FAMILY_EFR32BG1V  = 21,
-  EMBER_FAMILY_EFR32ZG1P  = 22,
-  EMBER_FAMILY_EFR32ZG1B  = 23,
-  EMBER_FAMILY_EFR32ZG1V  = 24,
   EMBER_FAMILY_EFR32FG1P  = 25,
   EMBER_FAMILY_EFR32FG1V  = 27,
   EMBER_FAMILY_EFR32MG12P = 28,
   EMBER_FAMILY_EFR32MG2P  = 28,
-  EMBER_FAMILY_EFR32BG12P = 29,
-  EMBER_FAMILY_EFR32FG12P = 30,
+  EMBER_FAMILY_EFR32BG12P = 31,
+  EMBER_FAMILY_EFR32FG12P = 39,
+  EMBER_FAMILY_EFR32MG13P = 40,
+  EMBER_FAMILY_EFR32BG13P = 43,
+  EMBER_FAMILY_EFR32FG13P = 49,
   EMBER_FAMILY_MAX_VALUE
 };
+
 typedef uint16_t EmberFamilyEnum;
 
 #define EMBER_FAMILY_STRINGS \
@@ -293,15 +301,15 @@ typedef uint16_t EmberFamilyEnum;
   "EFR32BG1P",               \
   "EFR32BG1B",               \
   "EFR32BG1V",               \
-  "EFR32ZG1P",               \
-  "EFR32ZG1B",               \
-  "EFR32ZG1V",               \
   "EFR32FG1P",               \
   "EFR32FG1V",               \
   "EFR32MG12P",              \
   "EFR32MG2P",               \
   "EFR32BG12P",              \
   "EFR32FG12P",              \
+  "EFR32MG13P",              \
+  "EFR32BG13P",              \
+  "EFR32FG13P",              \
   NULL,
 
 // A dummy type declared to allow generically passing around this
@@ -312,7 +320,7 @@ typedef uint16_t EmberMicroEnum;
 // Determine what micro and platform that we're supposed to target using the
 // defines passed in at build time. Then set the PLAT and MICRO defines based
 // on what was passed in
-#if ((! defined(EZSP_HOST)) && (! defined(UNIX_HOST)))
+#if ((!defined(EZSP_HOST)) && (!defined(UNIX_HOST)))
 
 #if defined(EMBER_TEST)
   #define PLAT EMBER_PLATFORM_AVR_ATMEGA
@@ -436,12 +444,6 @@ typedef uint16_t EmberMicroEnum;
   #define FAMILY EMBER_FAMILY_EFR32BG1B
 #elif defined(EFR32BG1V)
   #define FAMILY EMBER_FAMILY_EFR32BG1V
-#elif defined(EFR32ZG1P)
-  #define FAMILY EMBER_FAMILY_EFR32ZG1P
-#elif defined(EFR32ZG1B)
-  #define FAMILY EMBER_FAMILY_EFR32ZG1B
-#elif defined(EFR32ZG1V)
-  #define FAMILY EMBER_FAMILY_EFR32ZG1V
 #elif defined(EFR32FG1P)
   #define FAMILY EMBER_FAMILY_EFR32FG1P
 #elif defined(EFR32FG1V)
@@ -454,6 +456,12 @@ typedef uint16_t EmberMicroEnum;
   #define FAMILY EMBER_FAMILY_EFR32BG12P
 #elif defined(EFR32FG12P)
   #define FAMILY EMBER_FAMILY_EFR32FG12P
+#elif defined(EFR32MG13P)
+  #define FAMILY EMBER_FAMILY_EFR32MG13P
+#elif defined(EFR32BG13P)
+  #define FAMILY EMBER_FAMILY_EFR32BG13P
+#elif defined(EFR32FG13P)
+  #define FAMILY EMBER_FAMILY_EFR32FG13P
 #else
   #define FAMILY 0
 #endif
@@ -496,6 +504,7 @@ enum {
   EMBER_PHY_RAIL            = 15,
   EMBER_PHY_MAX_VALUE
 };
+
 typedef uint16_t EmberPhyEnum;
 
 #define EMBER_PHY_STRINGS \
@@ -553,8 +562,8 @@ typedef uint16_t EmberPhyEnum;
 
 typedef struct {
   EmberPlatformEnum platform;
-  EmberMicroEnum    micro;
-  EmberPhyEnum      phy;
+  EmberMicroEnum micro;
+  EmberPhyEnum phy;
 } EmberChipTypeStruct;
 
 // load up any chip-specific feature defines

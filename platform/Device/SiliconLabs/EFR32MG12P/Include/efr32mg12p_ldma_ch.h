@@ -1,10 +1,10 @@
 /**************************************************************************//**
  * @file efr32mg12p_ldma_ch.h
  * @brief EFR32MG12P_LDMA_CH register and bit field definitions
- * @version 5.0.0
+ * @version 5.2.1
  ******************************************************************************
- * @section License
- * <b>Copyright 2016 Silicon Laboratories, Inc. http://www.silabs.com</b>
+ * # License
+ * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -29,12 +29,20 @@
  * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
+
+#if defined(__ICCARM__)
+#pragma system_include       /* Treat file as system include file. */
+#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+#pragma clang system_header  /* Treat file as system include file. */
+#endif
+
 /**************************************************************************//**
 * @addtogroup Parts
 * @{
 ******************************************************************************/
 /**************************************************************************//**
- * @brief LDMA_CH EFR32MG12P LDMA CH
+ * @brief LDMA_CH LDMA CH Register
+ * @ingroup EFR32MG12P_LDMA
  *****************************************************************************/
 typedef struct
 {

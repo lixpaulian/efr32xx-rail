@@ -7,10 +7,8 @@
 //   This file defines the basic information needed to go from reset up to
 //   the main() found in C code.
 //
-//[[   Author: Brooks Barrett, Lee Taylor  ]]
 //   Copyright 2009 by Ember Corporation. All rights reserved.             *80*
 //=============================================================================
-
 
 // Forward declaration for the debugging ISR shim
 void halInternalIntDebuggingIsr(void);
@@ -23,6 +21,4 @@ void halInternalClassifyReset(void);
 //=============================================================================
 extern int main(void);
 
-
 extern const HalVectorTableType __vector_table[];
-

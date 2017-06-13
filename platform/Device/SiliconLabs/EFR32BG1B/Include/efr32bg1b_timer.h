@@ -1,10 +1,10 @@
 /**************************************************************************//**
  * @file efr32bg1b_timer.h
  * @brief EFR32BG1B_TIMER register and bit field definitions
- * @version 5.0.0
+ * @version 5.2.1
  ******************************************************************************
- * @section License
- * <b>Copyright 2016 Silicon Laboratories, Inc. http://www.silabs.com</b>
+ * # License
+ * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -29,15 +29,23 @@
  * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
+
+#if defined(__ICCARM__)
+#pragma system_include       /* Treat file as system include file. */
+#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+#pragma clang system_header  /* Treat file as system include file. */
+#endif
+
 /**************************************************************************//**
 * @addtogroup Parts
 * @{
 ******************************************************************************/
 /**************************************************************************//**
- * @defgroup EFR32BG1B_TIMER
+ * @defgroup EFR32BG1B_TIMER TIMER
  * @{
  * @brief EFR32BG1B_TIMER Register Declaration
  *****************************************************************************/
+/** TIMER Register Declaration */
 typedef struct
 {
   __IOM uint32_t   CTRL;         /**< Control Register  */
@@ -70,7 +78,9 @@ typedef struct
 } TIMER_TypeDef;                 /** @} */
 
 /**************************************************************************//**
- * @defgroup EFR32BG1B_TIMER_BitFields
+ * @addtogroup EFR32BG1B_TIMER
+ * @{
+ * @defgroup EFR32BG1B_TIMER_BitFields  TIMER Bit Fields
  * @{
  *****************************************************************************/
 
@@ -188,7 +198,7 @@ typedef struct
 #define _TIMER_CTRL_ATI_MASK                       0x10000000UL                             /**< Bit mask for TIMER_ATI */
 #define _TIMER_CTRL_ATI_DEFAULT                    0x00000000UL                             /**< Mode DEFAULT for TIMER_CTRL */
 #define TIMER_CTRL_ATI_DEFAULT                     (_TIMER_CTRL_ATI_DEFAULT << 28)          /**< Shifted mode DEFAULT for TIMER_CTRL */
-#define TIMER_CTRL_RSSCOIST                        (0x1UL << 29)                            /**< Reload-Start Sets Compare Ouptut initial State */
+#define TIMER_CTRL_RSSCOIST                        (0x1UL << 29)                            /**< Reload-Start Sets Compare Output initial State */
 #define _TIMER_CTRL_RSSCOIST_SHIFT                 29                                       /**< Shift value for TIMER_RSSCOIST */
 #define _TIMER_CTRL_RSSCOIST_MASK                  0x20000000UL                             /**< Bit mask for TIMER_RSSCOIST */
 #define _TIMER_CTRL_RSSCOIST_DEFAULT               0x00000000UL                             /**< Mode DEFAULT for TIMER_CTRL */
@@ -1570,6 +1580,7 @@ typedef struct
 #define TIMER_DTLOCK_LOCKKEY_LOCKED                (_TIMER_DTLOCK_LOCKKEY_LOCKED << 0)   /**< Shifted mode LOCKED for TIMER_DTLOCK */
 #define TIMER_DTLOCK_LOCKKEY_UNLOCK                (_TIMER_DTLOCK_LOCKKEY_UNLOCK << 0)   /**< Shifted mode UNLOCK for TIMER_DTLOCK */
 
+/** @} */
 /** @} End of group EFR32BG1B_TIMER */
 /** @} End of group Parts */
 

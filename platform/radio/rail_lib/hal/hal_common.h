@@ -54,7 +54,6 @@ typedef struct debugSignal {
   } loc;
 } debugSignal_t;
 
-
 /******************************************************************************
  * Function Prototypes
  *****************************************************************************/
@@ -72,7 +71,7 @@ void halInit(void);
  * signals that are in the returned list.
  * @return A pointer to a list of debug signals available on this chip.
  */
-debugSignal_t* halGetDebugSignals(uint32_t *size);
+const debugSignal_t* halGetDebugSignals(uint32_t *size);
 
 /**
  * HAL API to get all the known debug pins for a given chip in a unified
@@ -81,7 +80,7 @@ debugSignal_t* halGetDebugSignals(uint32_t *size);
  * pins that are in the returned list.
  * @return A pointer to a list of debug pins available on this chip.
  */
-debugPin_t* halGetDebugPins(uint32_t *size);
+const debugPin_t* halGetDebugPins(uint32_t *size);
 
 /**
  * HAL API to enable PRS output on a specific channel of a given debug signal.
@@ -98,17 +97,14 @@ void halEnablePrs(uint8_t channel, uint8_t loc, uint8_t source, uint8_t signal);
  */
 void halDisablePrs(uint8_t channel);
 
-uint32_t halCommonGetInt32uMillisecondTick(void);
-void halCommonDelayMicroseconds(uint16_t us);
-
 void halCommonMemMove(void *dest, const void *src, uint16_t bytes);
-#define MEMCOPY(d,s,l) halCommonMemMove(d,s,l)
+#define MEMCOPY(d, s, l) halCommonMemMove(d, s, l)
 
 /**
- * @brief Returns the elapsed time between two 32 bit values.  
+ * @brief Returns the elapsed time between two 32 bit values.
  *   Result may not be valid if the time samples differ by more than 2147483647
  */
-#define elapsedTimeInt32u(oldTime, newTime)      \
+#define elapsedTimeInt32u(oldTime, newTime) \
   ((uint32_t) ((uint32_t)(newTime) - (uint32_t)(oldTime)))
 
 #define halResetWatchdog()

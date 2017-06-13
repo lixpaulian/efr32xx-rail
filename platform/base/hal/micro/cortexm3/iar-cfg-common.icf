@@ -30,9 +30,9 @@
 //  | CONST        |
 //  |--------------| 0x080XXXXX
 //  | CODE         |
-//  |--------------| 0x08000184
+//  |--------------| 0x080002XX
 //  | Vector Table | 
-//  |--------------| 0x08000100
+//  |--------------| 0x08000200
 //  | Reserved     |
 //  |--------------| 0x080000XX
 //  | AAT          |
@@ -40,7 +40,7 @@
 //  | NULL BAT     |
 //  |--------------| 0x08000000
 
-// Basic memory layout of a bootloader application in FLASH:
+// Basic memory layout of an MFB bootloader application in FLASH:
 //  ---------------- MFB_TOP
 //  | Storage      | 
 //  |--------------| MFB_TOP-INTERNAL_STORAGE_SIZE
@@ -53,20 +53,49 @@
 //  | CONST        |
 //  |--------------| 0x080XXXXX
 //  | CODE         |
-//  |--------------| 0x08000184 + BTL_SIZE
+//  |--------------| 0x080002XX + BTL_SIZE
 //  | Vector Table | 
-//  |--------------| 0x08000100 + BTL_SIZE
+//  |--------------| 0x08000200 + BTL_SIZE
 //  | Reserved     |
 //  |--------------| 0x080000XX + BTL_SIZE
 //  | AAT          |
-//  |--------------| 0x08000000 + BTL_SIZE   (== 0x08001000 or 0x08002000 or 0x08004000)
+//  |--------------| 0x08000000 + BTL_SIZE
 //  | Bootloader   |
 //  |--------------| 0x080000XX
 //  | BAT          |
 //  |--------------| 0x08000000
 
-// Determine the size of the bootloader if not specified
-if( !isdefinedsymbol(BTL_SIZE) ) {
+// Basic memory layout of a info page bootloader application in FLASH:
+//  ---------------- MFB_TOP
+//  | Storage      | 
+//  |--------------| MFB_TOP-INTERNAL_STORAGE_SIZE
+//  | SIMEE        |
+//  |--------------| MFB_TOP-INTERNAL_STORAGE_SIZE-0x2000 or MFB_TOP-INTERNAL_STORAGE_SIZE-0x1000
+//  | Unused       |
+//  |--------------| 0x080XXXXX
+//  | DATA_INIT    |
+//  |--------------| 0x080XXXXX
+//  | CONST        |
+//  |--------------| 0x080XXXXX
+//  | CODE         |
+//  |--------------| 0x080002XX
+//  | Vector Table | 
+//  |--------------| 0x08000200
+//  | Reserved     |
+//  |--------------| 0x080000XX
+//  | AAT          |
+//  |--------------| 0x08000000
+
+
+if( isdefinedsymbol(GECKO_INFO_PAGE_BTL)
+    || isdefinedsymbol(APP_GECKO_INFO_PAGE_BTL)
+    || isdefinedsymbol(STA_GECKO_INFO_PAGE_BTL)
+    || isdefinedsymbol(LOCAL_STORAGE_GECKO_INFO_PAGE_BTL) ) {
+  // The Gecko bootloaders do not need a BAT
+  define symbol NO_BAT = 1;
+  define symbol BTL_SIZE = 0;
+} else if( !isdefinedsymbol(BTL_SIZE) ) {
+  // Determine the size of the bootloader if not specified
   if( isdefinedsymbol(NULL_BTL) ) {
     define symbol BTL_SIZE = 0;
   } else {
@@ -75,14 +104,15 @@ if( !isdefinedsymbol(BTL_SIZE) ) {
   }
 }
 
-//NOTE:  Simulated EEPROM size is determined by the sizing of the the
-//       storage variable simulatedEepromStorage which is placed into
-//       SIMEE section (which is placed at the end of the app).
-
 // Define a Header region and associated block where the AAT will 
 //  live (as well as a NULL BAT in the case of a NULL_BTL image)
-define symbol HEADER_SIZE = 512;  // Must be multiple of 256 so the vector table
-                                  // Can be placed immediately after the headers
+
+// The header size must be a multiple of a power of two greater than or equal to
+// the vector table size because we place the real vector table (which must be
+// correctly aligned) right after it.
+if( !isdefinedsymbol(HEADER_SIZE) ) {
+  define symbol HEADER_SIZE = 256;
+}
 define symbol HEADER_BOTTOM       = MFB_BOTTOM + BTL_SIZE;
 define symbol HEADER_TOP          = HEADER_BOTTOM + (HEADER_SIZE-1);
 define region HEADER_region       = mem:[from HEADER_BOTTOM to HEADER_TOP];
@@ -94,7 +124,10 @@ if( isdefinedsymbol(NULL_BTL) ) {
   // In other cases, the BAT is located at a fixed address in the bootloader, 
   //  and only the AAT occupies the HEADERS block
   define block HEADER_block with fixed order { ro section AAT };
-  "BAT": place at address mem:MFB_BOTTOM { section BAT };
+
+  if(!isdefinedsymbol(NO_BAT)) {
+    "BAT": place at address mem:MFB_BOTTOM { section BAT };
+  }
 }
 "HEADERS": place at start of HEADER_region { block HEADER_block };
 
@@ -113,8 +146,12 @@ define block APPRO_block with fixed order { ro section .intvec,
 "APP ro": place at start of APPRO_region { block APPRO_block };
 "NVM&SIMEE": place at end of APPRO_region {zi section NVM,
                                            zi section SIMEE,
-                                           zi section PSSTORE,
-                                           zi section INTERNAL_STORAGE};
+                                           zi section INTERNAL_STORAGE,
+                                           zi section PSSTORE};
+
+//NOTE:  Simulated EEPROM size is determined by the sizing of the the
+//       storage variable simulatedEepromStorage which is placed into
+//       SIMEE section (which is placed at the end of the app).
 
 if ( !isdefinedsymbol(NO_FIB) )
 {

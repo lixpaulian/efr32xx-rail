@@ -15,10 +15,6 @@
 
 #include "bspconfig.h"
 
-#ifdef EMBER_AF_USE_HWCONF
-  #warning This board header is not designed to be used with HW Configurator.
-#endif
-
 /**************             Main Board Definitions               **************/
 
 /** @name LED Definitions
@@ -70,32 +66,7 @@ enum HalBoardLedPins {
  *
  */
 //@{
-/**
- * @brief The interrupt service routine for all buttons.
- */
-#define BUTTON_ISR buttonIrqCallback
-/**
- * @brief The actual GPIO BUTTON0 is connected to.  This define should
- * be used whenever referencing BUTTON0.
- */
-#define BUTTON0         (BSP_GPIO_PB0_PIN)
-/**
- * @brief The GPIO port for BUTTON0.
- */
-#define BUTTON0_PORT        (BSP_GPIO_PB0_PORT)
-
-/**
- * @brief The actual GPIO BUTTON1 is connected to.  This define should
- * be used whenever referencing BUTTON1, such as controlling if pieces
- * are compiled in.
- */
-#define BUTTON1         (BSP_GPIO_PB1_PIN)
-/**
- * @brief The GPIO input register for BUTTON1.
- */
-#define BUTTON1_PORT        (BSP_GPIO_PB1_PORT)
 //@} //END OF BUTTON DEFINITIONS
-
 
 /** @name UART Definitions
  *
@@ -107,13 +78,16 @@ enum HalBoardLedPins {
  *
  */
 //@{
+
 /**
  * @brief Enable VCOM Pin, passthrough UART via the WSTK
  */
-#define halEnableVCOM()  do {                                      \
-    GPIO_PinModeSet(gpioPortA, 5, gpioModePushPull, 1);            \
-    GPIO_PinOutSet(gpioPortA, 5);                                  \
-  } while (0)
+#ifndef halEnableVCOM
+  #define halEnableVCOM()  do {                                                    \
+    GPIO_PinModeSet(BSP_BCC_ENABLE_PORT, BSP_BCC_ENABLE_PIN, gpioModePushPull, 1); \
+    GPIO_PinOutSet(BSP_BCC_ENABLE_PORT, BSP_BCC_ENABLE_PIN);                       \
+} while (0)
+#endif
 
 // Define USART0 flow control pins
 #ifndef USART0_CTS_LOCATION
@@ -136,6 +110,7 @@ enum HalBoardLedPins {
 #endif
 //@} //END OF UART DEFINITIONS
 //
+
 /** @name External Flash Definitions
  *
  * The following are used to aid in the abstraction with the external flash.
@@ -177,66 +152,19 @@ enum HalBoardLedPins {
 
 /**************            Common Configuration Options          **************/
 
-/** @name Packet Trace
- *
- * Packet Trace Interface (PTI) will be turned on by default unless
- * ::DISABLE_PTI is defined
- *
- * @note PTI uses PB11-13
- */
-//@{
-#ifndef halInternalConfigPti
-#ifndef DISABLE_PTI
-#define halInternalConfigPti() do {                                \
-  RADIO_PTIInit_t ptiInit = RADIO_PTI_INIT;                        \
-  RADIO_PTI_Init(&ptiInit);                                        \
-} while(0)
-#else
-#define halInternalConfigPti() do {                                \
-  RADIO_PTIInit_t ptiInit = RADIO_PTI_INIT;                        \
-  ptiInit.mode = RADIO_PTI_MODE_DISABLED;                          \
-  RADIO_PTI_Init(&ptiInit);                                        \
-} while(0)
-#endif
-#endif//halInternalConfigPti
-
-//@} //END OF PACKET TRACE DEFINITIONS
-
-/** @name DC-DC
- *
- * The DC to DC Interface will be turned on by default unless
- * ::DISABLE_DCDC is defined, in which case the DC-DC will be put
- * in bypass mode.
- *
- * @note Use EMU_DCDCPowerOff() to poweroff the DC-DC if not connected
- *
- * @note DC-DC configuration is write once on power-on, so a POR reset
- * is required to change DC-DC mode.
- */
-//@{
-#ifdef DISABLE_DCDC
-#define halInternalEnableDCDC() do {                           \
-  EMU_DCDCInit_TypeDef dcdcInit = EMU_DCDCINIT_WSTK_DEFAULT;   \
-  dcdcInit.dcdcMode = emuDcdcMode_Bypass;                      \
-  EMU_DCDCInit(&dcdcInit);                                     \
-  } while(0)
-#else
-#define halInternalEnableDCDC() do {                           \
-  EMU_DCDCInit_TypeDef dcdcInit = EMU_DCDCINIT_WSTK_DEFAULT;   \
-  EMU_DCDCInit(&dcdcInit);                                     \
-} while(0)
-#endif
-//@} //END OF DC-DC DEFINITIONS
-
 #ifndef halInternalInitPrs
-#define halInternalInitPrs()  do {                                                               \
-} while(0)
+#define halInternalInitPrs()  do { \
+} while (0)
 #endif //halInternalInitPrs
 
-#ifndef halInternalInitDataFlash
-#define halInternalInitDataFlash()  do {                             \
-} while(0)
-#endif //halInternalInitDataFlash
+/**
+ * @name EMDRV_RTCDRV_USE_LFRCO
+ *
+ * If not defined, RTCDRV will default to use the LFXO as a clock source.
+ * Must be defined if no LFXO is present
+ *
+ */
+#define EMDRV_RTCDRV_USE_LFRCO
 
 /**************            Essential Board Functions             **************/
 
@@ -247,18 +175,9 @@ enum HalBoardLedPins {
  * specific startup sequences.
  *
  */
-#define halInternalInitBoard() do {                                \
- halInternalInitLed();                                             \
- halInternalInitButton();                                          \
- halInternalInitDataFlash();                                       \
- halInternalPowerUpBoard();                                        \
- halInternalConfigPti();                                           \
- halInternalEnableDCDC();                                          \
- halInternalInitRadioHoldOff();                                    \
- halInternalInitPta();                                             \
- halInternalInitPrs();                                             \
- halInternalInitAntennaDiversity();                                \
-} while(0)
+#define halInternalInitBoard() do { \
+    halInternalPowerUpBoard();      \
+} while (0)
 
 /**
  * @name halInternalPowerUpBoard
@@ -268,8 +187,8 @@ enum HalBoardLedPins {
  *
  */
 #ifndef halInternalPowerUpBoard
-  #define halInternalPowerUpBoard() do {                             \
-  } while(0)
+  #define halInternalPowerUpBoard() do { \
+} while (0)
 #endif
 
 /**
@@ -280,8 +199,8 @@ enum HalBoardLedPins {
  *
  */
 #ifndef halInternalPowerDownBoard
-  #define halInternalPowerDownBoard() do {                           \
-  } while(0)
+  #define halInternalPowerDownBoard() do { \
+} while (0)
 #endif
 
 /**
@@ -290,6 +209,7 @@ enum HalBoardLedPins {
 #ifndef DEFINE_BOARD_GPIO_CFG_VARIABLES
   #define DEFINE_BOARD_GPIO_CFG_VARIABLES()
 #endif
+
 /**
  * Define TEMP_SENSOR to satisfy Ember HAL. Should not be used
  */
@@ -297,7 +217,6 @@ enum HalBoardLedPins {
 #define TEMP_SENSOR_SCALE_FACTOR 0
 
 #endif //__BOARD_COMMON_H__
-
 
 /** @} END Board Specific Functions */
 

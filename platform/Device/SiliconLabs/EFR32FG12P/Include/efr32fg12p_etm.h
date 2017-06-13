@@ -1,10 +1,10 @@
 /**************************************************************************//**
  * @file efr32fg12p_etm.h
  * @brief EFR32FG12P_ETM register and bit field definitions
- * @version 5.0.0
+ * @version 5.2.1
  ******************************************************************************
- * @section License
- * <b>Copyright 2016 Silicon Laboratories, Inc. http://www.silabs.com</b>
+ * # License
+ * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -29,15 +29,23 @@
  * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
+
+#if defined(__ICCARM__)
+#pragma system_include       /* Treat file as system include file. */
+#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+#pragma clang system_header  /* Treat file as system include file. */
+#endif
+
 /**************************************************************************//**
 * @addtogroup Parts
 * @{
 ******************************************************************************/
 /**************************************************************************//**
- * @defgroup EFR32FG12P_ETM
+ * @defgroup EFR32FG12P_ETM ETM
  * @{
  * @brief EFR32FG12P_ETM Register Declaration
  *****************************************************************************/
+/** ETM Register Declaration */
 typedef struct
 {
   __IOM uint32_t ETMCR;           /**< Main Control Register  */
@@ -101,7 +109,9 @@ typedef struct
 } ETM_TypeDef;                    /** @} */
 
 /**************************************************************************//**
- * @defgroup EFR32FG12P_ETM_BitFields
+ * @addtogroup EFR32FG12P_ETM
+ * @{
+ * @defgroup EFR32FG12P_ETM_BitFields  ETM Bit Fields
  * @{
  *****************************************************************************/
 
@@ -275,11 +285,6 @@ typedef struct
 #define _ETM_ETMSCR_MAXPORTSIZE_MASK                  0x7UL                                   /**< Bit mask for ETM_MAXPORTSIZE */
 #define _ETM_ETMSCR_MAXPORTSIZE_DEFAULT               0x00000001UL                            /**< Mode DEFAULT for ETM_ETMSCR */
 #define ETM_ETMSCR_MAXPORTSIZE_DEFAULT                (_ETM_ETMSCR_MAXPORTSIZE_DEFAULT << 0)  /**< Shifted mode DEFAULT for ETM_ETMSCR */
-#define ETM_ETMSCR_Reserved                           (0x1UL << 3)                            /**< Reserved */
-#define _ETM_ETMSCR_Reserved_SHIFT                    3                                       /**< Shift value for ETM_Reserved */
-#define _ETM_ETMSCR_Reserved_MASK                     0x8UL                                   /**< Bit mask for ETM_Reserved */
-#define _ETM_ETMSCR_Reserved_DEFAULT                  0x00000001UL                            /**< Mode DEFAULT for ETM_ETMSCR */
-#define ETM_ETMSCR_Reserved_DEFAULT                   (_ETM_ETMSCR_Reserved_DEFAULT << 3)     /**< Shifted mode DEFAULT for ETM_ETMSCR */
 #define ETM_ETMSCR_FIFOFULL                           (0x1UL << 8)                            /**< FIFO FULL Supported */
 #define _ETM_ETMSCR_FIFOFULL_SHIFT                    8                                       /**< Shift value for ETM_FIFOFULL */
 #define _ETM_ETMSCR_FIFOFULL_MASK                     0x100UL                                 /**< Bit mask for ETM_FIFOFULL */
@@ -781,6 +786,7 @@ typedef struct
 #define _ETM_ETMCIDR3_PREAMB_DEFAULT                  0x000000B1UL                        /**< Mode DEFAULT for ETM_ETMCIDR3 */
 #define ETM_ETMCIDR3_PREAMB_DEFAULT                   (_ETM_ETMCIDR3_PREAMB_DEFAULT << 0) /**< Shifted mode DEFAULT for ETM_ETMCIDR3 */
 
+/** @} */
 /** @} End of group EFR32FG12P_ETM */
 /** @} End of group Parts */
 

@@ -1,8 +1,8 @@
- /*************************************************************************//**
- * @file glib_font_bold_16x20.c
-* @brief Silicon Labs Graphics Library: GLIB font number '0'-'9', ':' and ' ', 16x20 pixels
+/*************************************************************************//**
+ * @file glib_font_number_16x20.c
+ * @brief Silicon Labs Graphics Library: GLIB font number '0'-'9', ':' and ' ', 16x20 pixels
  ******************************************************************************
- * @section License
+ * # License
  * <b>Copyright 2015 Silicon Labs, http://www.silabs.com</b>
  *******************************************************************************
  *
@@ -12,11 +12,11 @@
  *
  ******************************************************************************/
 
-
 /* Standard C header files */
 #include <stdint.h>
 #include "glib.h"
 
+/** @brief Pixel data for the "GLIB_FontNumber16x20" font. */
 static const uint16_t GLIB_FontNumber16x20PixMap[] =
 {
   0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000,
@@ -41,9 +41,10 @@ static const uint16_t GLIB_FontNumber16x20PixMap[] =
   0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000
 };
 
-const GLIB_Font_t GLIB_FontNumber16x20 = {(void *)GLIB_FontNumber16x20PixMap,
-                                          sizeof(GLIB_FontNumber16x20PixMap),
-                                          sizeof(GLIB_FontNumber16x20PixMap[0]),
-                                          12, 16, 20, 5, 0, NumbersOnlyFont};
-
-
+/**
+ * @brief Large 16x20 pixels font containing only numbers.
+ */
+const GLIB_Font_t GLIB_FontNumber16x20 = { (void *)GLIB_FontNumber16x20PixMap,
+                                           sizeof(GLIB_FontNumber16x20PixMap),
+                                           sizeof(GLIB_FontNumber16x20PixMap[0]),
+                                           12, 16, 20, 5, 0, NumbersOnlyFont };

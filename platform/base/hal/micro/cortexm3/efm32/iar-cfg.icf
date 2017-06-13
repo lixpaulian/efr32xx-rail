@@ -18,7 +18,7 @@ if ( RAM_SIZE == 31K ) {
   define symbol TRUE_RAM_SIZE = 32K;
 }
 else {
-  define symbol TRUE_RAM_SIZE = minimum(RAM_SIZE,64K);
+  define symbol TRUE_RAM_SIZE = RAM_SIZE;
 }
 
 // EFR32/EZR32 doesn't have a FIB
@@ -42,6 +42,9 @@ if( isdefinedsymbol(RAM_RETAIN_SIZE) ) {
 } else {
     define symbol UNUSED_RAM_SIZE = 0;
 }
+
+// The alignment required for EFR parts can be as much as 512 bytes.
+define symbol HEADER_SIZE = 512;
 
 // include the common icf which locates all the sections
 if(isdefinedsymbol(BOOTLOADER)) {

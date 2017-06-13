@@ -5,7 +5,7 @@ required to start writing applications for the EFR32xG Wireless Gecko family of 
 
 ## Version
 
-* Flex Lib v1.0.1.0
+* Geck SDK Suite v1.1
 
 ## Documentation
 
@@ -21,6 +21,7 @@ These files were extracted from the `SiliconLabs Simplicity Studio Installation`
 
 To save space, the following folders/files were removed:
 
+* app
 * hardware
 * meta
 * *.dat
