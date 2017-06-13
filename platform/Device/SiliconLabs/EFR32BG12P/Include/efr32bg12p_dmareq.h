@@ -1,10 +1,10 @@
 /**************************************************************************//**
  * @file efr32bg12p_dmareq.h
  * @brief EFR32BG12P_DMAREQ register and bit field definitions
- * @version 5.0.0
+ * @version 5.2.1
  ******************************************************************************
- * @section License
- * <b>Copyright 2016 Silicon Laboratories, Inc. http://www.silabs.com</b>
+ * # License
+ * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -29,13 +29,22 @@
  * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
+
+#if defined(__ICCARM__)
+#pragma system_include       /* Treat file as system include file. */
+#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+#pragma clang system_header  /* Treat file as system include file. */
+#endif
+
 /**************************************************************************//**
 * @addtogroup Parts
 * @{
 ******************************************************************************/
 
 /**************************************************************************//**
- * @defgroup EFR32BG12P_DMAREQ_BitFields
+ * @addtogroup EFR32BG12P_DMAREQ DMAREQ
+ * @{
+ * @defgroup EFR32BG12P_DMAREQ_BitFields DMAREQ Bit Fields
  * @{
  *****************************************************************************/
 #define DMAREQ_PRS_REQ0               ((1 << 16) + 0)         /**< DMA channel select for PRS_REQ0 */
@@ -85,16 +94,6 @@
 #define DMAREQ_WTIMER1_CC1            ((27 << 16) + 2)        /**< DMA channel select for WTIMER1_CC1 */
 #define DMAREQ_WTIMER1_CC2            ((27 << 16) + 3)        /**< DMA channel select for WTIMER1_CC2 */
 #define DMAREQ_WTIMER1_CC3            ((27 << 16) + 4)        /**< DMA channel select for WTIMER1_CC3 */
-#define DMAREQ_PROTIMER_POF           ((36 << 16) + 0)        /**< DMA channel select for PROTIMER_POF */
-#define DMAREQ_PROTIMER_BOF           ((36 << 16) + 1)        /**< DMA channel select for PROTIMER_BOF */
-#define DMAREQ_PROTIMER_WOF           ((36 << 16) + 2)        /**< DMA channel select for PROTIMER_WOF */
-#define DMAREQ_PROTIMER_CC0           ((36 << 16) + 3)        /**< DMA channel select for PROTIMER_CC0 */
-#define DMAREQ_PROTIMER_CC1           ((36 << 16) + 4)        /**< DMA channel select for PROTIMER_CC1 */
-#define DMAREQ_PROTIMER_CC2           ((36 << 16) + 5)        /**< DMA channel select for PROTIMER_CC2 */
-#define DMAREQ_PROTIMER_CC3           ((36 << 16) + 6)        /**< DMA channel select for PROTIMER_CC3 */
-#define DMAREQ_PROTIMER_CC4           ((36 << 16) + 7)        /**< DMA channel select for PROTIMER_CC4 */
-#define DMAREQ_MODEM_DEBUG            ((38 << 16) + 0)        /**< DMA channel select for MODEM_DEBUG */
-#define DMAREQ_AGC_RSSI               ((39 << 16) + 0)        /**< DMA channel select for AGC_RSSI */
 #define DMAREQ_MSC_WDATA              ((48 << 16) + 0)        /**< DMA channel select for MSC_WDATA */
 #define DMAREQ_CRYPTO0_DATA0WR        ((49 << 16) + 0)        /**< DMA channel select for CRYPTO0_DATA0WR */
 #define DMAREQ_CRYPTO_DATA0WR         DMAREQ_CRYPTO0_DATA0WR  /**< Alias for DMAREQ_CRYPTO0_DATA0WR */
@@ -115,6 +114,7 @@
 #define DMAREQ_CRYPTO1_DATA1WR        ((52 << 16) + 3)        /**< DMA channel select for CRYPTO1_DATA1WR */
 #define DMAREQ_CRYPTO1_DATA1RD        ((52 << 16) + 4)        /**< DMA channel select for CRYPTO1_DATA1RD */
 
+/** @} */
 /** @} End of group EFR32BG12P_DMAREQ */
 /** @} End of group Parts */
 

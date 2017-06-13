@@ -1,15 +1,13 @@
 /***************************************************************************//**
  * @file cstartup-iar-boot.c
- * @brief Startup and low-level utility code for the Cortex-M3 bootloader with 
+ * @brief Startup and low-level utility code for the Cortex-M3 bootloader with
  * the IAR tool chain.
- * @version 3.20.2
- * This file defines the basic information needed to go from reset up to 
- * the main() found in C code.  cstartup-iar-boot-asm instantiates the actual 
- * reset vector since hand crafted assembly code is required to get from the 
- * bootloader to the application cstartup when exiting deep sleep.
+ * This file defines the basic information needed to go from the end of the
+ * assembly reset handler to the main() found in C code. Also defines the
+ * bootloader address table (BAT).
  *******************************************************************************
  * @section License
- * <b>(C) Copyright 2015 Silicon Labs, http://www.silabs.com</b>
+ * <b>(C) Copyright 2017 Silicon Labs, http://www.silabs.com</b>
  *******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -48,19 +46,22 @@
 #include "hal/micro/bootloader-interface.h"
 #include "hal/micro/cortexm3/bootloader/bootloader-configuration.h"
 
+#include "em_rmu.h"
+
 #ifdef BTL_CHECK_INTEGRITY
 #include "standalone-bootloader.h"
 #endif
 
-// Pull in the SOFTWARE_VERSION from the stack
-#include "stack/config/config.h"
+// Pull in the base versioning info
+#include "base-version.h"
 
 // For static inline definition of INT_Disable
 #include "em_core.h"
+#include "em_chip.h"
 
 // Define the CUSTOMER_BOOTLOADER_VERSION if it wasn't set
 #ifndef CUSTOMER_BOOTLOADER_VERSION
-  // If this is an internal build use the Ember version number
+// If this is an internal build use the Ember version number
   #ifdef JAMBUILD
     #define CUSTOMER_BOOTLOADER_VERSION (0xFFFFFFFF)
   #else
@@ -71,14 +72,14 @@
 
 //=============================================================================
 // Define the size of the call stack and define a block of memory for it.
-// 
+//
 // Place the cstack area in a segment named CSTACK.  This segment is
 // defined soley for the purpose of placing the stack. Refer to reset handler
 // for the initialization code and iar-cfg-common.icf for segment placement in
 // memory.
-// 
+//
 // halResetInfo, used to store crash information and bootloader parameters, is
-// overlayed on top of the base of this segment so it can be overwritten by the 
+// overlayed on top of the base of this segment so it can be overwritten by the
 // call stack.
 // This assumes that the stack will not go that deep between reset and
 // use of the crash or the bootloader data.
@@ -108,7 +109,7 @@ void halNmiHardFaultIsr(void)
 //static void setStackPointer(uint32_t address)
 void setStackPointer(uint32_t address)
 {
-  asm("MOVS SP, r0");
+  asm ("MOVS SP, r0");
 }
 
 //=============================================================================
@@ -131,7 +132,6 @@ void halInternalAssertFailed(PGM_P filename, int linenumber)
   halInternalSysReset(RESET_BOOTLOADER_FATAL);
 }
 
-
 //=============================================================================
 // Check to see if we should jump to the app's halEntryPoint.  If not, when
 // this function returns the bootloader halEntryPoint will then invoke
@@ -145,7 +145,7 @@ bool checkAppJumpToApp(void)
   // All of this reset type detection logic is done inline rather than calling
   // helper functions to keep stack usage to the absolute minimum.
   // Cannot use any globals here, as they are not yet initialized.
-  if(bootloadForceActivation()) {
+  if (bootloadForceActivation()) {
     // override the reset type with a FORCED reset cause and return
     //  so that the bootloader is activated
     halResetInfo.crash.resetReason = RESET_BOOTLOADER_FORCE;
@@ -154,20 +154,19 @@ bool checkAppJumpToApp(void)
     halResetInfo.crash.resetSignature = RESET_VALID_SIGNATURE;
     return true;
   }
-  
+
   softwareReset =  ((RMU->RSTCAUSE & RMU_RSTCAUSE_SYSREQRST) == RMU_RSTCAUSE_SYSREQRST);
-  if(
-       ( (softwareReset) &&
-          (halResetInfo.crash.resetSignature == RESET_VALID_SIGNATURE) 
-        ) &&
-        ( (halResetInfo.crash.resetReason == RESET_BOOTLOADER_BOOTLOAD) ||
-          (halResetInfo.crash.resetReason == RESET_BOOTLOADER_OTAVALID) ||
-          (halResetInfo.crash.resetReason == RESET_FIB_BOOTLOADER) ||
-          (halResetInfo.crash.resetReason == RESET_FIB_MISMATCH) ||
-          (halResetInfo.crash.resetReason == RESET_FIB_BAUDRATE)
-        )
+  if (
+    ((softwareReset)
+     && (halResetInfo.crash.resetSignature == RESET_VALID_SIGNATURE)
     )
-  {
+    && ((halResetInfo.crash.resetReason == RESET_BOOTLOADER_BOOTLOAD)
+        || (halResetInfo.crash.resetReason == RESET_BOOTLOADER_OTAVALID)
+        || (halResetInfo.crash.resetReason == RESET_FIB_BOOTLOADER)
+        || (halResetInfo.crash.resetReason == RESET_FIB_MISMATCH)
+        || (halResetInfo.crash.resetReason == RESET_FIB_BAUDRATE)
+        )
+    ) {
     // If we get here, then reset type checks indicate we should run the bootloader
     //  either it was a software reset saying that the bootloader should run.
     return false;
@@ -183,12 +182,10 @@ bool checkAppJumpToApp(void)
   //  image, or else we will fall out and run the bootloader
   //TODO -- Should this address table check should be beefed up before
   //         declaring the app is valid and jumping to it?
-  if ( (halAppAddressTable.baseTable.type) == APP_ADDRESS_TABLE_TYPE ) {
-
+  if ((halAppAddressTable.baseTable.type) == APP_ADDRESS_TABLE_TYPE ) {
     #ifdef BTL_CHECK_INTEGRITY
     // check application integrity
-    if (halCheckIntegrity() != true)
-    {
+    if (halCheckIntegrity() != true) {
       return false;
     }
     #endif
@@ -225,7 +222,6 @@ bool checkAppJumpToApp(void)
   return false;
 }
 
-
 //=============================================================================
 // The bootloader's equivalent of halEntryPoint.  This must occur after the
 // lower level assembly code has verified we are not coming out of deep sleep.
@@ -236,26 +232,27 @@ void bootloaderEntryPoint(bool isForced)
   uint8_t *dataDestinationStart;
   uint8_t *dataDestinationEnd;
   bool softwareReset;
-  
+
   //When the Cortex-M3 exits reset, interrupts are enable.  Explicitely
   //disable them immediately using the standard set PRIMASK instruction.
   //Injecting an assembly instruction this early does not effect optimization.
-  asm("CPSID i");
-
+  asm ("CPSID i");
+  CHIP_Init();
+  SystemInit();
   //It is quite possible that when the Cortex-M3 begins executing code the
   //Core Reset Vector Catch is still left enabled.  Because this VC would
   //cause us to halt at reset if another reset event tripped, we should
   //clear it as soon as possible.  If a debugger wants to halt at reset,
   //it will set this bit again.
   // DEBUG_EMCR &= ~DEBUG_EMCR_VC_CORERESET;
-  
+
   //Configure flash access for optimal current consumption early
   //during boot to save as much current as we can.
   // halInternalConfigFlashAccess();
   softwareReset = ((RMU->RSTCAUSE & RMU_RSTCAUSE_SYSREQRST) == RMU_RSTCAUSE_SYSREQRST);
 
   //zero out the area of memory reserved for the stack
-  if(softwareReset) {
+  if (softwareReset) {
     // if it was a software reset, make sure we start the initialization
     //  _after_ the overlayed reset info
     dataDestinationStart = __segment_end(__RESETINFO__);
@@ -264,7 +261,7 @@ void bootloaderEntryPoint(bool isForced)
     dataDestinationStart = __segment_begin(__CSTACK__);
   }
   dataDestinationEnd = __segment_end(__CSTACK__);
-  while(dataDestinationStart < dataDestinationEnd) {
+  while (dataDestinationStart < dataDestinationEnd) {
     //Fill with magic value interpreted by C-SPY's Stack View
     *dataDestinationStart++ = (uint8_t)STACK_FILL_VALUE;
   }
@@ -272,14 +269,14 @@ void bootloaderEntryPoint(bool isForced)
   dataSourceStart = __segment_begin(__DATA_INIT__);
   dataDestinationStart = __segment_begin(__DATA__);
   dataDestinationEnd = __segment_end(__DATA__);
-  while(dataDestinationStart < dataDestinationEnd) {
+  while (dataDestinationStart < dataDestinationEnd) {
     *dataDestinationStart++ = *dataSourceStart++;
   }
-  
+
   //zero out the static and globals in RAM that are zero-initialized.
   dataDestinationStart = __segment_begin(__BSS__);
   dataDestinationEnd = __segment_end(__BSS__);
-  while(dataDestinationStart < dataDestinationEnd) {
+  while (dataDestinationStart < dataDestinationEnd) {
     *dataDestinationStart++ = 0;
   }
 
@@ -287,8 +284,8 @@ void bootloaderEntryPoint(bool isForced)
   // don't unintentionally enable interrupts after they finish atomic sections.
   CORE_ATOMIC_IRQ_DISABLE();
 
-  // Do a very simplified reset classification that really only cares 
-  //  about valid bootloader and fib software reset types.  All others get 
+  // Do a very simplified reset classification that really only cares
+  //  about valid bootloader and fib software reset types.  All others get
   //  wacked to an unknown classification
   // If we have a valid force reset type regardless of the type of
   //  hardware reset, or if the hardware indicates a software reset and we have
@@ -299,30 +296,29 @@ void bootloaderEntryPoint(bool isForced)
   //  this point in the code with this reset type is if bootloadForceActivation()
   //  actually returned true, which causes checkAppJumpToApp() override the
   //  reset type with RESET_BOOTLOADER_FORCE.
-  if( (halResetInfo.crash.resetSignature == RESET_VALID_SIGNATURE) &&
-      ( (halResetInfo.crash.resetReason == RESET_BOOTLOADER_FORCE) ||
-        ( (softwareReset) &&
-        ( (RESET_BASE_TYPE(halResetInfo.crash.resetReason) == RESET_FIB) ||
-          (RESET_BASE_TYPE(halResetInfo.crash.resetReason) == RESET_BOOTLOADER) ) 
-        ) 
-      ) 
-    ) {
+  if ((halResetInfo.crash.resetSignature == RESET_VALID_SIGNATURE)
+      && ((halResetInfo.crash.resetReason == RESET_BOOTLOADER_FORCE)
+          || ((softwareReset)
+              && ((RESET_BASE_TYPE(halResetInfo.crash.resetReason) == RESET_FIB)
+                  || (RESET_BASE_TYPE(halResetInfo.crash.resetReason) == RESET_BOOTLOADER))
+              )
+          )
+      ) {
     savedResetCause = halResetInfo.crash.resetReason;
   } else if (isForced) {
     savedResetCause = RESET_BOOTLOADER_FORCE;
   } else {
     savedResetCause = RESET_UNKNOWN_UNKNOWN;
   }
-  // mark the signature as invalid 
+  // mark the signature as invalid
   halResetInfo.crash.resetSignature = RESET_INVALID_SIGNATURE;
   RMU_ResetCauseClear();
 
   main();         //branch to the real C code main()!
-  
+
   // if main ever returns...
   halInternalSysReset(RESET_BOOTLOADER_FATAL);
 }
-
 
 //=============================================================================
 // Declare the address tables which will always live at well known addresses
@@ -332,7 +328,7 @@ VAR_AT_SEGMENT(NO_STRIPPING __no_init const HalAppAddressTableType halAppAddress
 extern EblDataFuncType eblDataFuncs;
 
 //=============================================================================
-// The bootloader address table includes all the important information 
+// The bootloader address table includes all the important information
 //  about the installed bootloader
 //=============================================================================
 VAR_AT_SEGMENT(NO_STRIPPING const HalBootloaderAddressTableType halBootloaderAddressTable, __BAT__) = {
@@ -345,33 +341,33 @@ VAR_AT_SEGMENT(NO_STRIPPING const HalBootloaderAddressTableType halBootloaderAdd
     NULL                    // No other vector table.
   },
   BOOTLOADER_TYPE,  //uint16_t bootloaderType;
-  SOFTWARE_VERSION, //uint16_t bootloaderVersion;  
+  SL_BASE_FULL_VERSION, //uint16_t bootloaderVersion;
   &halAppAddressTable,
   PLAT,  //uint8_t platInfo;   // type of platform, defined in micro.h
   MICRO, //uint8_t microInfo;  // type of micro, defined in micro.h
   PHY,   //uint8_t phyInfo;    // type of phy, defined in micro.h
-  0,     //uint8_t reserved;   // reserved for future use  
+  0,     //uint8_t reserved;   // reserved for future use
   eblProcessInit,
   eblProcess,
   &eblDataFuncs,
-  #if (((BOOTLOADER_TYPE)>>8) == BL_TYPE_APPLICATION)
-    halEepromInit,
-    halEepromRead,
-    halEepromWrite,
-    halEepromShutdown,
-    (const void *(*)(void))halEepromInfo,
-    halEepromErase,
-    halEepromBusy,
+  #if (((BOOTLOADER_TYPE) >> 8) == BL_TYPE_APPLICATION)
+  halEepromInit,
+  halEepromRead,
+  halEepromWrite,
+  halEepromShutdown,
+  (const void *(*)(void))halEepromInfo,
+  halEepromErase,
+  halEepromBusy,
   #else
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
+  NULL,
+  NULL,
+  NULL,
+  NULL,
+  NULL,
+  NULL,
+  NULL,
   #endif
-  EMBER_BUILD_NUMBER, // uint16_t softwareBuild;
+  SL_BASE_BUILD_NUMBER, // uint16_t softwareBuild;
   0,                  // uint16_t reserved2;
   CUSTOMER_BOOTLOADER_VERSION  // uint32_t customerBootloaderVersion;
 };

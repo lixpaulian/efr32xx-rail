@@ -1,10 +1,10 @@
 /**************************************************************************//**
  * @file efm32pg1b_pcnt.h
  * @brief EFM32PG1B_PCNT register and bit field definitions
- * @version 5.0.0
+ * @version 5.2.1
  ******************************************************************************
- * @section License
- * <b>Copyright 2016 Silicon Laboratories, Inc. http://www.silabs.com</b>
+ * # License
+ * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -29,15 +29,23 @@
  * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
+
+#if defined(__ICCARM__)
+#pragma system_include       /* Treat file as system include file. */
+#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+#pragma clang system_header  /* Treat file as system include file. */
+#endif
+
 /**************************************************************************//**
 * @addtogroup Parts
 * @{
 ******************************************************************************/
 /**************************************************************************//**
- * @defgroup EFM32PG1B_PCNT
+ * @defgroup EFM32PG1B_PCNT PCNT
  * @{
  * @brief EFM32PG1B_PCNT Register Declaration
  *****************************************************************************/
+/** PCNT Register Declaration */
 typedef struct
 {
   __IOM uint32_t CTRL;         /**< Control Register  */
@@ -64,7 +72,9 @@ typedef struct
 } PCNT_TypeDef;                /** @} */
 
 /**************************************************************************//**
- * @defgroup EFM32PG1B_PCNT_BitFields
+ * @addtogroup EFM32PG1B_PCNT
+ * @{
+ * @defgroup EFM32PG1B_PCNT_BitFields  PCNT Bit Fields
  * @{
  *****************************************************************************/
 
@@ -701,6 +711,7 @@ typedef struct
 #define _PCNT_OVSCFG_FLUTTERRM_DEFAULT     0x00000000UL                           /**< Mode DEFAULT for PCNT_OVSCFG */
 #define PCNT_OVSCFG_FLUTTERRM_DEFAULT      (_PCNT_OVSCFG_FLUTTERRM_DEFAULT << 12) /**< Shifted mode DEFAULT for PCNT_OVSCFG */
 
+/** @} */
 /** @} End of group EFM32PG1B_PCNT */
 /** @} End of group Parts */
 

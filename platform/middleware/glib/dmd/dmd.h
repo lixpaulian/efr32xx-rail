@@ -1,9 +1,9 @@
- /*************************************************************************//**
+/*************************************************************************//**
  * @file dmd.h
  * @brief Dot Matrix Display interface
- * @version x.xx
+ * @version 5.2.1
  ******************************************************************************
- * @section License
+ * # License
  * <b>Copyright 2015 Silicon Labs, http://www.silabs.com</b>
  *******************************************************************************
  *
@@ -13,16 +13,39 @@
  *
  ******************************************************************************/
 
-
-
 #ifndef __DMD_H__
 #define __DMD_H__
+
+/***************************************************************************//**
+ * @addtogroup glib
+ * @{
+ ******************************************************************************/
+
+/***************************************************************************//**
+ * @addtogroup DMD Dot Matrix Display
+ * @{
+ *
+ * The DMD interface is the hardware abstraction layer for a physical display.
+ * The DMD interface provides functions for treating a connected display as
+ * a matrix of pixels of a specific size. The DMD provides functions for
+ * initializing the display hardware interface by calling DMD_init() and
+ * writing pixel data to the display by calling the function DMD_writeData().
+ *
+ * @section dmd_drivers DMD Drivers
+ *
+ * GLIB provides a dot matrix display driver for the LCD controller SSD2119
+ * (@ref dmd_ssd2119.c) which is used on the Silicon Labs Development Kit.
+ *
+ * GLIB also provides a DMD driver for the Sharp Memory LCD screens used
+ * on the Silicon Labs Starter Kit (@ref dmd_display.c). This driver
+ * must be used together with the kit display drivers (@ref Display).
+ *
+ ******************************************************************************/
 
 #include <stdint.h>
 #include "em_types.h"
 /* TODO: remove this and replace with include types and ecodes */
 #define ECODE_DMD_BASE    0x00000000
-
 
 /* Error codes */
 /** Successful call */
@@ -65,7 +88,6 @@
 #define DMD_MEMORY_TEST_WIDTH        4
 #define DMD_MEMORY_TEST_HEIGHT       3
 
-
 /** Configuration parameter for DMD_init. This typedef is defined 'void' and
     may be defined differently in the future. */
 typedef void DMD_InitConfig;
@@ -73,8 +95,7 @@ typedef void DMD_InitConfig;
 /** @struct __DMD_DisplayGeometry
  *  @brief Dimensions of the display
  */
-typedef struct __DMD_DisplayGeometry
-{
+typedef struct __DMD_DisplayGeometry{
   /** Horizontal size of the display, in pixels */
   uint16_t xSize;
   /** Vertical size of the display, in pixels */
@@ -92,8 +113,7 @@ typedef struct __DMD_DisplayGeometry
 /** @struct __DMD_MemoryError
  *  @brief Information about a memory error
  */
-typedef struct __DMD_MemoryError
-{
+typedef struct __DMD_MemoryError{
   /** X coordinate of the address where the error happened */
   uint16_t x;
   /** Y coordinate of the address where the error happened */
@@ -114,8 +134,8 @@ EMSTATUS DMD_writeData(uint16_t x, uint16_t y,
 EMSTATUS DMD_writeDataRLE(uint16_t x, uint16_t y, uint16_t xlen, uint16_t ylen,
                           const uint8_t *data);
 EMSTATUS DMD_writeDataRLEFade(uint16_t x, uint16_t y, uint16_t xlen, uint16_t ylen,
-			      const uint8_t *data,
-			      int red, int green, int blue, int weight);
+                              const uint8_t *data,
+                              int red, int green, int blue, int weight);
 EMSTATUS DMD_readData(uint16_t x, uint16_t y,
                       uint8_t data[], uint32_t numPixels);
 EMSTATUS DMD_writeColor(uint16_t x, uint16_t y, uint8_t red,
@@ -127,6 +147,7 @@ EMSTATUS DMD_flipDisplay(int horizontal, int vertical);
 EMSTATUS DMD_selectFramebuffer (void* framebuffer);
 EMSTATUS DMD_updateDisplay (void);
 
+/** @cond DO_NOT_INCLUDE_WITH_DOXYGEN */
 /* Test functions */
 EMSTATUS DMD_testParameterChecks(void);
 EMSTATUS DMD_testMemory(uint16_t x, uint16_t y,
@@ -138,5 +159,10 @@ EMSTATUS DMD_testDeviceCode(void);
 EMSTATUS DMD_testColors(uint32_t delay);
 EMSTATUS DMD_testClipping(void);
 EMSTATUS DMD_runTests(uint32_t tests, uint32_t *result);
+/** @endcond */
 
-#endif  /* __DISPLAY_DMD_H__ */
+/**
+ * @} (end addtogroup DMD)
+ * @} (end addtogroup glib) */
+
+#endif /* __DISPLAY_DMD_H__ */

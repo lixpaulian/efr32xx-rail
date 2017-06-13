@@ -1,10 +1,10 @@
 /**************************************************************************//**
  * @file efr32bg12p_usart.h
  * @brief EFR32BG12P_USART register and bit field definitions
- * @version 5.0.0
+ * @version 5.2.1
  ******************************************************************************
- * @section License
- * <b>Copyright 2016 Silicon Laboratories, Inc. http://www.silabs.com</b>
+ * # License
+ * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -29,15 +29,23 @@
  * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
+
+#if defined(__ICCARM__)
+#pragma system_include       /* Treat file as system include file. */
+#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+#pragma clang system_header  /* Treat file as system include file. */
+#endif
+
 /**************************************************************************//**
 * @addtogroup Parts
 * @{
 ******************************************************************************/
 /**************************************************************************//**
- * @defgroup EFR32BG12P_USART
+ * @defgroup EFR32BG12P_USART USART
  * @{
  * @brief EFR32BG12P_USART Register Declaration
  *****************************************************************************/
+/** USART Register Declaration */
 typedef struct
 {
   __IOM uint32_t CTRL;         /**< Control Register  */
@@ -75,7 +83,9 @@ typedef struct
 } USART_TypeDef;               /** @} */
 
 /**************************************************************************//**
- * @defgroup EFR32BG12P_USART_BitFields
+ * @addtogroup EFR32BG12P_USART
+ * @{
+ * @defgroup EFR32BG12P_USART_BitFields  USART Bit Fields
  * @{
  *****************************************************************************/
 
@@ -1967,6 +1977,7 @@ typedef struct
 #define USART_ROUTELOC1_RTSLOC_LOC30            (_USART_ROUTELOC1_RTSLOC_LOC30 << 8)   /**< Shifted mode LOC30 for USART_ROUTELOC1 */
 #define USART_ROUTELOC1_RTSLOC_LOC31            (_USART_ROUTELOC1_RTSLOC_LOC31 << 8)   /**< Shifted mode LOC31 for USART_ROUTELOC1 */
 
+/** @} */
 /** @} End of group EFR32BG12P_USART */
 /** @} End of group Parts */
 

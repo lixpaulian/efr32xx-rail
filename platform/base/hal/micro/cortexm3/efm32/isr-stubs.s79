@@ -12,7 +12,6 @@
 // RESULT:  Simply define whichever ISRs you need in your application and this
 // file will fill in the gaps during linking.
 //
-// Author: Brooks Barrett
 // Copyright 2007 by Ember Corporation. All rights reserved.                *80*
 //------------------------------------------------------------------------------
 

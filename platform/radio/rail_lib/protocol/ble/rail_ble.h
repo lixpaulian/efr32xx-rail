@@ -21,7 +21,7 @@
 
 /**
  * @addtogroup BLE
- * Accelerator routines for Bluetooth Low Energy (BLE). 
+ * Accelerator routines for Bluetooth Low Energy (BLE).
  *
  * The APIs in this module help take care of configuring the radio for BLE
  * operation and provide some additional helper routines necessary for
@@ -42,17 +42,17 @@
  * the sync word and other parameters as needed based on your connection.
  *
  * @code{.c}
- * 
+ *
  * // Put the radio into receive on the first BLE advertising channel
  * int bleAdvertiseEnable(void)
  * {
  *   // Call the BLE initialization function to load the right radio config
  *   RAIL_BLE_Init();
- * 
+ *
  *   // Configure us for the first advertising channel (Physical: 0, Logical: 37)
  *   // The CRC init value and Access Address come from the BLE specification.
  *   RAIL_BLE_SetupChannelRadioParams(0x555555, 0x8E89BED6, 37, false);
- *   
+ *
  *   // Start receiving on this channel (Physical: 0, Logical: 37)
  *   RAIL_RxStart(0);
  *  }
@@ -145,19 +145,54 @@ bool RAIL_BLE_SetPhy2MbpsViterbi(void);
  * manual to be sure that it does before trying this.
  */
 bool RAIL_BLE_SetPhy2Mbps(void);
+
 /**
- * This function should be used to switch radio parameters on every connection
- * and/or channel change. It is BLE-aware and will set the access address,
- * preamble, CRC initialization value, and whitening configuration without
- * requiring you to load a new radio config.
+ * @enum RAIL_BLE_Coding_t
+ * @brief The variant of the BLE Coded PHY
+ */
+RAIL_ENUM(RAIL_BLE_Coding_t) {
+  RAIL_BLE_Coding_125kbps = 0,
+  RAIL_BLE_Coding_125kbps_DSA = 1,
+  RAIL_BLE_Coding_500kbps = 2,
+  RAIL_BLE_Coding_500kbps_DSA = 3,
+};
+
+/**
+ * Switch to the BLE Coded PHY.
+ *
+ * @param[in] ble_coding The RAIL_BLE_Coding_t to use
+ * @return This will return true if we were successfully able to switch and
+ * false otherwise.
+ *
+ * You can use this function to switch back to BLE Coded PHY from the default
+ * 1Mbps option. You may only call this function after initializing BLE and
+ * while the radio is idle. When using a BLE Coded PHY, the subPhy in
+ * RAIL_AppendedInfo_t marks the coding of the received packet. A subPhy of 0
+ * marks a 500kbps packet, and a subPhy of 1 marks a 125kbps packet.
+ *
+ * @note Not all chips support the BLE Coded PHY. Consult your part's reference
+ * manual to be sure that it does before trying this.
+ */
+bool RAIL_BLE_SetPhyCoded(RAIL_BLE_Coding_t ble_coding);
+
+/**
+ * Helper function to change BLE radio parameters.
+ *
  * @param crcInit The value to use for CRC initialization.
  * @param accessAddress The access access address to use for the connection.
  * @param channel The logical channel that you're changing to. This is used to
  * initialize the whitener if you're using whitening.
  * @param disableWhitening This can turn off the whitening engine and is useful
  * for sending BLE test mode packets that don't have this turned on.
+ * @return Returns true on success and false on failure. If you are not in BLE
+ * mode this function will always fail.
+ *
+ * This function can be used to switch radio parameters on every connection
+ * and/or channel change. It is BLE-aware and will set the access address,
+ * preamble, CRC initialization value, and whitening configuration without
+ * requiring you to load a new radio config.
  */
-void RAIL_BLE_SetupChannelRadioParams(uint32_t crcInit,
+bool RAIL_BLE_SetupChannelRadioParams(uint32_t crcInit,
                                       uint32_t accessAddress,
                                       uint8_t channel,
                                       bool disableWhitening);

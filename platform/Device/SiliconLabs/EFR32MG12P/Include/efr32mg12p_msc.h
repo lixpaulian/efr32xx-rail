@@ -1,10 +1,10 @@
 /**************************************************************************//**
  * @file efr32mg12p_msc.h
  * @brief EFR32MG12P_MSC register and bit field definitions
- * @version 5.0.0
+ * @version 5.2.1
  ******************************************************************************
- * @section License
- * <b>Copyright 2016 Silicon Laboratories, Inc. http://www.silabs.com</b>
+ * # License
+ * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -29,15 +29,23 @@
  * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
+
+#if defined(__ICCARM__)
+#pragma system_include       /* Treat file as system include file. */
+#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+#pragma clang system_header  /* Treat file as system include file. */
+#endif
+
 /**************************************************************************//**
 * @addtogroup Parts
 * @{
 ******************************************************************************/
 /**************************************************************************//**
- * @defgroup EFR32MG12P_MSC
+ * @defgroup EFR32MG12P_MSC MSC
  * @{
  * @brief EFR32MG12P_MSC Register Declaration
  *****************************************************************************/
+/** MSC Register Declaration */
 typedef struct
 {
   __IOM uint32_t CTRL;           /**< Memory System Control Register  */
@@ -75,11 +83,13 @@ typedef struct
   __IOM uint32_t CACHECONFIG0;   /**< Cache Configuration Register 0  */
 
   uint32_t       RESERVED6[25];  /**< Reserved for future use **/
-  __IOM uint32_t RAMCTRL;        /**< DMEM Control enable Register  */
+  __IOM uint32_t RAMCTRL;        /**< RAM Control enable Register  */
 } MSC_TypeDef;                   /** @} */
 
 /**************************************************************************//**
- * @defgroup EFR32MG12P_MSC_BitFields
+ * @addtogroup EFR32MG12P_MSC
+ * @{
+ * @defgroup EFR32MG12P_MSC_BitFields  MSC Bit Fields
  * @{
  *****************************************************************************/
 
@@ -160,7 +170,7 @@ typedef struct
 
 /* Bit fields for MSC WRITECTRL */
 #define _MSC_WRITECTRL_RESETVALUE                         0x00000000UL                                /**< Default value for MSC_WRITECTRL */
-#define _MSC_WRITECTRL_MASK                               0x0000003FUL                                /**< Mask for MSC_WRITECTRL */
+#define _MSC_WRITECTRL_MASK                               0x00000023UL                                /**< Mask for MSC_WRITECTRL */
 #define MSC_WRITECTRL_WREN                                (0x1UL << 0)                                /**< Enable Write/Erase Controller  */
 #define _MSC_WRITECTRL_WREN_SHIFT                         0                                           /**< Shift value for MSC_WREN */
 #define _MSC_WRITECTRL_WREN_MASK                          0x1UL                                       /**< Bit mask for MSC_WREN */
@@ -171,21 +181,6 @@ typedef struct
 #define _MSC_WRITECTRL_IRQERASEABORT_MASK                 0x2UL                                       /**< Bit mask for MSC_IRQERASEABORT */
 #define _MSC_WRITECTRL_IRQERASEABORT_DEFAULT              0x00000000UL                                /**< Mode DEFAULT for MSC_WRITECTRL */
 #define MSC_WRITECTRL_IRQERASEABORT_DEFAULT               (_MSC_WRITECTRL_IRQERASEABORT_DEFAULT << 1) /**< Shifted mode DEFAULT for MSC_WRITECTRL */
-#define MSC_WRITECTRL_WDOUBLE                             (0x1UL << 2)                                /**< Write two words at a time */
-#define _MSC_WRITECTRL_WDOUBLE_SHIFT                      2                                           /**< Shift value for MSC_WDOUBLE */
-#define _MSC_WRITECTRL_WDOUBLE_MASK                       0x4UL                                       /**< Bit mask for MSC_WDOUBLE */
-#define _MSC_WRITECTRL_WDOUBLE_DEFAULT                    0x00000000UL                                /**< Mode DEFAULT for MSC_WRITECTRL */
-#define MSC_WRITECTRL_WDOUBLE_DEFAULT                     (_MSC_WRITECTRL_WDOUBLE_DEFAULT << 2)       /**< Shifted mode DEFAULT for MSC_WRITECTRL */
-#define MSC_WRITECTRL_LPWRITE                             (0x1UL << 3)                                /**< Low-Power Erase */
-#define _MSC_WRITECTRL_LPWRITE_SHIFT                      3                                           /**< Shift value for MSC_LPWRITE */
-#define _MSC_WRITECTRL_LPWRITE_MASK                       0x8UL                                       /**< Bit mask for MSC_LPWRITE */
-#define _MSC_WRITECTRL_LPWRITE_DEFAULT                    0x00000000UL                                /**< Mode DEFAULT for MSC_WRITECTRL */
-#define MSC_WRITECTRL_LPWRITE_DEFAULT                     (_MSC_WRITECTRL_LPWRITE_DEFAULT << 3)       /**< Shifted mode DEFAULT for MSC_WRITECTRL */
-#define MSC_WRITECTRL_LPERASE                             (0x1UL << 4)                                /**< Low-Power Erase */
-#define _MSC_WRITECTRL_LPERASE_SHIFT                      4                                           /**< Shift value for MSC_LPERASE */
-#define _MSC_WRITECTRL_LPERASE_MASK                       0x10UL                                      /**< Bit mask for MSC_LPERASE */
-#define _MSC_WRITECTRL_LPERASE_DEFAULT                    0x00000000UL                                /**< Mode DEFAULT for MSC_WRITECTRL */
-#define MSC_WRITECTRL_LPERASE_DEFAULT                     (_MSC_WRITECTRL_LPERASE_DEFAULT << 4)       /**< Shifted mode DEFAULT for MSC_WRITECTRL */
 #define MSC_WRITECTRL_RWWEN                               (0x1UL << 5)                                /**< Read-While-Write Enable */
 #define _MSC_WRITECTRL_RWWEN_SHIFT                        5                                           /**< Shift value for MSC_RWWEN */
 #define _MSC_WRITECTRL_RWWEN_MASK                         0x20UL                                      /**< Bit mask for MSC_RWWEN */
@@ -674,6 +669,7 @@ typedef struct
 #define _MSC_RAMCTRL_RAMSEQCACHEEN_DEFAULT                0x00000000UL                               /**< Mode DEFAULT for MSC_RAMCTRL */
 #define MSC_RAMCTRL_RAMSEQCACHEEN_DEFAULT                 (_MSC_RAMCTRL_RAMSEQCACHEEN_DEFAULT << 19) /**< Shifted mode DEFAULT for MSC_RAMCTRL */
 
+/** @} */
 /** @} End of group EFR32MG12P_MSC */
 /** @} End of group Parts */
 

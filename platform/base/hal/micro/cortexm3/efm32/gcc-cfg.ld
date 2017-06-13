@@ -4,14 +4,18 @@
 /*----------------------------------------------------------------------------*/
 
 /* Memory map for the EFR32/EZR32 */
+/* GCC ld will not accept symbols for origin or length. This memory block
+   definition will have to be generated per variant or moved to a parameterized
+   include file in the future. For the time being, we're specifying the largest
+   supported size - EFR32xG12's 1 MB flash and 256 kB RAM. */
 MEMORY {
-  flash (rx) : ORIGIN = 0x00000000, LENGTH = 0x00040000
-  ram  (rwx) : ORIGIN = 0x20000000, LENGTH = 0x00008000
+  flash (rx) : ORIGIN = 0x00000000, LENGTH = 0x00100000
+  ram  (rwx) : ORIGIN = 0x20000000, LENGTH = 0x00040000
 }
 
 /* Default to 256k Flash and 32K Ram */
 FLASH_SIZE = DEFINED(FLASH_SIZE) ? FLASH_SIZE : 256K;
-RAM_SIZE = DEFINED(RAM_SIZE) ? (RAM_SIZE > 64K ? 64K : (RAM_SIZE==31K ? 32K : RAM_SIZE) ) : 32K;
+RAM_SIZE = DEFINED(RAM_SIZE) ? (RAM_SIZE==31K ? 32K : RAM_SIZE) : 32K;
 
 /* Default to 2 kB flash page size */
 FLASH_PAGE_SIZE     = DEFINED(FLASH_PAGE_SIZE) ? FLASH_PAGE_SIZE : 0x800;

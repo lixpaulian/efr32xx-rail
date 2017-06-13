@@ -5,14 +5,14 @@ IFS=$'\n\t'
 # Archives are to be copied from the Simplicity Studio installation directory:
 # /Applications/Simplicity Studio/Contents/Eclipse/developer/stacks/flex
 
-RELEASE_VERSION="1.0.1.0"
+RELEASE_VERSION="1.1"
 VECTORS_VERSION="5.0.0.0"
 
 FAMILY="EFR32FG FlexGecko"
 GITHUB_PROJECT="lixpaulian/efr32fg-rail"
 ARCHIVE_NAME="SiliconLabs Simplicity Studio Installation"
-ARCHIVE_LOCATION="/Applications/Simplicity Studio.app/Contents/Eclipse/developer/stacks/flex/v${RELEASE_VERSION}"
-DEVICE_VECTORS_LOCATION="/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v${VECTORS_VERSION}/platform/Device"
+ARCHIVE_LOCATION="/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/gecko_sdk_suite/v${RELEASE_VERSION}"
+#DEVICE_VECTORS_LOCATION="/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/exx32/v${VECTORS_VERSION}/platform/Device"
 
 echo "Cleaning previous files..."
 for f in *
@@ -28,16 +28,17 @@ done
 # Copy files from the Simplicity Studio installation
 
 cp -R "${ARCHIVE_LOCATION}/"* .
-rm -rf platform/Device/*
-cp -R "${DEVICE_VECTORS_LOCATION}/"* platform/Device
+#rm -rf platform/Device/*
+#cp -R "${DEVICE_VECTORS_LOCATION}/"* platform/Device
 
 echo "Saving the precompiled library..."
 mkdir lib
-cp protocol/flex_1.0/connect/plugins/libraries/libphy-rail-efr32xg1-rtos-library-gcc.a lib/librail_efr32.a
+cp "${ARCHIVE_LOCATION}"/protocol/flex_1.2/connect/plugins/libraries/phy-rail-efr32xg1-rtos-library-gcc.a lib/librail_efr32.a
 
 echo "Removing unnecessary files..."
 
 rm -rf \
+app \
 hardware \
 meta \
 protocol \
@@ -55,7 +56,7 @@ required to start writing applications for the EFR32FG Flex Gecko family.
 
 ## Version
 
-* Flex Lib v${RELEASE_VERSION}
+* Geck SDK Suite v${RELEASE_VERSION}
 
 ## Documentation
 
@@ -71,6 +72,7 @@ These files were extracted from the \`${ARCHIVE_NAME}\`.
 
 To save space, the following folders/files were removed:
 
+* app
 * hardware
 * meta
 * *.dat

@@ -1,10 +1,10 @@
 /**************************************************************************//**
  * @file ezr32hg_usb.h
  * @brief EZR32HG_USB register and bit field definitions
- * @version 5.0.0
+ * @version 5.2.1
  ******************************************************************************
- * @section License
- * <b>Copyright 2016 Silicon Laboratories, Inc. http://www.silabs.com</b>
+ * # License
+ * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -29,6 +29,13 @@
  * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
+
+#if defined(__ICCARM__)
+#pragma system_include       /* Treat file as system include file. */
+#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+#pragma clang system_header  /* Treat file as system include file. */
+#endif
+
 /**************************************************************************//**
 * @addtogroup Parts
 * @{
@@ -120,7 +127,7 @@ typedef struct
 
   uint32_t         RESERVED19[28288]; /**< Reserved registers */
   __IOM uint32_t   FIFORAM[512];      /**< Direct Access to Data FIFO RAM for Debugging (2 KB)  */
-} USB_TypeDef;                        /** @} */
+} USB_TypeDef;                        /**< USB Register Declaration *//** @} */
 
 /**************************************************************************//**
  * @defgroup EZR32HG_USB_BitFields

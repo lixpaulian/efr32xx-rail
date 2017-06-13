@@ -1,10 +1,10 @@
 /**************************************************************************//**
  * @file efm32hg_usart.h
  * @brief EFM32HG_USART register and bit field definitions
- * @version 5.0.0
+ * @version 5.2.1
  ******************************************************************************
- * @section License
- * <b>Copyright 2016 Silicon Laboratories, Inc. http://www.silabs.com</b>
+ * # License
+ * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>
  ******************************************************************************
  *
  * Permission is granted to anyone to use this software for any purpose,
@@ -29,6 +29,13 @@
  * any third party, arising from your use of this Software.
  *
  *****************************************************************************/
+
+#if defined(__ICCARM__)
+#pragma system_include       /* Treat file as system include file. */
+#elif defined(__ARMCC_VERSION) && (__ARMCC_VERSION >= 6010050)
+#pragma clang system_header  /* Treat file as system include file. */
+#endif
+
 /**************************************************************************//**
 * @addtogroup Parts
 * @{
@@ -64,7 +71,7 @@ typedef struct
   __IOM uint32_t ROUTE;      /**< I/O Routing Register  */
   __IOM uint32_t INPUT;      /**< USART Input Register  */
   __IOM uint32_t I2SCTRL;    /**< I2S Control Register  */
-} USART_TypeDef;             /** @} */
+} USART_TypeDef;             /**< USART Register Declaration *//** @} */
 
 /**************************************************************************//**
  * @defgroup EFM32HG_USART_BitFields
