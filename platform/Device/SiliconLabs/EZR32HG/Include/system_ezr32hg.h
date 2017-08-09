@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file system_ezr32hg.h
  * @brief CMSIS Cortex-M System Layer for EZR32HG devices.
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

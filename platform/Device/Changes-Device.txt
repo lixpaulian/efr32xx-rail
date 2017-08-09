@@ -1,4 +1,7 @@
 ================ Revision history ============================================
+5.2.2:
+ - No changes.
+
 5.2.1:
  - Added support for new members of EFM32GG11B family of Gecko MCU's.
  - Added workaround for errata DCDC-E206 for EFR32xG1x devices.

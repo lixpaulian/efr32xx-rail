@@ -1,4 +1,8 @@
 ================ Revision history ============================================
+5.2.2:
+ - em_emu: Fixed bug in EMU_EM4Init(), The BUBODRSTDIS field was not initialized
+   as specified in function input parameters.
+
 5.2.1:
  - em_emu: Fixed a problem with handling of DCDC bypass current limiter
    that may cause brownout reset.

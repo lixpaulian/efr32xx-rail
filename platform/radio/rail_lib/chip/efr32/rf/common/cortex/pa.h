@@ -213,6 +213,17 @@ uint32_t PA_RampTimeGet(void);
  */
 uint32_t PA_RampTimeSet(uint32_t ramptime);
 
+/**
+ * Enable/Disable PA calibration
+ *
+ * @param[in] enable Enables/Disables PA calibration
+ * @return void
+ *
+ * Enabling this will ensure that the PA power remains constant chip to chip.
+ * By default this feature is disabled after reset.
+ */
+void PA_EnableCal(bool enable);
+
 /***************************************************************************//**
  * @addtogroup EFR32xG1x_PA_Advanced
  * @{

@@ -10,9 +10,8 @@
 #include <stdlib.h>
 
 #include "em_device.h"
-#include "em_gpio.h"
-#include "bspconfig.h"
 #include "retargetserial.h"
+#include "em_gpio.h"
 
 /***************************************************************************//**
  * @brief

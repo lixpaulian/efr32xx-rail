@@ -1,7 +1,7 @@
 ;/**************************************************************************//**
 ; * @file     startup_em355x.s
 ; * @brief    CMSIS Cortex-M3 Core Device Startup File for em355x
-; * @version 5.2.1
+; * @version 5.2.2
 ; * @date     23. November 2012
 ; *
 ; * @note

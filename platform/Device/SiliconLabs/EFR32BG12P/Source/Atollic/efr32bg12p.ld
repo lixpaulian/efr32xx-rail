@@ -10,7 +10,7 @@
 **
 **  Target      : Silicon Labs EFR32BG12P devices.
 **
-**  Version     : 5.2.1
+**  Version     : 5.2.2
 **
 **  Environment : Atollic TrueSTUDIO(R)
 **

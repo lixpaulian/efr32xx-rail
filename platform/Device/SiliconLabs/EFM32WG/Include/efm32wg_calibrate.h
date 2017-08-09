@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file efm32wg_calibrate.h
  * @brief EFM32WG_CALIBRATE register and bit field definitions
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

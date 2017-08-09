@@ -11,8 +11,8 @@
 // perform capacitive sense scanning.  All must be defined
 // in the project in order for the library to function correctly.
 uint16_t executeConversion(void);
-uint16_t scanSensor(uint8_t);
-void configureSensorForActiveMode(void);
+uint32_t CSLIB_scanSensorCB(uint8_t);
+void CSLIB_configureSensorForActiveModeCB(void);
 void nodeInit(uint8_t sensor_index);
 uint8_t determine_highest_gain(void);
 

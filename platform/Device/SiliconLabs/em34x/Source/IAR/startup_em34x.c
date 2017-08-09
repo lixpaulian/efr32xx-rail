@@ -1,7 +1,7 @@
 /**************************************************************************//**
 * @file
 * @brief CMSIS Cortex-M3 Core Device Startup File for em34x
-* @version 5.2.1
+* @version 5.2.2
 ******************************************************************************
 * @section License
 * <b>(C) Copyright 2014 Silicon Labs, http://www.silabs.com</b>

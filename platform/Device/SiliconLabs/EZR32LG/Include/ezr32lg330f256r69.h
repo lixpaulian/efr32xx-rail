@@ -2,7 +2,7 @@
  * @file ezr32lg330f256r69.h
  * @brief CMSIS Cortex-M Peripheral Access Layer Header File
  *        for EZR32LG330F256R69
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

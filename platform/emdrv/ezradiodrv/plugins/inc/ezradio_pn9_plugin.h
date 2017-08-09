@@ -1,7 +1,7 @@
 /***************************************************************************//**
  * @file ezradio_pn9_plugin.h
  * @brief EzRadio PN9 plug-in managed by the plug-in manager if enabled.
- * @version 5.2.1
+ * @version 5.2.2
  *******************************************************************************
  * # License
  * <b>(C) Copyright 2015 Silicon Labs, http://www.silabs.com</b>

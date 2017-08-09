@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file efr32mg1v_ldma_ch.h
  * @brief EFR32MG1V_LDMA_CH register and bit field definitions
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

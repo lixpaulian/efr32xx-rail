@@ -1,7 +1,7 @@
 /***************************************************************************//**
  * @file dmd_ssd2119_direct.c
  * @brief Dot matrix display Direct Driver for TFT SSD2119 "Generic" mode
- * @version 5.2.1
+ * @version 5.2.2
  *******************************************************************************
  * # License
  * <b>Copyright 2015 Silicon Labs, http://www.silabs.com</b>

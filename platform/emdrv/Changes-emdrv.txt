@@ -1,4 +1,7 @@
 ================ Revision history ============================================
+5.2.2:
+ - No changes.
+
 5.2.1:
  - RTCDRV: Added support for PLFRCO.
 

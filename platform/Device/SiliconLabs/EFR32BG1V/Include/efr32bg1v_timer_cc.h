@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file efr32bg1v_timer_cc.h
  * @brief EFR32BG1V_TIMER_CC register and bit field definitions
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

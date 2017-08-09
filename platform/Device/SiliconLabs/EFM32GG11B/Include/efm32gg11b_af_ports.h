@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file efm32gg11b_af_ports.h
  * @brief EFM32GG11B_AF_PORTS register and bit field definitions
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

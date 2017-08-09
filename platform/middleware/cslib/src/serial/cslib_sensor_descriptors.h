@@ -11,6 +11,12 @@ void outputsensorDescriptors(void);
 
 #define HAS_SENSOR_DESCRIPTORS
 
-#define SENSOR_DESCRIPTOR_LIST "B0"
+#if (DEF_NUM_SENSORS == 2)
+#define SENSOR_DESCRIPTOR_LIST "B0", "B1"
+#elif (DEF_NUM_SENSORS == 4)
+#define SENSOR_DESCRIPTOR_LIST "B0", "B1", "B2", "B3"
+#else
+#error "Unsupported CSLIB sensor count."
+#endif
 
 #endif // __CSLIB_SENSOR_DESCRIPTORS_H__

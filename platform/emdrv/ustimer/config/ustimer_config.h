@@ -1,7 +1,7 @@
 /***************************************************************************//**
  * @file ustimer_config.h
  * @brief USTIMER configuration file.
- * @version 5.2.1
+ * @version 5.2.2
  *******************************************************************************
  * # License
  * <b>(C) Copyright 2015 Silicon Labs, http://www.silabs.com</b>

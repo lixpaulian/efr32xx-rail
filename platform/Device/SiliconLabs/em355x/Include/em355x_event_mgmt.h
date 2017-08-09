@@ -1,7 +1,7 @@
 /**************************************************************************//**
 * @file
 * @brief em355x_event_mgmt Register and Bit Field definitions
-* @version 5.2.1
+* @version 5.2.2
 ******************************************************************************
 * @section License
 * <b>(C) Copyright 2014 Silicon Labs, http://www.silabs.com</b>

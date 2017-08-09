@@ -1176,6 +1176,20 @@ void RAILCb_TxPacketSent(RAIL_TxPacketInfo_t *txPacketInfo);
  */
 void RAILCb_TxRadioStatus(uint8_t status);
 
+/**
+ * Enable/Disable PA calibration
+ *
+ * @param[in] enable Enables/Disables PA calibration
+ * @return void
+ *
+ * Enabling this will ensure that the PA power remains constant chip to chip.
+ * By default this feature is disabled after reset.
+ *
+ * @note this function should be called before /ref RADIO_PA_Init() if this
+ *       feature is desired.
+ */
+void RAIL_EnablePaCal(bool enable);
+
 /******************************************************************************
  * Pre-Transmit Operations
  *****************************************************************************/

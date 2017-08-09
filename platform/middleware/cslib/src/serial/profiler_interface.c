@@ -13,9 +13,10 @@
 
 #if defined(__DEBUG_TIMER_H__)
 uint32_t serial_output_debug_time[DEF_NUM_SENSORS];
-#endif
-
 #define HEADER_TYPE_COUNT 10
+#else
+#define HEADER_TYPE_COUNT 9
+#endif
 
 /// @brief Defines each data type and count for that type
 const HeaderStruct_t headerEntries[HEADER_TYPE_COUNT] =
@@ -29,7 +30,9 @@ const HeaderStruct_t headerEntries[HEADER_TYPE_COUNT] =
   { "NOISEEST", 1 },
   { "C_ACTTHR", DEF_NUM_SENSORS },
   { "C_INACTTHR", DEF_NUM_SENSORS },
-  { "DEBUGTIMER", DEF_NUM_SENSORS }
+#if defined(__DEBUG_TIMER_H__)
+  { "DEBUGTIMER", DEF_NUM_SENSORS },
+#endif
 };
 
 /// @brief One-shot flag triggering output of header line
@@ -111,6 +114,12 @@ void CSLIB_commUpdate(void)
   for (index = 0; index < DEF_NUM_SENSORS; index++) {
     printf("%u ", CSLIB_inactiveThreshold[index]);
   }
+
+#if defined(__DEBUG_TIMER_H__)
+  // Output debug timer info (not yet implemented)
+#error "Debug timer not implemented!"
+#else
+#endif
 
   outputNewLine();
 

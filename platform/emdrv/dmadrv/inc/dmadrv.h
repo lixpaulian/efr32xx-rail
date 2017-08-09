@@ -1,7 +1,7 @@
 /***************************************************************************//**
  * @file dmadrv.h
  * @brief DMADRV API definition.
- * @version 5.2.1
+ * @version 5.2.2
  *******************************************************************************
  * # License
  * <b>(C) Copyright 2014 Silicon Labs, http://www.silabs.com</b>
