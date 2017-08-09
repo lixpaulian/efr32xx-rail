@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file efm32tg_pcnt.h
  * @brief EFM32TG_PCNT register and bit field definitions
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

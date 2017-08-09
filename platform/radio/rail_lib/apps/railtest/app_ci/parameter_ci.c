@@ -109,6 +109,13 @@ void setPaCtune(int argc, char **argv)
   }
 }
 
+void enablePaCal(int argc, char **argv)
+{
+  uint8_t enable = ciGetUnsigned(argv[1]);
+  RAIL_EnablePaCal(enable);
+  responsePrint(argv[0], "paCal:%s", (enable ? "Enabled" : "Disabled"));
+}
+
 void getConfig(int argc, char **argv)
 {
   responsePrint(argv[0], "Index:%u,Config:%s", currentConfig, configNames[currentConfig]);

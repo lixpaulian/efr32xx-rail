@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file efr32bg1b_af_pins.h
  * @brief EFR32BG1B_AF_PINS register and bit field definitions
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

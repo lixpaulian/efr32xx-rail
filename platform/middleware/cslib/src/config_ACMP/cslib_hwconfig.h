@@ -26,7 +26,7 @@
 /// @brief Per channel active threshold setting
 /// @note Minimum threshold used is @ref INACTIVE_THRESHOLD_ARRAY value,
 /// maximum value is 100
-#define ACTIVE_THRESHOLD_ARRAY 50, 50
+#define ACTIVE_THRESHOLD_ARRAY 70, 70
 
 /// @brief Per channel inactive threshold setting
 /// @note Minimum threshold used is 1, maximum value is @ref ACTIVE_THRESHOLD_ARRAY

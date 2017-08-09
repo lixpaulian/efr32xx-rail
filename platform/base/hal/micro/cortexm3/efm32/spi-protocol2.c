@@ -170,9 +170,6 @@ void halHostSerialTick(void)
       CLR_nHOST_INT();  //indicate the pending callback
     }
   } else {
-    if (nSSEL_IS_ASSERTED() && (NCP_SPI_BUFSIZE - remaining - 1 > 0)) {
-      SET_nHOST_INT();
-    }
     // perform processing specific to one mode or the other
     halHostSerialTickFullDuplex();
   }
@@ -320,6 +317,8 @@ static void nSSEL_ISR(uint8_t pin)
       // initiate LDMA
       LDMA_StartTransfer(spiHandle->txDMACh, &xfer, desc);
     }
+
+    SET_nHOST_INT();
   } else { // rising edge
     int remainingRx;
     int remainingTx = 0;
@@ -440,9 +439,6 @@ static void restartSpiRx(void)
                           dmadrvDataSize1,
                           spiRxDone,
                           NULL);
-  // enable byte interrupt (will be deiabled after first byte)
-  USART_IntClear(SPI_NCP_USART, USART_IF_RXDATAV);
-  USART_IntEnable(SPI_NCP_USART, USART_IF_RXDATAV);
 }
 
 /**************************************************************************//**
@@ -569,22 +565,4 @@ static void wipeSpi(void)
 
   // Initialize a SPI driver instance
   SPIDRV_Init(spiHandle, &initData);
-
-  /* Clear previous RX interrupts */
-  USART_IntClear(SPI_NCP_USART, USART_IF_RXDATAV);
-  NVIC_ClearPendingIRQ(SPI_NCP_USART_IRQn);
-
-  /* Enable RX interrupts */
-  USART_IntEnable(SPI_NCP_USART, USART_IF_RXDATAV);
-  NVIC_EnableIRQ(SPI_NCP_USART_IRQn);
-}
-
-// IRQ handler so that NCP wakes up on SPI transfers and de-asserts nHOST_INT
-void SPI_NCP_USART_IRQ_NAME(void)
-{
-  if (USART_IntGetEnabled(SPI_NCP_USART) & _USART_IF_RXDATAV_MASK) {
-    SET_nHOST_INT();
-    USART_IntDisable(SPI_NCP_USART, USART_IF_RXDATAV);
-    USART_IntClear(SPI_NCP_USART, USART_IF_RXDATAV);
-  }
 }

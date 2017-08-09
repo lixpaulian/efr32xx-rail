@@ -2,7 +2,7 @@
  * @file efm32gg11b520f2048gq64.h
  * @brief CMSIS Cortex-M Peripheral Access Layer Header File
  *        for EFM32GG11B520F2048GQ64
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file efm32g_prs.h
  * @brief EFM32G_PRS register and bit field definitions
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

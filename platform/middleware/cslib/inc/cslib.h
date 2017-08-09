@@ -16,7 +16,7 @@ typedef struct {
 } CSLIB_LibraryVersion_t;
 
 /// CSLIB library version.
-#define CSLIB_LIBRARY_VERSION { 1, 3, 0 }
+#define CSLIB_LIBRARY_VERSION { 1, 3, 1 }
 
 /// Global variable which holds the CSLIB library version.
 extern CSLIB_LibraryVersion_t CSLIB_Version;

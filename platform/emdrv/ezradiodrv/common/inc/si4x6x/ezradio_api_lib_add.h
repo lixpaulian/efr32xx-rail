@@ -5,7 +5,7 @@
  *
  * @note The ezradiodrv API is not settled entirely in the current relase.
  *
- * @version 5.2.1
+ * @version 5.2.2
  *******************************************************************************
  * # License
  * <b>(C) Copyright 2015 Silicon Labs, http://www.silabs.com</b>

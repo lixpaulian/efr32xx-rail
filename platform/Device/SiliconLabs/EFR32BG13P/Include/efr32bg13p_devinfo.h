@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file efr32bg13p_devinfo.h
  * @brief EFR32BG13P_DEVINFO register and bit field definitions
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

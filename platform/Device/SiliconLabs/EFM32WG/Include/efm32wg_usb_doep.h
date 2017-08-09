@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file efm32wg_usb_doep.h
  * @brief EFM32WG_USB_DOEP register and bit field definitions
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

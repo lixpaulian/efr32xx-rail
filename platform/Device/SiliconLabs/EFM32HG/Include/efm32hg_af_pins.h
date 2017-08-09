@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file efm32hg_af_pins.h
  * @brief EFM32HG_AF_PINS register and bit field definitions
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

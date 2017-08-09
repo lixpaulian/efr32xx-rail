@@ -2,7 +2,7 @@
  * @file ezradio_plugin_manager.h
  * @brief This file contains the plug-in manager for the EZRadio and
  *        EZRadioPRO chip families.
- * @version 5.2.1
+ * @version 5.2.2
  *******************************************************************************
  * # License
  * <b>(C) Copyright 2015 Silicon Labs, http://www.silabs.com</b>
@@ -343,7 +343,7 @@ struct EZRADIODRV_HandleData{
     EZRADIODRV_UNMOD_CARRIER_PLUGIN_INIT_DEFAULT   /* CW plugin init */         \
     EZRADIODRV_PN9_PLUGIN_INIT_DEFAULT             /* PN9 plugin init */        \
     EZRADIODRV_DIRECT_TRANSMIT_PLUGIN_INIT_DEFAULT /* Direct Tx plugin init */  \
-    EZRADIODRV_DIRECT_RECEIVE_PLUGIN_INIT_DEFAULT  /* Direct Rx plugin init */  \
+      EZRADIODRV_DIRECT_RECEIVE_PLUGIN_INIT_DEFAULT /* Direct Rx plugin init */ \
   }
 
 void ezradioInit(EZRADIODRV_Handle_t handle);

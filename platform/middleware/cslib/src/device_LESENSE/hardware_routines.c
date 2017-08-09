@@ -32,13 +32,13 @@ static void (*lesenseScanCb)(void);
 // Callback function for LESENSE interrupts.
 static void (*lesenseChCb)(void);
 // Configures whether sleep mode scan uses LESENSE or SENSE algo
-extern uint16_t LESENSE_sleepScan;
+uint16_t CSLIB_autoScan;
 
 // Temporarily saves sensor data before being pushed into CSLIB_node struct
-volatile unsigned long CS_dataBuffer[DEF_NUM_SENSORS];
+volatile unsigned long CSLIB_autoScanBuffer[DEF_NUM_SENSORS];
 
 // Flag used in asychronous scanning to signal foreground that new data is availabe
-extern uint16_t CS_newData;
+uint16_t CSLIB_autoScanComplete = 0;
 
 /**************************************************************************//**
  * @brief  Callback for timer overflow.
@@ -146,7 +146,7 @@ void LESENSE_IRQHandler(void)
     LESENSE_IntClear(LESENSE_IF_SCANCOMPLETE);
 
     // Flag is cleared upon first read of data buffer LESENSE_ScanResultDataGet[]
-    CS_newData = 1;
+    CSLIB_autoScanComplete = 1;
     timerTick = 1;
     // Iterate trough all channels
     CSLIB_node_index = 0;
@@ -160,7 +160,7 @@ void LESENSE_IRQHandler(void)
       count = LESENSE_ScanResultDataGet();
 
       // Store value in channelValues
-      CS_dataBuffer[CSLIB_node_index] = count;
+      CSLIB_autoScanBuffer[CSLIB_node_index] = count;
 
       // CSLIB_node_index only increments for enabled channels
       CSLIB_node_index = CSLIB_node_index + 1;
@@ -357,7 +357,7 @@ void CAPLESENSE_initLESENSE(bool sleep)
   // Array for storing the calibration values.
   static uint16_t capsenseCalibrateVals[4];
   // Indicates that sleep mode scanning with LESENSE should be used by library
-  LESENSE_sleepScan = 1;
+  CSLIB_autoScan = 1;
 
   if (init) {
     // Initialize LESENSE interface with RESET.
@@ -439,13 +439,33 @@ uint16_t executeConversion(void)
 }
 
 /**************************************************************************//**
+ * Pre baseline initialization callback
+ *
+ * Called before a baseline for a sensor has been initialized.
+ *
+ *****************************************************************************/
+void CSLIB_baselineInitEnableCB(void)
+{
+}
+
+/**************************************************************************//**
+ * Post baseline initialization callback
+ *
+ * Called after a baseline for a sensor has been initialized.
+ *
+ *****************************************************************************/
+void CSLIB_baselineInitDisableCB(void)
+{
+}
+
+/**************************************************************************//**
  * Ready CS0 for active mode, unbound sensor scanning
  *
  * This is a top-level call to configure the sensor to its operational state
  * during active mode.
  *
  *****************************************************************************/
-void configureSensorForActiveMode(void)
+void CSLIB_configureSensorForActiveModeCB(void)
 {
   configureRelaxOscActiveMode();
 }
@@ -501,7 +521,7 @@ uint8_t determine_highest_gain(void)
   return 0;
 }
 
-uint16_t scanSensor(uint8_t index)
+uint32_t CSLIB_scanSensorCB(uint8_t index)
 {
   (void) index;
   // stub callback function, not used in LESENSE

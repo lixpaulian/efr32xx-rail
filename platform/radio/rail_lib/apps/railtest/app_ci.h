@@ -132,6 +132,7 @@
   COMMAND_ENTRY("setCtune", "v", setCtune, "[ctune] Set the value of CTUNE in the CMU->HFXOSTEADYSTATECTRL register"),                                                                                         \
   COMMAND_ENTRY("getCtune", "", getCtune, "Get the value of CTUNE in the CMU->HFXOSTEADYSTATECTRL register"),                                                                                                  \
   COMMAND_ENTRY("setPaCtune", "uu", setPaCtune, "[txPaCtune] [rxPaCtune] Set the value of PACTUNE for TX and RX mode"),                                                                                        \
+  COMMAND_ENTRY("enablePaCal", "u", enablePaCal, "[enable] Enable(1) or Disable(0) PA power calibration"),                                                                                                     \
   COMMAND_ENTRY("setDebugSignal", "?", setDebugSignal, "Configure chip specific debug output. Use 'setDebugSignal help' for more details."),                                                                   \
   COMMAND_ENTRY("setDebugMode", "w", setDebugMode, "[mode] 1 = Frequency Override. 0 = Disable debug mode"),                                                                                                   \
   COMMAND_ENTRY("freqOverride", "w", setFrequency, "[freq] Change to freq specified in Hz. Requires debug mode to be enabled. Only small frequency deviations from the current configuration are supported."), \
@@ -219,6 +220,7 @@ void setCtune(int argc, char **argv);
 void getCtune(int argc, char **argv);
 
 void setPaCtune(int argc, char **argv);
+void enablePaCal(int argc, char **argv);
 
 void setTxFifoThreshold(int argc, char **argv);
 void setRxFifoThreshold(int argc, char **argv);

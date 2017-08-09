@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file efm32pg12b_etm.h
  * @brief EFM32PG12B_ETM register and bit field definitions
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

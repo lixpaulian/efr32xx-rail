@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file startup_efm32jg12b.c
  * @brief CMSIS Compatible EFM32JG12B startup file in C for IAR EWARM
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

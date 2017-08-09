@@ -2,7 +2,7 @@
  * @file startup_efm32gg11b.c
  * @brief CMSIS Compatible EFM32GG11B startup file in C.
  *        Should be used with GCC 'GNU Tools ARM Embedded'
- * @version 5.2.1
+ * @version 5.2.2
  * Date:    12 June 2014
  *
  */

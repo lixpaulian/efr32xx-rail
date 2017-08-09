@@ -1,7 +1,7 @@
 /**************************************************************************//**
  * @file ezr32hg_dma_descriptor.h
  * @brief EZR32HG_DMA_DESCRIPTOR register and bit field definitions
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

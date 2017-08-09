@@ -1,7 +1,7 @@
 /* @file startup_efm32zg.S
  * @brief startup file for Silicon Labs EFM32ZG devices.
  *        For use with GCC for ARM Embedded Processors
- * @version 5.2.1
+ * @version 5.2.2
  * Date:    12 June 2014
  *
  */

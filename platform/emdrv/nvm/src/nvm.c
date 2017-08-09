@@ -1,7 +1,7 @@
 /***************************************************************************//**
  * @file nvm.c
  * @brief Non-Volatile Memory Wear-Leveling driver API implementation
- * @version 5.2.1
+ * @version 5.2.2
  *******************************************************************************
  * # License
  * <b>(C) Copyright 2015 Silicon Labs, http://www.silabs.com</b>

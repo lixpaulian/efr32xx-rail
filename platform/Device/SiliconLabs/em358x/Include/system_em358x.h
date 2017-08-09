@@ -2,7 +2,7 @@
 * @file     system_em358x.h
 * @brief    CMSIS Cortex-M3 Device Peripheral Access Layer Header File for
 *           Device em358x
-* @version 5.2.1
+* @version 5.2.2
 * @date     23. November 2012
 *
 * @note

@@ -37,13 +37,14 @@ static volatile bool measurementComplete;
 static uint16_t scanResult;
 
 /// @brief Flag used within library functions
-extern uint16_t CS_newData;
+uint16_t CSLIB_autoScanComplete;
 
 /// @brief buffer used within library code
-uint32_t CS_dataBuffer[DEF_NUM_SENSORS];
+// Temporarily saves sensor data before being pushed into CSLIB_node struct
+volatile uint32_t CSLIB_autoScanBuffer[DEF_NUM_SENSORS];
 
 /// @brief Configures whether sleep mode scan uses LESENSE or SENSE algo
-extern uint16_t LESENSE_sleepScan;
+uint16_t CSLIB_autoScan;
 
 void configureRelaxOscActiveMode(void);
 
@@ -79,7 +80,7 @@ void TIMER0_IRQHandler(void)
  *        initiates a reading. Uses EM1 while waiting for the result from
  *        each sensor.
  *****************************************************************************/
-uint16_t scanSensor(uint8_t index)
+uint32_t CSLIB_scanSensorCB(uint8_t index)
 {
   // Use the default STK capacative sensing setup and enable it
   ACMP_Enable(ACMP_CAPSENSE);
@@ -112,6 +113,26 @@ uint16_t scanSensor(uint8_t index)
 }
 
 /**************************************************************************//**
+ * Pre baseline initialization callback
+ *
+ * Called before a baseline for a sensor has been initialized.
+ *
+ *****************************************************************************/
+void CSLIB_baselineInitEnableCB(void)
+{
+}
+
+/**************************************************************************//**
+ * Post baseline initialization callback
+ *
+ * Called after a baseline for a sensor has been initialized.
+ *
+ *****************************************************************************/
+void CSLIB_baselineInitDisableCB(void)
+{
+}
+
+/**************************************************************************//**
  * @brief Initializes the capacative sense system.
  *        Capacative sensing uses two timers: TIMER0 and TIMER1 as well as ACMP.
  *        ACMP is set up in cap-sense (oscialltor mode).
@@ -125,7 +146,7 @@ void CAPSENSE_Init(void)
   ACMP_CapsenseInit_TypeDef capsenseInit = ACMP_CAPSENSE_INIT_DEFAULT;
 
   // Indicates that sleep mode scanning with ACMP should be used in library code
-  LESENSE_sleepScan = 0;
+  CSLIB_autoScan = 0;
   // Enable TIMER0, TIMER1, ACMP_CAPSENSE and PRS clock
   CMU_ClockEnable(cmuClock_HFPER, true);
   CMU_ClockEnable(cmuClock_TIMER0, true);
@@ -174,7 +195,7 @@ void CAPSENSE_Init(void)
  * during active mode.
  *
  *****************************************************************************/
-void configureSensorForActiveMode(void)
+void CSLIB_configureSensorForActiveModeCB(void)
 {
   configureRelaxOscActiveMode();
 }
@@ -188,10 +209,10 @@ void configureSensorForActiveMode(void)
 void configureRelaxOscActiveMode(void)
 {
   CAPSENSE_Init();
-  configureTimerForActiveMode();
+  CSLIB_configureTimerForActiveModeCB();
 }
 
-#if (defined(RTCC_PRESENT))
+#if (defined(_EFM32_PEARL_FAMILY))
 void RTCC_IRQHandler(void)
 {
   timerTick = 1;

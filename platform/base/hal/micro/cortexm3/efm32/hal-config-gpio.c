@@ -10,13 +10,12 @@
 // any purpose, you must agree to the terms of that agreement.
 //
 // -----------------------------------------------------------------------------
-// 
+//
 #include PLATFORM_HEADER
 #include "hal/hal.h"
 #include "em_device.h"
 
-
-#if (HAL_GPIO_MAX>32)
+#if (HAL_GPIO_MAX > 32)
 uint64_t halConfigGpioActive;
 #define GPIOBIT(x) ((uint64_t)1 << (x))
 #else
@@ -27,10 +26,16 @@ uint32_t halConfigGpioActive;
 #define GPIOREADBIT(reg, bit)     (reg & (GPIOBIT(bit)))
 #define GPIOSETBIT(reg, bit)      reg |= GPIOBIT(bit)
 
-#if (HAL_GPIO_MAX==0)
-void halConfigInitGpio(){}
-void halConfigPowerDownGpio(){}
-void halConfigPowerUpGpio(){}
+#if (HAL_GPIO_MAX == 0)
+void halConfigInitGpio()
+{
+}
+void halConfigPowerDownGpio()
+{
+}
+void halConfigPowerUpGpio()
+{
+}
 bool halConfigRegisterGpio(GPIO_Port_TypeDef port,
                            uint8_t pin,
                            GPIO_Mode_TypeDef pUpMode,
@@ -70,19 +75,16 @@ static bool halConfigFindGpio(GPIO_Port_TypeDef port, uint8_t pin, int8_t *index
 {
   *index = -1;
   int8_t i;
-  for ( i=0; i<HAL_GPIO_MAX; i++ )
-  {
+  for ( i = 0; i < HAL_GPIO_MAX; i++ ) {
     // Return immediately if GPIO is found
     if ((halConfigGpio[i].port == port)
         && (halConfigGpio[i].pin == pin)
-        && (GPIOREADBIT(halConfigGpioActive,i)))
-    {
+        && (GPIOREADBIT(halConfigGpioActive, i))) {
       *index = i;
       return true;
     }
     // Store free index in case GPIO is not found
-    if (!GPIOREADBIT(halConfigGpioActive,i))
-    {
+    if (!GPIOREADBIT(halConfigGpioActive, i)) {
       *index = i;
     }
   }
@@ -95,16 +97,15 @@ static bool halConfigFindGpio(GPIO_Port_TypeDef port, uint8_t pin, int8_t *index
 void halConfigInitGpio()
 {
   // Clear GPIO state
-  halConfigGpioActive=0;
-  MEMSET (halConfigGpio, 0, sizeof(halConfigGpio));
+  halConfigGpioActive = 0;
+  MEMSET(halConfigGpio, 0, sizeof(halConfigGpio));
   // Initialize preset GPIO registration
 #ifdef HAL_GPIO_INIT
   tGpioArray fixedGpioArray[] = HAL_GPIO_INIT;
-  MEMCOPY (halConfigGpio, fixedGpioArray, sizeof(fixedGpioArray));
+  MEMCOPY(halConfigGpio, fixedGpioArray, sizeof(fixedGpioArray));
   int8_t i;
-  for ( i=0; i<(sizeof(fixedGpioArray)/sizeof(tGpioArray)); i++ )
-  {
-    GPIOSETBIT(halConfigGpioActive,i);
+  for ( i = 0; i < (sizeof(fixedGpioArray) / sizeof(tGpioArray)); i++ ) {
+    GPIOSETBIT(halConfigGpioActive, i);
   }
 #endif
 }
@@ -116,10 +117,8 @@ void halConfigInitGpio()
 void halConfigPowerDownGpio()
 {
   uint8_t i;
-  for ( i=0; i<HAL_GPIO_MAX; i++ )
-  {
-    if (GPIOREADBIT(halConfigGpioActive,i))
-    {
+  for ( i = 0; i < HAL_GPIO_MAX; i++ ) {
+    if (GPIOREADBIT(halConfigGpioActive, i)) {
       GPIO_PinModeSet(halConfigGpio[i].port,
                       halConfigGpio[i].pin,
                       halConfigGpio[i].pDownMode,
@@ -135,10 +134,8 @@ void halConfigPowerDownGpio()
 void halConfigPowerUpGpio()
 {
   uint8_t i;
-  for ( i=0; i<HAL_GPIO_MAX; i++ )
-  {
-    if (GPIOREADBIT(halConfigGpioActive,i))
-    {
+  for ( i = 0; i < HAL_GPIO_MAX; i++ ) {
+    if (GPIOREADBIT(halConfigGpioActive, i)) {
       GPIO_PinModeSet(halConfigGpio[i].port,
                       halConfigGpio[i].pin,
                       halConfigGpio[i].pUpMode,
@@ -162,16 +159,16 @@ void halConfigPowerUpGpio()
  *   The desired pin mode when powering up.
  *
  * @param[in] pUpOut
- *   Value to set for pin in DOUT register on power down. The DOUT setting is 
- *   important for even some input mode configurations, determining 
+ *   Value to set for pin in DOUT register on power down. The DOUT setting is
+ *   important for even some input mode configurations, determining
  *   pull-up/down direction.
  *
  * @param[in] pDownMode
  *   The desired pin mode when powering down
  *
  * @param[in] pDownOut
- *   Value to set for pin in DOUT register on power down. The DOUT setting is 
- *   important for even some input mode configurations, determining 
+ *   Value to set for pin in DOUT register on power down. The DOUT setting is
+ *   important for even some input mode configurations, determining
  *   pull-up/down direction.
  *
  * @return
@@ -185,17 +182,15 @@ bool halConfigRegisterGpio(GPIO_Port_TypeDef port,
                            uint8_t pDownOut)
 {
   int8_t index;
-  tGpioArray gpio = {port, pin, pUpMode, pUpOut, pDownMode, pDownOut};
+  tGpioArray gpio = { port, pin, pUpMode, pUpOut, pDownMode, pDownOut };
   // Found active GPIO, overwrite current settings
-  if (halConfigFindGpio(port, pin, &index))
-  {
+  if (halConfigFindGpio(port, pin, &index)) {
     halConfigGpio[index] = gpio;
     return true;
   }
   // Register new GPIO
-  else if (index >= 0)
-  {
-    GPIOSETBIT(halConfigGpioActive,index);
+  else if (index >= 0) {
+    GPIOSETBIT(halConfigGpioActive, index);
     halConfigGpio[index] = gpio;
     return true;
   }
@@ -219,8 +214,7 @@ bool halConfigRegisterGpio(GPIO_Port_TypeDef port,
 bool halConfigUnregisterGpio(GPIO_Port_TypeDef port, uint8_t pin)
 {
   int8_t index;
-  if (!halConfigFindGpio(port, pin, &index))
-  {
+  if (!halConfigFindGpio(port, pin, &index)) {
     return false;
   }
   GPIOCLEARBIT(halConfigGpioActive, index);

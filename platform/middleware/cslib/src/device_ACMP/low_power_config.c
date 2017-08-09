@@ -26,7 +26,6 @@
 uint8_t timerTick;
 
 void CAPSENSE_Init(void);
-void rtcSetup(uint16_t frequency);
 
 /**************************************************************************//**
  * Configure sensor for sleep mode
@@ -34,7 +33,7 @@ void rtcSetup(uint16_t frequency);
  * Configures sensor peripheral(s) for sleep mode scanning
  *
  *****************************************************************************/
-void configureSensorForSleepMode(void)
+void CSLIB_configureSensorForSleepModeCB(void)
 {
   CAPSENSE_Init();
 }
@@ -67,7 +66,7 @@ void restoreRegistersFromSleep(void)
  * Re-enable and get system ready for active mode
  *
  *****************************************************************************/
-void enterLowPowerState(void)
+void CSLIB_enterLowPowerStateCB(void)
 {
   EMU_EnterEM2(true);
 }
@@ -80,7 +79,7 @@ void enterLowPowerState(void)
  * configures the SmaRTClock to the frequency defined in cslib_config.h.
  *
  *****************************************************************************/
-void configureTimerForActiveMode(void)
+void CSLIB_configureTimerForActiveModeCB(void)
 {
 #if (defined(_EFM32_PEARL_FAMILY))
   rtccSetup(1000 / DEF_ACTIVE_MODE_PERIOD);
@@ -97,7 +96,7 @@ void configureTimerForActiveMode(void)
  * configures the SmaRTClock to the frequency defined in cslib_config.h.
  *
  *****************************************************************************/
-void configureTimerForSleepMode(void)
+void CSLIB_configureTimerForSleepModeCB(void)
 {
 #if (defined(_EFM32_PEARL_FAMILY))
   rtccSetup(1000 / DEF_SLEEP_MODE_PERIOD);
@@ -110,7 +109,7 @@ void configureTimerForSleepMode(void)
  * Check timer
  *
  *****************************************************************************/
-void checkTimer(void)
+void CSLIB_checkTimerCB(void)
 {
   // Stub function because EFM32 code sets flag inside RTC ISR
 }

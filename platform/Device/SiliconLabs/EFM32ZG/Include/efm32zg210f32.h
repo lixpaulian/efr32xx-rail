@@ -2,7 +2,7 @@
  * @file efm32zg210f32.h
  * @brief CMSIS Cortex-M Peripheral Access Layer Header File
  *        for EFM32ZG210F32
- * @version 5.2.1
+ * @version 5.2.2
  ******************************************************************************
  * # License
  * <b>Copyright 2017 Silicon Laboratories, Inc. http://www.silabs.com</b>

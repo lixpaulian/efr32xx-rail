@@ -1,7 +1,7 @@
 /***************************************************************************//**
  * @file em_usbtimer.c
  * @brief USB protocol stack library, timer API.
- * @version 5.2.1
+ * @version 5.2.2
  *******************************************************************************
  * # License
  * <b>(C) Copyright 2014 Silicon Labs, http://www.silabs.com</b>

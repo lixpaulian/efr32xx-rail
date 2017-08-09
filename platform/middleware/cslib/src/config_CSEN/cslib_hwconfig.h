@@ -26,7 +26,7 @@
 /// and the output of the sensor when active(touched).
 /// @note These values should be defined in terms of X/16, or X>>4, as they are stored
 /// in a packed byte array
-#define AVERAGE_TOUCH_DELTA_ARRAY 850 >> 4, 850 >> 4, 850 >> 4, 850 >> 4
+#define AVERAGE_TOUCH_DELTA_ARRAY 2048 >> 4, 2048 >> 4, 2048 >> 4, 2048 >> 4
 
 #define CSEN_ACTIVEMODE_DEFAULT                                         \
   {                                                                     \
@@ -39,7 +39,7 @@
     csenCmpModeDisabled,        /* Disable the comparator. */           \
     0,                          /* Comparator threshold not used. */    \
     csenSingleSelDefault,       /* Disconnect the single input. */      \
-    0x00AA,                     /* Enable inputs 1,3,5,7.  */           \
+    0x000F,                     /* Enable inputs 1,3,5,7.  */           \
     0,                          /* Disable inputs 32 to 63. */          \
     false,                      /* Do not ground inactive inputs. */    \
     csenConvSelDM,             /* Use the DM mode. */                   \
@@ -65,7 +65,7 @@
     csenCmpModeEMAWindow,       /* Enable EMA comparator. */           \
     255,                        /* Set wake value +/-EMA. */           \
     csenSingleSelDefault,       /* Disconnect the single input. */     \
-    0x00AA,                     /* Disable inputs 0 to 31. */          \
+    0x000F,                     /* Disable inputs 0 to 31. */          \
     0,                          /* Disable inputs 32 to 63. */         \
     false,                      /* Do not ground inactive inputs. */   \
     csenConvSelSAR,             /* Use the SAR converter. */           \

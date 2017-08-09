@@ -2,7 +2,7 @@
 * @file ezradio_api_lib.c
 * @brief This file contains the common API library of the EZRadio and
 * EZRadioPRO families.
-* @version 5.2.1
+* @version 5.2.2
 ******************************************************************************
 * # License
 * <b>(C) Copyright 2015 Silicon Labs, http://www.silabs.com</b>
